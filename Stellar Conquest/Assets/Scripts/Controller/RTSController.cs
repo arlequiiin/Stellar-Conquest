@@ -4,14 +4,12 @@ using UnityEngine.InputSystem;
 public class RTSController : MonoBehaviour
 {
     private PlayerControls _controls;
-    private Camera _mainCamera;
 
     private SoldierBlue _selectedSoldier;
 
     private void Awake()
     {
         _controls = new PlayerControls();
-        _mainCamera = Camera.main;
     }
 
     private void OnEnable()
