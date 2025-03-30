@@ -1,0 +1,803 @@
+fileFormatVersion: 2
+guid: b6bd7c086856bb341a01ace4557d55f3
+TextureImporter:
+  internalIDToNameTable:
+  - first:
+      213: 6921097935928961876
+    second: players blue x1 outlines_0
+  - first:
+      213: -2735955007736218037
+    second: players blue x1 outlines_1
+  - first:
+      213: -7642959548702357735
+    second: players blue x1 outlines_2
+  - first:
+      213: -6369078546102680535
+    second: players blue x1 outlines_3
+  - first:
+      213: -2502176319095733667
+    second: players blue x1 outlines_4
+  - first:
+      213: 673125882647106879
+    second: players blue x1 outlines_5
+  - first:
+      213: 2284391688752820022
+    second: players blue x1 outlines_6
+  - first:
+      213: -5951092937772920987
+    second: players blue x1 outlines_7
+  - first:
+      213: -354315115863172446
+    second: players blue x1 outlines_8
+  - first:
+      213: -6742036071578751749
+    second: players blue x1 outlines_9
+  - first:
+      213: -4023790163416920872
+    second: players blue x1 outlines_10
+  - first:
+      213: -4377842821500063155
+    second: players blue x1 outlines_11
+  - first:
+      213: 5288862390179634365
+    second: players blue x1 outlines_12
+  - first:
+      213: 5858264629671899166
+    second: players blue x1 outlines_13
+  - first:
+      213: 1777447828474233437
+    second: players blue x1 outlines_14
+  - first:
+      213: 5586301934634810780
+    second: players blue x1 outlines_15
+  - first:
+      213: -387002822212194829
+    second: players blue x1 outlines_16
+  - first:
+      213: -7092022687632656379
+    second: players blue x1 outlines_17
+  - first:
+      213: -6865831839941712851
+    second: players blue x1 outlines_18
+  - first:
+      213: -4089594409661783426
+    second: players blue x1 outlines_19
+  - first:
+      213: -4817189032604518622
+    second: players blue x1 outlines_20
+  - first:
+      213: -8414260506734750660
+    second: players blue x1 outlines_21
+  - first:
+      213: -2196176473613208819
+    second: players blue x1 outlines_22
+  - first:
+      213: 4153608238920407191
+    second: players blue x1 outlines_23
+  - first:
+      213: -1050354383737117845
+    second: players blue x1 outlines_24
+  - first:
+      213: -8891233022275499499
+    second: players blue x1 outlines_25
+  - first:
+      213: 3331227622854142923
+    second: players blue x1 outlines_26
+  - first:
+      213: -1755364839418976803
+    second: players blue x1 outlines_27
+  - first:
+      213: 6030122450431359423
+    second: players blue x1 outlines_28
+  - first:
+      213: -5073356746513407034
+    second: players blue x1 outlines_29
+  - first:
+      213: -4065618561698399722
+    second: players blue x1 outlines_30
+  - first:
+      213: -6469735290533225017
+    second: players blue x1 outlines_31
+  - first:
+      213: 3553618439028606544
+    second: players blue x1 outlines_32
+  - first:
+      213: 1494992057866905844
+    second: players blue x1 outlines_33
+  - first:
+      213: -2147600619683961468
+    second: players blue x1 outlines_34
+  - first:
+      213: 71846419485474817
+    second: players blue x1 outlines_35
+  - first:
+      213: -2313988230114805461
+    second: players blue x1 outlines_36
+  - first:
+      213: 2403660948221795498
+    second: players blue x1 outlines_37
+  - first:
+      213: -4611241478222057298
+    second: players blue x1 outlines_38
+  - first:
+      213: -8778334985472149215
+    second: players blue x1 outlines_39
+  - first:
+      213: -8118955959658196846
+    second: players blue x1 outlines_40
+  - first:
+      213: -336741243031500625
+    second: players blue x1 outlines_41
+  - first:
+      213: -5076955323567631682
+    second: players blue x1 outlines_42
+  - first:
+      213: -7935049815192343767
+    second: players blue x1 outlines_43
+  - first:
+      213: -8398738417921021141
+    second: players blue x1 outlines_44
+  - first:
+      213: -7043398839780492799
+    second: players blue x1 outlines_45
+  externalObjects: {}
+  serializedVersion: 13
+  mipmaps:
+    mipMapMode: 0
+    enableMipMap: 0
+    sRGBTexture: 1
+    linearTexture: 0
+    fadeOut: 0
+    borderMipMap: 0
+    mipMapsPreserveCoverage: 0
+    alphaTestReferenceValue: 0.5
+    mipMapFadeDistanceStart: 1
+    mipMapFadeDistanceEnd: 3
+  bumpmap:
+    convertToNormalMap: 0
+    externalNormalMap: 0
+    heightScale: 0.25
+    normalMapFilter: 0
+    flipGreenChannel: 0
+  isReadable: 0
+  streamingMipmaps: 0
+  streamingMipmapsPriority: 0
+  vTOnly: 0
+  ignoreMipmapLimit: 0
+  grayScaleToAlpha: 0
+  generateCubemap: 6
+  cubemapConvolution: 0
+  seamlessCubemap: 0
+  textureFormat: 1
+  maxTextureSize: 2048
+  textureSettings:
+    serializedVersion: 2
+    filterMode: 0
+    aniso: 1
+    mipBias: 0
+    wrapU: 1
+    wrapV: 1
+    wrapW: 1
+  nPOTScale: 0
+  lightmap: 0
+  compressionQuality: 50
+  spriteMode: 2
+  spriteExtrude: 1
+  spriteMeshType: 1
+  alignment: 0
+  spritePivot: {x: 0.5, y: 0.5}
+  spritePixelsToUnits: 20
+  spriteBorder: {x: 0, y: 0, z: 0, w: 0}
+  spriteGenerateFallbackPhysicsShape: 1
+  alphaUsage: 1
+  alphaIsTransparency: 1
+  spriteTessellationDetail: -1
+  textureType: 8
+  textureShape: 1
+  singleChannelComponent: 0
+  flipbookRows: 1
+  flipbookColumns: 1
+  maxTextureSizeSet: 0
+  compressionQualitySet: 0
+  textureFormatSet: 0
+  ignorePngGamma: 0
+  applyGammaDecoding: 0
+  swizzle: 50462976
+  cookieLightType: 0
+  platformSettings:
+  - serializedVersion: 4
+    buildTarget: DefaultTexturePlatform
+    maxTextureSize: 2048
+    resizeAlgorithm: 0
+    textureFormat: -1
+    textureCompression: 1
+    compressionQuality: 50
+    crunchedCompression: 0
+    allowsAlphaSplitting: 0
+    overridden: 0
+    ignorePlatformSupport: 0
+    androidETC2FallbackOverride: 0
+    forceMaximumCompressionQuality_BC6H_BC7: 0
+  - serializedVersion: 4
+    buildTarget: Standalone
+    maxTextureSize: 2048
+    resizeAlgorithm: 0
+    textureFormat: -1
+    textureCompression: 1
+    compressionQuality: 50
+    crunchedCompression: 0
+    allowsAlphaSplitting: 0
+    overridden: 0
+    ignorePlatformSupport: 0
+    androidETC2FallbackOverride: 0
+    forceMaximumCompressionQuality_BC6H_BC7: 0
+  - serializedVersion: 4
+    buildTarget: WebGL
+    maxTextureSize: 2048
+    resizeAlgorithm: 0
+    textureFormat: -1
+    textureCompression: 1
+    compressionQuality: 50
+    crunchedCompression: 0
+    allowsAlphaSplitting: 0
+    overridden: 0
+    ignorePlatformSupport: 0
+    androidETC2FallbackOverride: 0
+    forceMaximumCompressionQuality_BC6H_BC7: 0
+  spriteSheet:
+    serializedVersion: 2
+    sprites:
+    - serializedVersion: 2
+      name: players blue x1 outlines_0
+      rect:
+        serializedVersion: 2
+        x: 0
+        y: 384
+        width: 32
+        height: 32
+      alignment: 7
+      pivot: {x: 0.5, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 153a6e184694da94c9809cf7fd38e828
+      internalID: -1861130694
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: players blue x1 outlines_2
+      rect:
+        serializedVersion: 2
+        x: 0
+        y: 352
+        width: 32
+        height: 32
+      alignment: 7
+      pivot: {x: 0.5, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 0eb61b06fc63dce4d95e964fe93082e0
+      internalID: 1597189240
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: players blue x1 outlines_3
+      rect:
+        serializedVersion: 2
+        x: 32
+        y: 352
+        width: 32
+        height: 32
+      alignment: 7
+      pivot: {x: 0.5, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: bffbfc99897016942b3432db62ec1e92
+      internalID: -472538861
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: players blue x1 outlines_5
+      rect:
+        serializedVersion: 2
+        x: 0
+        y: 320
+        width: 32
+        height: 32
+      alignment: 7
+      pivot: {x: 0.5, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: cec07297276c9ee48a766c02514e942b
+      internalID: 1937418515
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: players blue x1 outlines_6
+      rect:
+        serializedVersion: 2
+        x: 32
+        y: 320
+        width: 32
+        height: 32
+      alignment: 7
+      pivot: {x: 0.5, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 244d5cb3e5989a44e99b011fe59b33fe
+      internalID: -107457796
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: players blue x1 outlines_7
+      rect:
+        serializedVersion: 2
+        x: 64
+        y: 320
+        width: 32
+        height: 32
+      alignment: 7
+      pivot: {x: 0.5, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 170d80032cb71e444b37066dc93e288e
+      internalID: -1003179257
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: players blue x1 outlines_8
+      rect:
+        serializedVersion: 2
+        x: 96
+        y: 320
+        width: 32
+        height: 32
+      alignment: 7
+      pivot: {x: 0.5, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: d5359994638aa9d4aa175445bdf51426
+      internalID: -1424332914
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: players blue x1 outlines_9
+      rect:
+        serializedVersion: 2
+        x: 128
+        y: 320
+        width: 32
+        height: 32
+      alignment: 7
+      pivot: {x: 0.5, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: af43dfcf40500bf468f4779bdf4e3039
+      internalID: 427530405
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: players blue x1 outlines_11
+      rect:
+        serializedVersion: 2
+        x: 0
+        y: 288
+        width: 32
+        height: 32
+      alignment: 7
+      pivot: {x: 0.5, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 3d34c838ebd4a0d4d903f54a1a0260aa
+      internalID: -1597540759
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: players blue x1 outlines_12
+      rect:
+        serializedVersion: 2
+        x: 32
+        y: 288
+        width: 32
+        height: 32
+      alignment: 7
+      pivot: {x: 0.5, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: c4209ced267434842ab0487413802f0f
+      internalID: 1464274693
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: players blue x1 outlines_13
+      rect:
+        serializedVersion: 2
+        x: 64
+        y: 288
+        width: 32
+        height: 32
+      alignment: 7
+      pivot: {x: 0.5, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 8a0937122573632499a1db496425c7fa
+      internalID: -679646007
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: players blue x1 outlines_14
+      rect:
+        serializedVersion: 2
+        x: 96
+        y: 288
+        width: 32
+        height: 32
+      alignment: 7
+      pivot: {x: 0.5, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 3cd06180548646649a21302df208dec0
+      internalID: 1947373144
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: players blue x1 outlines_16
+      rect:
+        serializedVersion: 2
+        x: 0
+        y: 256
+        width: 32
+        height: 32
+      alignment: 7
+      pivot: {x: 0.5, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: bd18464c5372a8d438a2ba5106566e1e
+      internalID: -1204814259
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: players blue x1 outlines_17
+      rect:
+        serializedVersion: 2
+        x: 32
+        y: 256
+        width: 32
+        height: 32
+      alignment: 7
+      pivot: {x: 0.5, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: dae5a0bdbb114be4bbb821f4f22ae13f
+      internalID: 1453384850
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: players blue x1 outlines_18
+      rect:
+        serializedVersion: 2
+        x: 64
+        y: 256
+        width: 32
+        height: 32
+      alignment: 7
+      pivot: {x: 0.5, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: ae279f122e8024b4f9ccd891bf4ae2aa
+      internalID: -249621912
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: players blue x1 outlines_19
+      rect:
+        serializedVersion: 2
+        x: 96
+        y: 256
+        width: 32
+        height: 32
+      alignment: 7
+      pivot: {x: 0.5, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 8d680a735c1a44a45b880159be9149b7
+      internalID: -401756457
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: players blue x1 outlines_21
+      rect:
+        serializedVersion: 2
+        x: 0
+        y: 224
+        width: 32
+        height: 32
+      alignment: 7
+      pivot: {x: 0.5, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 7df049fe330c0b94b8570cf9af24343c
+      internalID: -1295367379
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: players blue x1 outlines_22
+      rect:
+        serializedVersion: 2
+        x: 32
+        y: 224
+        width: 32
+        height: 32
+      alignment: 7
+      pivot: {x: 0.5, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 714c2035e127fe147a199407721155e0
+      internalID: 568081209
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: players blue x1 outlines_23
+      rect:
+        serializedVersion: 2
+        x: 64
+        y: 224
+        width: 32
+        height: 32
+      alignment: 7
+      pivot: {x: 0.5, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 4b8e609338cb137428c3f1e8d6400745
+      internalID: 42690760
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: players blue x1 outlines_24
+      rect:
+        serializedVersion: 2
+        x: 96
+        y: 224
+        width: 32
+        height: 32
+      alignment: 7
+      pivot: {x: 0.5, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: d0203158dbb1c3b46b98e1c0071c92b0
+      internalID: 1111499258
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: players blue x1 outlines_25
+      rect:
+        serializedVersion: 2
+        x: 128
+        y: 224
+        width: 32
+        height: 32
+      alignment: 7
+      pivot: {x: 0.5, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 772b9a2e560de7043b88cd960d10f436
+      internalID: 4405041
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: players blue x1 outlines_26
+      rect:
+        serializedVersion: 2
+        x: 160
+        y: 224
+        width: 32
+        height: 32
+      alignment: 7
+      pivot: {x: 0.5, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 64f7b9422f4d18945b0040c8ead976ca
+      internalID: -638412661
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: players blue x1 outlines_27
+      rect:
+        serializedVersion: 2
+        x: 192
+        y: 224
+        width: 32
+        height: 32
+      alignment: 7
+      pivot: {x: 0.5, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 6d878e02238593844b26f2a502d3b12d
+      internalID: -1647142776
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    outline: []
+    customData: 
+    physicsShape: []
+    bones: []
+    spriteID: ced2e659b99d8ef4e930c107c2987ec3
+    internalID: 0
+    vertices: []
+    indices: 
+    edges: []
+    weights: []
+    secondaryTextures: []
+    spriteCustomMetadata:
+      entries: []
+    nameFileIdTable:
+      players blue x1 outlines_0: -1861130694
+      players blue x1 outlines_1: 1587959176
+      players blue x1 outlines_10: 2023972250
+      players blue x1 outlines_11: -1597540759
+      players blue x1 outlines_12: 1464274693
+      players blue x1 outlines_13: -679646007
+      players blue x1 outlines_14: 1947373144
+      players blue x1 outlines_15: -1983486209
+      players blue x1 outlines_16: -1204814259
+      players blue x1 outlines_17: 1453384850
+      players blue x1 outlines_18: -249621912
+      players blue x1 outlines_19: -401756457
+      players blue x1 outlines_2: 1597189240
+      players blue x1 outlines_20: 166941258
+      players blue x1 outlines_21: -1295367379
+      players blue x1 outlines_22: 568081209
+      players blue x1 outlines_23: 42690760
+      players blue x1 outlines_24: 1111499258
+      players blue x1 outlines_25: 4405041
+      players blue x1 outlines_26: -638412661
+      players blue x1 outlines_27: -1647142776
+      players blue x1 outlines_28: -107249768
+      players blue x1 outlines_3: -472538861
+      players blue x1 outlines_4: 1894978081
+      players blue x1 outlines_5: 1937418515
+      players blue x1 outlines_6: -107457796
+      players blue x1 outlines_7: -1003179257
+      players blue x1 outlines_8: -1424332914
+      players blue x1 outlines_9: 427530405
+  mipmapLimitGroupName: 
+  pSDRemoveMatte: 0
+  userData: 
+  assetBundleName: 
+  assetBundleVariant: 
