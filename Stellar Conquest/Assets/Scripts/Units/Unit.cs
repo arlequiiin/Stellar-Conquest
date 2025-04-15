@@ -5,26 +5,24 @@ public class Units : Entity {
 
     [SerializeField] private float _walkSpeed;
     [SerializeField] public float _range;
-    [SerializeField] public int _ammoInClip;
-    [SerializeField] public float _recoilAmount;
-    [SerializeField] public float _reloadTime;
+
+    // [SerializeField] public float _recoilAmount;
+
     [SerializeField] private float _attackDamage;
     [SerializeField] private float _attackCooldown;
 
     private NavMeshAgent _navMeshAgent;
 
-    private enum UnitState { Idle, Moving, Attacking, Reloading }
+    private enum UnitState { Idle, Moving, Attacking, Death }
     private UnitState _currentState = UnitState.Idle;
     private Entity _currentTarget;
     private float _lastAttackTime;
-    private int _currentAmmo;
 
     protected override void Awake() 
     {
         base.Awake(); 
         _navMeshAgent = GetComponent<NavMeshAgent>();
         _navMeshAgent.speed = _walkSpeed;
-        _currentAmmo = _ammoInClip; 
     }
 
     protected virtual void Update() {
@@ -47,7 +45,7 @@ public class Units : Entity {
                 PerformAttack();
                 break;
 
-            case UnitState.Reloading:
+            case UnitState.Death:
                 // Логика перезарядки 
                 break;
         }
@@ -149,49 +147,13 @@ public class Units : Entity {
         transform.LookAt(_currentTarget.transform);
 
         if (Time.time >= _lastAttackTime + _attackCooldown) {
-            if (_ammoInClip > 0 && _currentAmmo <= 0) {
-                StartReloading(); 
-                return; 
-            }
-
             Debug.Log($"{gameObject.name} атакует {_currentTarget.name} нанеся {_attackDamage} урона");
             _currentTarget.TakeDamage(_attackDamage);
 
             // визуальные эффекты: выстрел, звук, отдача
-            ApplyRecoil();
 
             _lastAttackTime = Time.time; 
-
-            if (_ammoInClip > 0) {
-                _currentAmmo--;
-                Debug.Log($"{gameObject.name} патронов осталось: {_currentAmmo}/{_ammoInClip}");
-            }
         }
-    }
-
-    private void ApplyRecoil() {
-        transform.position -= transform.forward * _recoilAmount;
-        // Или отдача для оружия, если оно отдельный объект
-        // weaponTransform.localRotation *= Quaternion.Euler(-_recoilAmount * 10, 0, 0);
-        // Debug.Log("Applying recoil effect (visual).");
-    }
-
-    private void StartReloading() {
-        if (_currentState == UnitState.Reloading) return;
-
-        Debug.Log($"{gameObject.name} начата перезарядка");
-        _currentState = UnitState.Reloading;
-
-        StartCoroutine(ReloadCoroutine());
-    }
-
-    private System.Collections.IEnumerator ReloadCoroutine() {
-        yield return new WaitForSeconds(_reloadTime);
-        _currentAmmo = _ammoInClip;
-        _currentState = UnitState.Idle; 
-        Debug.Log($"{gameObject.name} перезарядился");
-
-        FindTargetAndAttackIfNeeded();
     }
 
     protected override void Die() {
