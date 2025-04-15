@@ -1,64 +1,55 @@
 fileFormatVersion: 2
-guid: eea38f694b39af84893a03688f428338
+guid: 7ee4f9adfafa4d34898da17905ce7530
 TextureImporter:
   internalIDToNameTable:
   - first:
-      213: -6846869337993207789
-    second: RadioOperator-Class_0
+      213: -2723847139052971728
+    second: MachineGunner-Class_0
   - first:
-      213: -7474514042056018072
-    second: RadioOperator-Class_1
+      213: -2138089510807324195
+    second: MachineGunner-Class_1
   - first:
-      213: -7695661161144565835
-    second: RadioOperator-Class_2
+      213: -5577094600431285627
+    second: MachineGunner-Class_2
   - first:
-      213: -1253331212991827356
-    second: RadioOperator-Class_3
+      213: 1410496013269407783
+    second: MachineGunner-Class_3
   - first:
-      213: 5543071233620991802
-    second: RadioOperator-Class_4
+      213: 3589428930050761493
+    second: MachineGunner-Class_4
   - first:
-      213: 4761788502632421447
-    second: RadioOperator-Class_5
+      213: 7948365131655128202
+    second: MachineGunner-Class_5
   - first:
-      213: 6329793640977924163
-    second: RadioOperator-Class_6
+      213: -1205441125977684947
+    second: MachineGunner-Class_6
   - first:
-      213: -297691160078912901
-    second: RadioOperator-Class_7
+      213: -1699843044962968579
+    second: MachineGunner-Class_7
   - first:
-      213: -1581857340423455630
-    second: RadioOperator-Class_8
+      213: -8664050393128913126
+    second: MachineGunner-Class_8
   - first:
-      213: 4956583842401379215
-    second: RadioOperator-Class_9
+      213: -364179936694723938
+    second: MachineGunner-Class_9
   - first:
-      213: -7317689742097998994
-    second: RadioOperator-Class_10
+      213: -6453887229523524698
+    second: MachineGunner-Class_10
   - first:
-      213: -1799673785967287335
-    second: RadioOperator-Class_11
+      213: 6159307909330601708
+    second: MachineGunner-Class_11
   - first:
-      213: -1630891319230546470
-    second: RadioOperator-Class_12
+      213: 5219649131798171900
+    second: MachineGunner-Class_12
   - first:
-      213: 2154459204000401847
-    second: RadioOperator-Class_13
+      213: 2328313219051841426
+    second: MachineGunner-Class_13
   - first:
-      213: -4244620720066880111
-    second: RadioOperator-Class_14
+      213: -5553026847342423855
+    second: MachineGunner-Class_14
   - first:
-      213: 1743513491137860831
-    second: RadioOperator-Class_15
-  - first:
-      213: 8702239646977456279
-    second: RadioOperator-Class_16
-  - first:
-      213: 4588487306575229437
-    second: RadioOperator-Class_17
-  - first:
-      213: -3463482076858237337
-    second: RadioOperator-Class_18
+      213: -4339466779237403074
+    second: MachineGunner-Class_15
   externalObjects: {}
   serializedVersion: 13
   mipmaps:
@@ -167,7 +158,7 @@ TextureImporter:
     serializedVersion: 2
     sprites:
     - serializedVersion: 2
-      name: RadioOperator-Class_0
+      name: Soldier_0
       rect:
         serializedVersion: 2
         x: 0
@@ -180,16 +171,16 @@ TextureImporter:
       customData: 
       outline: []
       physicsShape: []
-      tessellationDetail: -1
+      tessellationDetail: 0
       bones: []
-      spriteID: 310a6650d980bf0a0800000000000000
-      internalID: -6846869337993207789
+      spriteID: 2d5d07fa18320a34c92d1052d4e9d489
+      internalID: 1421664858
       vertices: []
       indices: 
       edges: []
       weights: []
     - serializedVersion: 2
-      name: RadioOperator-Class_1
+      name: Soldier_1
       rect:
         serializedVersion: 2
         x: 16
@@ -202,16 +193,16 @@ TextureImporter:
       customData: 
       outline: []
       physicsShape: []
-      tessellationDetail: -1
+      tessellationDetail: 0
       bones: []
-      spriteID: 867f4969411354890800000000000000
-      internalID: -7474514042056018072
+      spriteID: c9bd18e021037e94abf9db09c1342c3b
+      internalID: -263974992
       vertices: []
       indices: 
       edges: []
       weights: []
     - serializedVersion: 2
-      name: RadioOperator-Class_2
+      name: Soldier_2
       rect:
         serializedVersion: 2
         x: 0
@@ -224,16 +215,16 @@ TextureImporter:
       customData: 
       outline: []
       physicsShape: []
-      tessellationDetail: -1
+      tessellationDetail: 0
       bones: []
-      spriteID: 5bf353282f4833590800000000000000
-      internalID: -7695661161144565835
+      spriteID: 2ac8b12203f8b2641862b155eb726af4
+      internalID: 1844762137
       vertices: []
       indices: 
       edges: []
       weights: []
     - serializedVersion: 2
-      name: RadioOperator-Class_3
+      name: Soldier_3
       rect:
         serializedVersion: 2
         x: 16
@@ -246,16 +237,16 @@ TextureImporter:
       customData: 
       outline: []
       physicsShape: []
-      tessellationDetail: -1
+      tessellationDetail: 0
       bones: []
-      spriteID: 46276b7f6e54b9ee0800000000000000
-      internalID: -1253331212991827356
+      spriteID: 53d3c0bd7b3014047a58ef8b9c7bde6d
+      internalID: -1282655460
       vertices: []
       indices: 
       edges: []
       weights: []
     - serializedVersion: 2
-      name: RadioOperator-Class_6
+      name: Soldier_6
       rect:
         serializedVersion: 2
         x: 0
@@ -268,16 +259,16 @@ TextureImporter:
       customData: 
       outline: []
       physicsShape: []
-      tessellationDetail: -1
+      tessellationDetail: 0
       bones: []
-      spriteID: 3400400a7c1f7d750800000000000000
-      internalID: 6329793640977924163
+      spriteID: de49fedc44dd6964e9239c2341b9afca
+      internalID: 2141126303
       vertices: []
       indices: 
       edges: []
       weights: []
     - serializedVersion: 2
-      name: RadioOperator-Class_7
+      name: Soldier_7
       rect:
         serializedVersion: 2
         x: 16
@@ -290,16 +281,16 @@ TextureImporter:
       customData: 
       outline: []
       physicsShape: []
-      tessellationDetail: -1
+      tessellationDetail: 0
       bones: []
-      spriteID: b72f8b697736edbf0800000000000000
-      internalID: -297691160078912901
+      spriteID: ebc610896fd0a7a4a991f886a6773db5
+      internalID: -822111384
       vertices: []
       indices: 
       edges: []
       weights: []
     - serializedVersion: 2
-      name: RadioOperator-Class_11
+      name: Soldier_11
       rect:
         serializedVersion: 2
         x: 0
@@ -312,16 +303,16 @@ TextureImporter:
       customData: 
       outline: []
       physicsShape: []
-      tessellationDetail: -1
+      tessellationDetail: 0
       bones: []
-      spriteID: 9d366db0a364607e0800000000000000
-      internalID: -1799673785967287335
+      spriteID: 744f537e572bac340945fff0264ee659
+      internalID: -639653076
       vertices: []
       indices: 
       edges: []
       weights: []
     - serializedVersion: 2
-      name: RadioOperator-Class_12
+      name: Soldier_12
       rect:
         serializedVersion: 2
         x: 16
@@ -334,16 +325,16 @@ TextureImporter:
       customData: 
       outline: []
       physicsShape: []
-      tessellationDetail: -1
+      tessellationDetail: 0
       bones: []
-      spriteID: addbef96cf8ed59e0800000000000000
-      internalID: -1630891319230546470
+      spriteID: c1b04598a25f06849a95ec5be7702608
+      internalID: -1161954043
       vertices: []
       indices: 
       edges: []
       weights: []
     - serializedVersion: 2
-      name: RadioOperator-Class_13
+      name: Soldier_13
       rect:
         serializedVersion: 2
         x: 32
@@ -356,16 +347,16 @@ TextureImporter:
       customData: 
       outline: []
       physicsShape: []
-      tessellationDetail: -1
+      tessellationDetail: 0
       bones: []
-      spriteID: 7b9c3813b3d26ed10800000000000000
-      internalID: 2154459204000401847
+      spriteID: 85ff26a65f3e606429fcdf1d41431019
+      internalID: -767156117
       vertices: []
       indices: 
       edges: []
       weights: []
     - serializedVersion: 2
-      name: RadioOperator-Class_14
+      name: Soldier_14
       rect:
         serializedVersion: 2
         x: 48
@@ -378,16 +369,16 @@ TextureImporter:
       customData: 
       outline: []
       physicsShape: []
-      tessellationDetail: -1
+      tessellationDetail: 0
       bones: []
-      spriteID: 19d962ea1f31815c0800000000000000
-      internalID: -4244620720066880111
+      spriteID: ba1ad0693d03b144db161d711d824ed0
+      internalID: 646891756
       vertices: []
       indices: 
       edges: []
       weights: []
     - serializedVersion: 2
-      name: RadioOperator-Class_15
+      name: Soldier_15
       rect:
         serializedVersion: 2
         x: 64
@@ -400,10 +391,10 @@ TextureImporter:
       customData: 
       outline: []
       physicsShape: []
-      tessellationDetail: -1
+      tessellationDetail: 0
       bones: []
-      spriteID: fd49f5c5844323810800000000000000
-      internalID: 1743513491137860831
+      spriteID: 1bfe50f3c0c2fdb43be6584297b7b32f
+      internalID: 256890191
       vertices: []
       indices: 
       edges: []
@@ -412,7 +403,7 @@ TextureImporter:
     customData: 
     physicsShape: []
     bones: []
-    spriteID: c4e59a61494bd1046a8333a7d6156ea5
+    spriteID: a5e1df4ef234b2f4281b08872e3e8e18
     internalID: 0
     vertices: []
     indices: 
@@ -422,25 +413,25 @@ TextureImporter:
     spriteCustomMetadata:
       entries: []
     nameFileIdTable:
-      RadioOperator-Class_0: -6846869337993207789
-      RadioOperator-Class_1: -7474514042056018072
-      RadioOperator-Class_10: -7317689742097998994
-      RadioOperator-Class_11: -1799673785967287335
-      RadioOperator-Class_12: -1630891319230546470
-      RadioOperator-Class_13: 2154459204000401847
-      RadioOperator-Class_14: -4244620720066880111
-      RadioOperator-Class_15: 1743513491137860831
-      RadioOperator-Class_16: 8702239646977456279
-      RadioOperator-Class_17: 4588487306575229437
-      RadioOperator-Class_18: -3463482076858237337
-      RadioOperator-Class_2: -7695661161144565835
-      RadioOperator-Class_3: -1253331212991827356
-      RadioOperator-Class_4: 5543071233620991802
-      RadioOperator-Class_5: 4761788502632421447
-      RadioOperator-Class_6: 6329793640977924163
-      RadioOperator-Class_7: -297691160078912901
-      RadioOperator-Class_8: -1581857340423455630
-      RadioOperator-Class_9: 4956583842401379215
+      Soldier_0: 1421664858
+      Soldier_1: -263974992
+      Soldier_10: 1127098611
+      Soldier_11: -639653076
+      Soldier_12: -1161954043
+      Soldier_13: -767156117
+      Soldier_14: 646891756
+      Soldier_15: 256890191
+      Soldier_16: 256395632
+      Soldier_17: -1532574657
+      Soldier_18: 1261645856
+      Soldier_2: 1844762137
+      Soldier_3: -1282655460
+      Soldier_4: 309195285
+      Soldier_5: -197074145
+      Soldier_6: 2141126303
+      Soldier_7: -822111384
+      Soldier_8: 1865463109
+      Soldier_9: -1044403413
   mipmapLimitGroupName: 
   pSDRemoveMatte: 0
   userData: 

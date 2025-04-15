@@ -1,55 +1,64 @@
 fileFormatVersion: 2
-guid: 7ee4f9adfafa4d34898da17905ce7530
+guid: eea38f694b39af84893a03688f428338
 TextureImporter:
   internalIDToNameTable:
   - first:
-      213: -2723847139052971728
-    second: MachineGunner-Class_0
+      213: -6846869337993207789
+    second: RadioOperator-Class_0
   - first:
-      213: -2138089510807324195
-    second: MachineGunner-Class_1
+      213: -7474514042056018072
+    second: RadioOperator-Class_1
   - first:
-      213: -5577094600431285627
-    second: MachineGunner-Class_2
+      213: -7695661161144565835
+    second: RadioOperator-Class_2
   - first:
-      213: 1410496013269407783
-    second: MachineGunner-Class_3
+      213: -1253331212991827356
+    second: RadioOperator-Class_3
   - first:
-      213: 3589428930050761493
-    second: MachineGunner-Class_4
+      213: 5543071233620991802
+    second: RadioOperator-Class_4
   - first:
-      213: 7948365131655128202
-    second: MachineGunner-Class_5
+      213: 4761788502632421447
+    second: RadioOperator-Class_5
   - first:
-      213: -1205441125977684947
-    second: MachineGunner-Class_6
+      213: 6329793640977924163
+    second: RadioOperator-Class_6
   - first:
-      213: -1699843044962968579
-    second: MachineGunner-Class_7
+      213: -297691160078912901
+    second: RadioOperator-Class_7
   - first:
-      213: -8664050393128913126
-    second: MachineGunner-Class_8
+      213: -1581857340423455630
+    second: RadioOperator-Class_8
   - first:
-      213: -364179936694723938
-    second: MachineGunner-Class_9
+      213: 4956583842401379215
+    second: RadioOperator-Class_9
   - first:
-      213: -6453887229523524698
-    second: MachineGunner-Class_10
+      213: -7317689742097998994
+    second: RadioOperator-Class_10
   - first:
-      213: 6159307909330601708
-    second: MachineGunner-Class_11
+      213: -1799673785967287335
+    second: RadioOperator-Class_11
   - first:
-      213: 5219649131798171900
-    second: MachineGunner-Class_12
+      213: -1630891319230546470
+    second: RadioOperator-Class_12
   - first:
-      213: 2328313219051841426
-    second: MachineGunner-Class_13
+      213: 2154459204000401847
+    second: RadioOperator-Class_13
   - first:
-      213: -5553026847342423855
-    second: MachineGunner-Class_14
+      213: -4244620720066880111
+    second: RadioOperator-Class_14
   - first:
-      213: -4339466779237403074
-    second: MachineGunner-Class_15
+      213: 1743513491137860831
+    second: RadioOperator-Class_15
+  - first:
+      213: 8702239646977456279
+    second: RadioOperator-Class_16
+  - first:
+      213: 4588487306575229437
+    second: RadioOperator-Class_17
+  - first:
+      213: -3463482076858237337
+    second: RadioOperator-Class_18
   externalObjects: {}
   serializedVersion: 13
   mipmaps:
@@ -96,7 +105,7 @@ TextureImporter:
   spriteMeshType: 1
   alignment: 0
   spritePivot: {x: 0.5, y: 0.5}
-  spritePixelsToUnits: 100
+  spritePixelsToUnits: 16
   spriteBorder: {x: 0, y: 0, z: 0, w: 0}
   spriteGenerateFallbackPhysicsShape: 1
   alphaUsage: 1
@@ -158,7 +167,7 @@ TextureImporter:
     serializedVersion: 2
     sprites:
     - serializedVersion: 2
-      name: MachineGunner-Class_0
+      name: Scout_0
       rect:
         serializedVersion: 2
         x: 0
@@ -171,16 +180,16 @@ TextureImporter:
       customData: 
       outline: []
       physicsShape: []
-      tessellationDetail: -1
+      tessellationDetail: 0
       bones: []
-      spriteID: 03998466573f23ad0800000000000000
-      internalID: -2723847139052971728
+      spriteID: 1cb782c7a02b3764c8769c2e8e01b7a0
+      internalID: 1880287171
       vertices: []
       indices: 
       edges: []
       weights: []
     - serializedVersion: 2
-      name: MachineGunner-Class_1
+      name: Scout_1
       rect:
         serializedVersion: 2
         x: 16
@@ -193,16 +202,16 @@ TextureImporter:
       customData: 
       outline: []
       physicsShape: []
-      tessellationDetail: -1
+      tessellationDetail: 0
       bones: []
-      spriteID: dd937520beaf352e0800000000000000
-      internalID: -2138089510807324195
+      spriteID: 9fe57398225fa4340b31cf6129a813f9
+      internalID: 1915592573
       vertices: []
       indices: 
       edges: []
       weights: []
     - serializedVersion: 2
-      name: MachineGunner-Class_2
+      name: Scout_2
       rect:
         serializedVersion: 2
         x: 0
@@ -215,16 +224,16 @@ TextureImporter:
       customData: 
       outline: []
       physicsShape: []
-      tessellationDetail: -1
+      tessellationDetail: 0
       bones: []
-      spriteID: 58a4b86720e2a92b0800000000000000
-      internalID: -5577094600431285627
+      spriteID: 1e41fb3efade25141bd384110ffe2fe4
+      internalID: -400811617
       vertices: []
       indices: 
       edges: []
       weights: []
     - serializedVersion: 2
-      name: MachineGunner-Class_3
+      name: Scout_3
       rect:
         serializedVersion: 2
         x: 16
@@ -237,16 +246,16 @@ TextureImporter:
       customData: 
       outline: []
       physicsShape: []
-      tessellationDetail: -1
+      tessellationDetail: 0
       bones: []
-      spriteID: 7281704a6a6139310800000000000000
-      internalID: 1410496013269407783
+      spriteID: 09bfde6f9c5b73e46a8b7caaee68dd28
+      internalID: -1833094423
       vertices: []
       indices: 
       edges: []
       weights: []
     - serializedVersion: 2
-      name: MachineGunner-Class_6
+      name: Scout_6
       rect:
         serializedVersion: 2
         x: 0
@@ -259,16 +268,16 @@ TextureImporter:
       customData: 
       outline: []
       physicsShape: []
-      tessellationDetail: -1
+      tessellationDetail: 0
       bones: []
-      spriteID: d240470cea9654fe0800000000000000
-      internalID: -1205441125977684947
+      spriteID: 8e46895f921567f4db0c066265d9004d
+      internalID: -1626095802
       vertices: []
       indices: 
       edges: []
       weights: []
     - serializedVersion: 2
-      name: MachineGunner-Class_7
+      name: Scout_7
       rect:
         serializedVersion: 2
         x: 16
@@ -281,16 +290,16 @@ TextureImporter:
       customData: 
       outline: []
       physicsShape: []
-      tessellationDetail: -1
+      tessellationDetail: 0
       bones: []
-      spriteID: dfb501bb1c1f868e0800000000000000
-      internalID: -1699843044962968579
+      spriteID: 7657e73094700214fbbed428430be543
+      internalID: 786137285
       vertices: []
       indices: 
       edges: []
       weights: []
     - serializedVersion: 2
-      name: MachineGunner-Class_11
+      name: Scout_11
       rect:
         serializedVersion: 2
         x: 0
@@ -303,16 +312,16 @@ TextureImporter:
       customData: 
       outline: []
       physicsShape: []
-      tessellationDetail: -1
+      tessellationDetail: 0
       bones: []
-      spriteID: ce687edf8e14a7550800000000000000
-      internalID: 6159307909330601708
+      spriteID: c4280a2d1803fdf4a82616b8567f3e39
+      internalID: 345880050
       vertices: []
       indices: 
       edges: []
       weights: []
     - serializedVersion: 2
-      name: MachineGunner-Class_12
+      name: Scout_12
       rect:
         serializedVersion: 2
         x: 16
@@ -325,16 +334,16 @@ TextureImporter:
       customData: 
       outline: []
       physicsShape: []
-      tessellationDetail: -1
+      tessellationDetail: 0
       bones: []
-      spriteID: cf091010b3bef6840800000000000000
-      internalID: 5219649131798171900
+      spriteID: 877878c1d914e0242b443926fff727d9
+      internalID: 2012850472
       vertices: []
       indices: 
       edges: []
       weights: []
     - serializedVersion: 2
-      name: MachineGunner-Class_13
+      name: Scout_13
       rect:
         serializedVersion: 2
         x: 32
@@ -347,16 +356,16 @@ TextureImporter:
       customData: 
       outline: []
       physicsShape: []
-      tessellationDetail: -1
+      tessellationDetail: 0
       bones: []
-      spriteID: 2976e6b6984df4020800000000000000
-      internalID: 2328313219051841426
+      spriteID: 1b0a98bd89cbf0a4f96738c7a0fb47fe
+      internalID: 1767667372
       vertices: []
       indices: 
       edges: []
       weights: []
     - serializedVersion: 2
-      name: MachineGunner-Class_14
+      name: Scout_14
       rect:
         serializedVersion: 2
         x: 48
@@ -369,16 +378,16 @@ TextureImporter:
       customData: 
       outline: []
       physicsShape: []
-      tessellationDetail: -1
+      tessellationDetail: 0
       bones: []
-      spriteID: 1d092f7e08fafe2b0800000000000000
-      internalID: -5553026847342423855
+      spriteID: 7720f2fc5cda37e4db731d49ec67bc91
+      internalID: 245454465
       vertices: []
       indices: 
       edges: []
       weights: []
     - serializedVersion: 2
-      name: MachineGunner-Class_15
+      name: Scout_15
       rect:
         serializedVersion: 2
         x: 64
@@ -391,10 +400,10 @@ TextureImporter:
       customData: 
       outline: []
       physicsShape: []
-      tessellationDetail: -1
+      tessellationDetail: 0
       bones: []
-      spriteID: e3632fca4fd17c3c0800000000000000
-      internalID: -4339466779237403074
+      spriteID: 829a437b360028e4bb4f98af79ab17f8
+      internalID: -462114605
       vertices: []
       indices: 
       edges: []
@@ -403,7 +412,7 @@ TextureImporter:
     customData: 
     physicsShape: []
     bones: []
-    spriteID: a5e1df4ef234b2f4281b08872e3e8e18
+    spriteID: c4e59a61494bd1046a8333a7d6156ea5
     internalID: 0
     vertices: []
     indices: 
@@ -413,26 +422,25 @@ TextureImporter:
     spriteCustomMetadata:
       entries: []
     nameFileIdTable:
-      MachineGunner-Class_0: -2723847139052971728
-      MachineGunner-Class_1: -2138089510807324195
-      MachineGunner-Class_10: -6453887229523524698
-      MachineGunner-Class_11: 6159307909330601708
-      MachineGunner-Class_12: 5219649131798171900
-      MachineGunner-Class_13: 2328313219051841426
-      MachineGunner-Class_14: -5553026847342423855
-      MachineGunner-Class_15: -4339466779237403074
-      MachineGunner-Class_16: 1769715682
-      MachineGunner-Class_17: 272575490
-      MachineGunner-Class_18: 1575721394
-      MachineGunner-Class_19: 1836348988
-      MachineGunner-Class_2: -5577094600431285627
-      MachineGunner-Class_3: 1410496013269407783
-      MachineGunner-Class_4: 3589428930050761493
-      MachineGunner-Class_5: 7948365131655128202
-      MachineGunner-Class_6: -1205441125977684947
-      MachineGunner-Class_7: -1699843044962968579
-      MachineGunner-Class_8: -8664050393128913126
-      MachineGunner-Class_9: -364179936694723938
+      Scout_0: 1880287171
+      Scout_1: 1915592573
+      Scout_10: -659996999
+      Scout_11: 345880050
+      Scout_12: 2012850472
+      Scout_13: 1767667372
+      Scout_14: 245454465
+      Scout_15: -462114605
+      Scout_16: -1730247468
+      Scout_17: 885336668
+      Scout_18: 863837828
+      Scout_2: -400811617
+      Scout_3: -1833094423
+      Scout_4: -1578260307
+      Scout_5: 1943947941
+      Scout_6: -1626095802
+      Scout_7: 786137285
+      Scout_8: -1838965298
+      Scout_9: -492936568
   mipmapLimitGroupName: 
   pSDRemoveMatte: 0
   userData: 
