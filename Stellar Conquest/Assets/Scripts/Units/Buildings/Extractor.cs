@@ -2,7 +2,7 @@ using UnityEngine;
 using UnityEngine.UIElements;
 
 public class Extractor : Buildings {
-    [SerializeField] private ResourceType _resourceType = ResourceType.Resource;
+    [SerializeField] private ResourceType _resourceType = ResourceType.Nanites;
     [SerializeField] private float _extractionRate = 5f; 
     [SerializeField] private float _extractionInterval = 1f;
 
@@ -53,4 +53,4 @@ public class Extractor : Buildings {
     }
 }
 
-public enum ResourceType { Electricity, Resource } 
+public enum ResourceType { Electricity, Nanites } 
