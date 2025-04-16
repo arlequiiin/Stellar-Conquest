@@ -33,8 +33,8 @@ public class SelectionManager : MonoBehaviour {
     void Start() {
         _inputManager = InputManager.Instance;
         if (_inputManager == null) {
-            Debug.LogError("SelectionManager requires an InputManager instance!");
-            enabled = false; // Отключаем компонент, если нет InputManager
+            Debug.LogError("SelectionManager'у необходим InputManager");
+            enabled = false; 
             return;
         }
 
@@ -49,7 +49,7 @@ public class SelectionManager : MonoBehaviour {
         _inputManager.OnDragSelectEnd += HandleDragEnd;
     }
 
-    void OnDestroy() // Отписываемся при уничтожении
+    void OnDestroy()
     {
         if (_inputManager != null) {
             _inputManager.OnLeftClick -= HandleLeftClick;
@@ -75,7 +75,7 @@ public class SelectionManager : MonoBehaviour {
                 if (clickedEntity.OwnerPlayerId == GameManager.Instance?.LocalPlayerId) {
                     SelectEntity(clickedEntity);
                 }
-                // TODO: Возможно, нужно выделять и вражеские/нейтральные объекты для просмотра информации?
+                // нужно выделять и вражеские объекты?
                 // else { SelectEntity(clickedEntity, allowCommands: false); }
             }
         }
@@ -129,7 +129,7 @@ public class SelectionManager : MonoBehaviour {
         if (_selectedEntities.Count > 0) {
             Debug.Log("Issuing Stop command to selected units.");
             foreach (var entity in _selectedEntities) {
-                if (entity is Unit unit) // Отменяем только для юнитов
+                if (entity is Units unit) // Отменяем только для юнитов
                 {
                     unit.StopActions();
                 }
@@ -217,7 +217,7 @@ public class SelectionManager : MonoBehaviour {
     private void IssueMoveCommand(Vector3 destination) {
         // TODO: Формации движения? Пока просто отправляем всех в одну точку
         foreach (var entity in _selectedEntities) {
-            if (entity is Unit unit) {
+            if (entity is Units unit) {
                 unit.MoveTo(destination);
             }
         }
@@ -225,7 +225,7 @@ public class SelectionManager : MonoBehaviour {
 
     private void IssueAttackCommand(Entity target) {
         foreach (var entity in _selectedEntities) {
-            if (entity is Unit unit) {
+            if (entity is Units unit) {
                 unit.OrderAttackTarget(target);
             }
         }

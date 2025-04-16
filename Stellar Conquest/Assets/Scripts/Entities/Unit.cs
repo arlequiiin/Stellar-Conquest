@@ -17,21 +17,25 @@ public class Units : Entity {
     private UnitState _currentState = UnitState.Idle;
     private Entity _currentTarget;
     private float _lastAttackTime;
+    private Animator _animator;
 
     protected override void Awake() 
     {
         base.Awake(); 
         _navMeshAgent = GetComponent<NavMeshAgent>();
         _navMeshAgent.speed = _walkSpeed;
+        _animator = GetComponent<Animator>();
     }
 
     protected virtual void Update() {
         switch (_currentState) {
             case UnitState.Idle:
+                SetAnimator(false, false);
                 FindTargetAndAttackIfNeeded();
                 break;
 
             case UnitState.Moving:
+                SetAnimator(true, false);
                 if (!_navMeshAgent.pathPending && _navMeshAgent.remainingDistance <= _navMeshAgent.stoppingDistance) {
                     if (!_navMeshAgent.hasPath || _navMeshAgent.velocity.sqrMagnitude == 0f) {
                         Debug.Log($"{gameObject.name} достиг пункта назначения");
@@ -42,16 +46,23 @@ public class Units : Entity {
                 break;
 
             case UnitState.Attacking:
+                SetAnimator(false, true);
                 PerformAttack();
                 break;
 
             case UnitState.Death:
-                // Логика перезарядки 
+
                 break;
         }
 
         Debug.Log($"Юнит: {gameObject.name}, Состояние: {_currentState}");
     }
+
+    private void SetAnimator(bool isMoving, bool isFiring) {
+        _animator.SetBool("IsMoving", isMoving);
+        _animator.SetBool("IsFiring", isFiring);
+    }
+
 
     public void MoveTo(Vector3 destination) {
         if (_navMeshAgent.SetDestination(destination)) {
@@ -158,8 +169,13 @@ public class Units : Entity {
 
     protected override void Die() {
         Debug.Log($"Юнит {gameObject.name} уничтожен");
-        //эффекты смерти юнита (анимация, звук)
+        _currentState = UnitState.Death;
+        _navMeshAgent.enabled = false;
+        _animator.SetBool("IsMoving", false);
+        _animator.SetBool("IsFiring", false);
+        _animator.SetTrigger("IsDead");
 
+        Destroy(gameObject, 5f); // удалим через 5 сек
         base.Die(); 
     }
 }

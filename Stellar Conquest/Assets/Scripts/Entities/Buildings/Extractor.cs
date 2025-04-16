@@ -53,4 +53,4 @@ public class Extractor : Buildings {
     }
 }
 
-public enum ResourceType { Electricity, Nanites } 
+// public enum ResourceType { Electricity, Nanites } 

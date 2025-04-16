@@ -17,7 +17,7 @@ public class Factory : Buildings {
         public Units UnitPrefab;         
         public float ProductionTime = 5f;
         public float ResourceCost = 100f;
-        public ResourceType ResourceType = ResourceType.Resource; 
+        public ResourceType ResourceType = ResourceType.Nanites; 
         public float PowerCost = 0f;     // cтоимость в энергии (мгновенная при заказе?)
     }
 

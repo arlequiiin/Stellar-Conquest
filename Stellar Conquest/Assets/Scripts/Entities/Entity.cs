@@ -2,20 +2,18 @@ using UnityEngine;
 
 public abstract class Entity : MonoBehaviour {
     [SerializeField] public float _maxHealth;
+    [SerializeField] private GameObject _selectionCircle;
     private float _currentHealth;
 
-    private GameObject _outlineRenderer;
-    protected virtual void Awake() 
-{
+    public int OwnerPlayerId { get; protected set; }
+
+    protected virtual void Awake() {
         _currentHealth = _maxHealth;
     }
 
     protected virtual void Start() {
-        _outlineRenderer.SetActive(false);
+        _selectionCircle?.SetActive(false);
     }
-
-
-    public int OwnerPlayerId { get; protected set; }
 
     public virtual void TakeDamage(float amount) {
         if (amount <= 0) return;
@@ -30,18 +28,19 @@ public abstract class Entity : MonoBehaviour {
     public float MaxHealth => _maxHealth;
 
     public virtual void Select() {
-        if (_outlineRenderer != null) {
-            _outlineRenderer.SetActive(true);
-        }
+        if (_selectionCircle != null)
+            _selectionCircle.SetActive(true);
+    
         Debug.Log($"{gameObject.name} выбран");
     }
 
     public virtual void Deselect() {
-        if (_outlineRenderer != null) {
-            _outlineRenderer.SetActive(false);
-        }
+        if (_selectionCircle != null)
+            _selectionCircle.SetActive(false);
+
         Debug.Log($"{gameObject.name} не выбран");
     }
+
     public virtual void SetOwner(int playerId) {
         OwnerPlayerId = playerId;
         // применить цвета игрока
@@ -57,8 +56,8 @@ public abstract class Entity : MonoBehaviour {
         Destroy(gameObject);
     }
     protected virtual void OnDestroy() {
-        if (_outlineRenderer != null) {
-            Destroy(_outlineRenderer);
+        if (_selectionCircle != null) {
+            Destroy(_selectionCircle);
         }
     }
 }
