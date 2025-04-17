@@ -31,7 +31,7 @@ Transform:
   serializedVersion: 2
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
   m_LocalPosition: {x: -1.5009, y: 2.4257, z: -0.042778105}
-  m_LocalScale: {x: 0.9218, y: 0.9088, z: 1}
+  m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children:
   - {fileID: 5657442270574426599}
@@ -195,7 +195,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   _maxHealth: 100
-  _selectionCircle: {fileID: 0}
+  _selectionCircle: {fileID: 6962358814173311666}
   _walkSpeed: 5
   _range: 10
   _attackDamage: 10

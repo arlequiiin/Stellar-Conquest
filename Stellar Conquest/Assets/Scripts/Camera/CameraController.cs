@@ -15,7 +15,7 @@ public class CameraController : MonoBehaviour {
 
     void Update() {
         HandleKeyboardMovement();
-        HandleMouseEdgeScrolling();
+        // HandleMouseEdgeScrolling();
         HandleZoom();
     }
 
