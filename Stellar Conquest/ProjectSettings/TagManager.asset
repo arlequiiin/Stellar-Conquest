@@ -9,15 +9,15 @@ TagManager:
   - Default
   - TransparentFX
   - Ignore Raycast
-  - 
+  - Selectable
   - Water
   - UI
-  - 
-  - 
+  - Ground
+  - Interactable
   - NavMesh
   - BackgroundImage
   - DistantHotspot
-  - 
+  - Enemy
   - 
   - 
   - 

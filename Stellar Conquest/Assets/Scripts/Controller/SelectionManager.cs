@@ -3,29 +3,24 @@ using System.Collections.Generic;
 using System.Linq;
 
 public class SelectionManager : MonoBehaviour {
-    // --- Singleton ---
     private static SelectionManager _instance;
-    public static SelectionManager Instance { get { /* ... Singleton Get ... */ return _instance; } }
+    public static SelectionManager Instance { get { return _instance; } }
 
-    // --- State ---
     [SerializeField] private List<Entity> _selectedEntities = new List<Entity>();
-    public IReadOnlyList<Entity> SelectedEntities => _selectedEntities; // Доступ только для чтения извне
+    public IReadOnlyList<Entity> SelectedEntities => _selectedEntities; 
 
-    // --- Dependencies ---
     private InputManager _inputManager;
     [SerializeField] private LayerMask _selectableLayerMask;
     [SerializeField] private LayerMask _groundLayerMask;
-    [SerializeField] private LayerMask _enemyLayerMask; // Слой для вражеских юнитов/зданий
+    [SerializeField] private LayerMask _enemyLayerMask; 
 
-    // --- Drag Selection UI ---
-    [SerializeField] private RectTransform _selectionBoxRect; // Ссылка на UI Image/Panel для рамки
+    [SerializeField] private RectTransform _selectionBoxRect; 
     private Vector2 _startDragPos;
 
     void Awake() {
-        // Ensure Singleton
         if (_instance != null && _instance != this) { Destroy(gameObject); return; }
         _instance = this;
-        // DontDestroyOnLoad(gameObject); // Если нужно
+        // DontDestroyOnLoad(gameObject); 
 
         if (_selectionBoxRect != null) _selectionBoxRect.gameObject.SetActive(false);
     }
@@ -38,7 +33,6 @@ public class SelectionManager : MonoBehaviour {
             return;
         }
 
-        // Подписываемся на события InputManager
         _inputManager.OnLeftClick += HandleLeftClick;
         _inputManager.OnShiftLeftClick += HandleShiftLeftClick;
         _inputManager.OnRightClick += HandleRightClick;

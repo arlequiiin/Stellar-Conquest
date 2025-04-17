@@ -1,7 +1,7 @@
 using UnityEngine;
 
 public abstract class Entity : MonoBehaviour {
-    [SerializeField] public float _maxHealth;
+    [SerializeField] private float _maxHealth;
     [SerializeField] private GameObject _selectionCircle;
     private float _currentHealth;
 
@@ -13,6 +13,7 @@ public abstract class Entity : MonoBehaviour {
 
     protected virtual void Start() {
         _selectionCircle?.SetActive(false);
+        Debug.Log($"{gameObject.name} выключил выделение");
     }
 
     public virtual void TakeDamage(float amount) {
@@ -24,6 +25,7 @@ public abstract class Entity : MonoBehaviour {
         if (_currentHealth <= 0) Die();
     }
 
+    public bool IsAlive => _currentHealth > 0;
     public float CurrentHealth => _currentHealth;
     public float MaxHealth => _maxHealth;
 
@@ -53,7 +55,7 @@ public abstract class Entity : MonoBehaviour {
         // Сообщаем внешним системам (например, GameManager) о смерти
         // OnEntityDestroyed?.Invoke(this); 
 
-        Destroy(gameObject);
+        Destroy(gameObject, 5f); // удалим через 5 сек
     }
     protected virtual void OnDestroy() {
         if (_selectionCircle != null) {

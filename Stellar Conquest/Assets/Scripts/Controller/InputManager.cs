@@ -17,6 +17,7 @@ public class InputManager : MonoBehaviour {
     [SerializeField] private LayerMask _groundLayerMask;
     [SerializeField] private LayerMask _selectableLayerMask;
     [SerializeField] private LayerMask _interactableLayerMask;
+    [SerializeField] private LayerMask _enemyLayerMask;
 
     private PlayerControls _controls;
 
@@ -85,6 +86,7 @@ public class InputManager : MonoBehaviour {
     }
 
     private void HandleLeftClick() {
+
         // EndDrag
     }
 

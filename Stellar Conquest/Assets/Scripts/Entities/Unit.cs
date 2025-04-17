@@ -11,6 +11,7 @@ public class Units : Entity {
     [SerializeField] private float _attackDamage;
     [SerializeField] private float _attackCooldown;
 
+
     private NavMeshAgent _navMeshAgent;
 
     private enum UnitState { Idle, Moving, Attacking, Death }
@@ -18,12 +19,19 @@ public class Units : Entity {
     private Entity _currentTarget;
     private float _lastAttackTime;
     private Animator _animator;
+    private bool _isMoving;
+    private bool _isFiring;
+    private bool _updateRotation = false;
+    private bool _updateUpAxis = false;
 
     protected override void Awake() 
     {
         base.Awake(); 
         _navMeshAgent = GetComponent<NavMeshAgent>();
         _navMeshAgent.speed = _walkSpeed;
+        _navMeshAgent.updateRotation = _updateRotation;
+        _navMeshAgent.updateUpAxis = _updateUpAxis;
+
         _animator = GetComponent<Animator>();
     }
 
@@ -55,12 +63,21 @@ public class Units : Entity {
                 break;
         }
 
-        Debug.Log($"Юнит: {gameObject.name}, Состояние: {_currentState}");
+        // #if UNITY_EDITOR
+        // Debug.Log($"Юнит: {gameObject.name}, Состояние: {_currentState}");
+        // #endif    
     }
 
     private void SetAnimator(bool isMoving, bool isFiring) {
-        _animator.SetBool("IsMoving", isMoving);
-        _animator.SetBool("IsFiring", isFiring);
+        if (_isMoving != isMoving) {
+            _animator.SetBool("IsMoving", isMoving);
+            _isMoving = isMoving;
+        }
+
+        if (_isFiring != isFiring) {
+            _animator.SetBool("IsFiring", isFiring);
+            _isFiring = isFiring;
+        }
     }
 
 
@@ -175,7 +192,6 @@ public class Units : Entity {
         _animator.SetBool("IsFiring", false);
         _animator.SetTrigger("IsDead");
 
-        Destroy(gameObject, 5f); // удалим через 5 сек
-        base.Die(); 
+        base.Die();
     }
 }
