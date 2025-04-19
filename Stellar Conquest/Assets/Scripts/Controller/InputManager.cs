@@ -39,22 +39,21 @@ public class InputManager : MonoBehaviour {
         _controls.Enable();
 
         _controls.Player.Select.performed += ctx => HandleLeftClick();
-        _controls.Player.RightClick.performed += ctx => HandleRightClick();
-        _controls.Player.Cancel.performed += ctx => OnCancelKeyPressed?.Invoke();
-
-        _controls.Player.Select.started += ctx => StartDrag(ctx);
-        _controls.Player.Select.canceled += ctx => EndDrag(ctx);
+        //_controls.Player.RightClick.performed += ctx => HandleRightClick();
+        //_controls.Player.Cancel.performed += ctx => OnCancelKeyPressed?.Invoke();
+        //_controls.Player.Select.started += ctx => StartDrag(ctx);
+        //_controls.Player.Select.canceled += ctx => EndDrag(ctx);
     }
 
     void Update() {
-        if (GameManager.Instance != null && GameManager.Instance.CurrentState != GameManager.GameState.Playing)
-            return;
+        //if (GameManager.Instance != null && GameManager.Instance.CurrentState != GameManager.GameState.Playing)
+        //    return;
 
-        if (_isDragging) {
-            Vector2 mousePos = Mouse.current.position.ReadValue();
-            if (Vector2.Distance(mousePos, _dragStartPosition) > DragThreshold)
-                OnDragSelectUpdate?.Invoke(mousePos, _dragStartPosition);
-        }
+        //if (_isDragging) {
+        //    Vector2 mousePos = Mouse.current.position.ReadValue();
+        //    if (Vector2.Distance(mousePos, _dragStartPosition) > DragThreshold)
+        //        OnDragSelectUpdate?.Invoke(mousePos, _dragStartPosition);
+        //}
     }
 
     private void StartDrag(InputAction.CallbackContext ctx) {
@@ -86,8 +85,14 @@ public class InputManager : MonoBehaviour {
     }
 
     private void HandleLeftClick() {
-
-        // EndDrag
+        if (RaycastMouse(out RaycastHit hit, _selectableLayerMask)) {
+            OnLeftClick?.Invoke(hit.point);
+            Debug.Log($"Рейкаст попал в объект (в HandleLeftClick): {hit.collider.gameObject.name}, Слой: {LayerMask.LayerToName(hit.collider.gameObject.layer)}, Точка попадания: {hit.point}");
+        }
+        else {
+            OnLeftClick?.Invoke(Vector3.negativeInfinity);
+            Debug.Log("Рейкаст ничего не попал (в HandleLeftClick)");
+        }
     }
 
     private void HandleRightClick() {
@@ -101,9 +106,12 @@ public class InputManager : MonoBehaviour {
     }
 
     public bool GetObjectUnderCursor<T>(out T component, LayerMask layerMask) where T : Component {
+        Debug.Log($"Выполняем RaycastMouse с маской: {layerMask.value}"); 
         component = null;
         if (RaycastMouse(out RaycastHit hit, layerMask)) {
+            Debug.Log($"Raycast попал в объект: {hit.collider.gameObject.name}");
             component = hit.collider.GetComponent<T>();
+            Debug.Log($"Получен компонент {typeof(T)}: {component != null}"); 
             return component != null;
         }
         return false;

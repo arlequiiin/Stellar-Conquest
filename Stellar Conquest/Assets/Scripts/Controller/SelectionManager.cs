@@ -60,11 +60,11 @@ public class SelectionManager : MonoBehaviour {
 
     private void HandleLeftClick(Vector3 clickPosition) {
         ClearSelection(); // Сначала очищаем предыдущее выделение
-
         // Если клик был не в пустоту
         if (clickPosition != Vector3.negativeInfinity) {
             // Пытаемся найти объект под курсором
             if (_inputManager.GetObjectUnderCursor<Entity>(out Entity clickedEntity, _selectableLayerMask)) {
+                Debug.Log("Нажатие ЛКМ по объекту");
                 // Выделяем только если это юнит/здание локального игрока
                 if (clickedEntity.OwnerPlayerId == GameManager.Instance?.LocalPlayerId) {
                     SelectEntity(clickedEntity);
@@ -73,7 +73,7 @@ public class SelectionManager : MonoBehaviour {
                 // else { SelectEntity(clickedEntity, allowCommands: false); }
             }
         }
-        UpdateSelectionUI(); // Обновить UI в любом случае (показать инфо или очистить)
+        // UpdateSelectionUI(); // Обновить UI в любом случае (показать инфо или очистить)
     }
 
     private void HandleShiftLeftClick(Vector3 clickPosition) {
