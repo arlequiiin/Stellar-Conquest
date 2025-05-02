@@ -1,6 +1,8 @@
 using UnityEngine;
 using UnityEngine.InputSystem;
 using System;
+using UnityEngine.EventSystems; 
+using System.Collections.Generic;
 
 public class InputManager : MonoBehaviour {
     public static InputManager Instance { get; private set; }
@@ -39,21 +41,21 @@ public class InputManager : MonoBehaviour {
         _controls.Enable();
 
         _controls.Player.Select.performed += ctx => HandleLeftClick();
-        //_controls.Player.RightClick.performed += ctx => HandleRightClick();
-        //_controls.Player.Cancel.performed += ctx => OnCancelKeyPressed?.Invoke();
-        //_controls.Player.Select.started += ctx => StartDrag(ctx);
-        //_controls.Player.Select.canceled += ctx => EndDrag(ctx);
+        _controls.Player.RightClick.performed += ctx => HandleRightClick();
+        _controls.Player.Cancel.performed += ctx => OnCancelKeyPressed?.Invoke();
+        _controls.Player.Select.started += ctx => StartDrag(ctx);
+        _controls.Player.Select.canceled += ctx => EndDrag(ctx);
     }
 
     void Update() {
         //if (GameManager.Instance != null && GameManager.Instance.CurrentState != GameManager.GameState.Playing)
         //    return;
 
-        //if (_isDragging) {
-        //    Vector2 mousePos = Mouse.current.position.ReadValue();
-        //    if (Vector2.Distance(mousePos, _dragStartPosition) > DragThreshold)
-        //        OnDragSelectUpdate?.Invoke(mousePos, _dragStartPosition);
-        //}
+        if (_isDragging) {
+            Vector2 mousePos = Mouse.current.position.ReadValue();
+            if (Vector2.Distance(mousePos, _dragStartPosition) > DragThreshold)
+                OnDragSelectUpdate?.Invoke(mousePos, _dragStartPosition);
+        }
     }
 
     private void StartDrag(InputAction.CallbackContext ctx) {
@@ -72,7 +74,11 @@ public class InputManager : MonoBehaviour {
             OnDragSelectEnd?.Invoke(mousePos, _dragStartPosition);
         }
         else {
-            if (RaycastMouse(out RaycastHit hit, _selectableLayerMask | _groundLayerMask)) {
+            if (IsPointerOverUI()) {
+                Debug.Log("Detected a click (no drag) over UI. Blocking world interaction.");
+                return; 
+            }
+            if (RaycastMouse(out RaycastHit2D hit, _selectableLayerMask | _groundLayerMask)) {
                 if (_controls.Player.MultiSelect.ReadValue<float>() > 0)
                     OnShiftLeftClick?.Invoke(hit.point);
                 else
@@ -85,7 +91,12 @@ public class InputManager : MonoBehaviour {
     }
 
     private void HandleLeftClick() {
-        if (RaycastMouse(out RaycastHit hit, _selectableLayerMask)) {
+        if (IsPointerOverUI()) {
+            Debug.Log("Clicked on UI (HandleLeftClick). Blocking world interaction.");
+            return;
+        }
+
+        if (RaycastMouse(out RaycastHit2D hit, _selectableLayerMask)) {
             OnLeftClick?.Invoke(hit.point);
             Debug.Log($"Рейкаст попал в объект (в HandleLeftClick): {hit.collider.gameObject.name}, Слой: {LayerMask.LayerToName(hit.collider.gameObject.layer)}, Точка попадания: {hit.point}");
         }
@@ -96,19 +107,38 @@ public class InputManager : MonoBehaviour {
     }
 
     private void HandleRightClick() {
-        if (RaycastMouse(out RaycastHit hit, _interactableLayerMask))
+        if (IsPointerOverUI()) {
+            Debug.Log("Clicked on UI (HandleRightClick). Blocking world interaction.");
+            return;
+        }
+
+        LayerMask rightClickMask = _groundLayerMask | _enemyLayerMask | _interactableLayerMask;
+
+        if (RaycastMouse(out RaycastHit2D hit, rightClickMask)) {
             OnRightClick?.Invoke(hit.point);
+        }
     }
 
-    private bool RaycastMouse(out RaycastHit hitInfo, LayerMask layerMask) {
+    private bool RaycastMouse(out RaycastHit2D hitInfo, LayerMask layerMask) {
+        hitInfo = default;
         Ray ray = _mainCamera.ScreenPointToRay(Mouse.current.position.ReadValue());
-        return Physics.Raycast(ray, out hitInfo, MaxRayDistance, layerMask);
+
+        RaycastHit2D hit = Physics2D.GetRayIntersection(ray, MaxRayDistance, layerMask);
+
+        if (hit.collider != null) {
+            hitInfo = hit;
+            // Debug.Log($"[RaycastMouse 2D] Hit: {hit.collider.name} on layer {LayerMask.LayerToName(hit.collider.gameObject.layer)}");
+            return true; // Попали во что-то
+        }
+
+        // Debug.Log($"[RaycastMouse 2D] Missed with mask: {LayerMask.LayerToName(layerMask)}");
+        return false; // Ничего не попали
     }
 
     public bool GetObjectUnderCursor<T>(out T component, LayerMask layerMask) where T : Component {
         Debug.Log($"Выполняем RaycastMouse с маской: {layerMask.value}"); 
         component = null;
-        if (RaycastMouse(out RaycastHit hit, layerMask)) {
+        if (RaycastMouse(out RaycastHit2D hit, layerMask)) {
             Debug.Log($"Raycast попал в объект: {hit.collider.gameObject.name}");
             component = hit.collider.GetComponent<T>();
             Debug.Log($"Получен компонент {typeof(T)}: {component != null}"); 
@@ -119,10 +149,22 @@ public class InputManager : MonoBehaviour {
 
     public bool GetGroundPointUnderCursor(out Vector3 point) {
         point = Vector3.zero;
-        if (RaycastMouse(out RaycastHit hit, _groundLayerMask)) {
+        if (RaycastMouse(out RaycastHit2D hit, _groundLayerMask)) {
             point = hit.point;
             return true;
         }
         return false;
+    }
+
+    private bool IsPointerOverUI() {
+        if (EventSystem.current == null) {
+            Debug.LogError("EventSystem отсутствует в сцене! UI события не будут работать корректно.");
+            return false;
+        }
+        PointerEventData eventData = new PointerEventData(EventSystem.current);
+        eventData.position = Mouse.current.position.ReadValue();
+        List<RaycastResult> results = new List<RaycastResult>();
+        EventSystem.current.RaycastAll(eventData, results);
+        return results.Count > 0;
     }
 }

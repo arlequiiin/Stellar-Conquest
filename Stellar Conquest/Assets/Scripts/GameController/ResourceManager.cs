@@ -5,12 +5,11 @@ using System;
 public enum ResourceType { Energy, Nanites } 
 
 public class ResourceManager : MonoBehaviour {
-    // --- Singleton Pattern ---
     private static ResourceManager _instance;
     public static ResourceManager Instance {
         get {
             if (_instance == null) {
-                _instance = FindObjectOfType<ResourceManager>();
+                _instance = FindFirstObjectByType<ResourceManager>();
                 if (_instance == null) {
                     GameObject singletonObject = new GameObject("ResourceManager");
                     _instance = singletonObject.AddComponent<ResourceManager>();

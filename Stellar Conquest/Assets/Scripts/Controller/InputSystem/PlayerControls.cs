@@ -99,7 +99,7 @@ public partial class @PlayerControls: IInputActionCollection2, IDisposable
                 {
                     ""name"": """",
                     ""id"": ""4dda1641-0162-47e8-99db-3108face88c3"",
-                    ""path"": ""<Keyboard>/s"",
+                    ""path"": ""<Keyboard>/c"",
                     ""interactions"": """",
                     ""processors"": """",
                     ""groups"": """",

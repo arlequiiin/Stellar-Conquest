@@ -3,41 +3,36 @@ using System.Collections.Generic;
 using System.Linq; // Для Linq методов типа Count()
 
 public class GameManager : MonoBehaviour {
-    // --- Singleton Pattern ---
     private static GameManager _instance;
     public static GameManager Instance {
         get {
-            if (_instance == null) _instance = FindObjectOfType<GameManager>();
-            // Опционально: создать, если не найден
+            if (_instance == null) _instance = FindFirstObjectByType<GameManager>();
             return _instance;
         }
     }
 
-    // --- Game State ---
     public enum GameState { Pregame, Playing, Paused, GameOver }
     public GameState CurrentState { get; private set; } = GameState.Pregame;
 
-    // --- Player Management ---
     public class PlayerInfo {
         public int PlayerId;
-        public string PlayerName; // Например, "Игрок 1", "Компьютер"
-        public Color PlayerColor;  // Цвет для юнитов/зданий
-        public bool IsHuman;      // Человек или ИИ?
-        public CommandCenter CommandCenter; // Ссылка на главный штаб
+        public string PlayerName; 
+        public Color PlayerColor;  
+        public bool IsHuman; 
+        public CommandCenter CommandCenter;
         public bool IsDefeated = false;
     }
 
     public List<PlayerInfo> Players = new List<PlayerInfo>();
-    public int LocalPlayerId = 1; // ID игрока, который управляет этой копией игры
+    public int LocalPlayerId = 1;
 
     void Awake() {
-        // Ensure Singleton
         if (_instance != null && _instance != this) {
             Destroy(gameObject);
             return;
         }
         _instance = this;
-        DontDestroyOnLoad(gameObject); // Опционально
+        DontDestroyOnLoad(gameObject); 
     }
 
     void Start() {
@@ -78,7 +73,8 @@ public class GameManager : MonoBehaviour {
 
     // Вызывается из CommandCenter.Die()
     public void PlayerLost(int playerId) {
-        if (CurrentState != GameState.Playing) return; // Игра уже закончена или не началась
+        if (CurrentState != GameState.Playing) 
+            return; 
 
         PlayerInfo defeatedPlayer = Players.Find(p => p.PlayerId == playerId);
         if (defeatedPlayer != null && !defeatedPlayer.IsDefeated) {
@@ -116,7 +112,6 @@ public class GameManager : MonoBehaviour {
         // Time.timeScale = 0f;
     }
 
-    // --- Другие возможные методы ---
     public void PauseGame() {
         if (CurrentState == GameState.Playing) {
             CurrentState = GameState.Paused;

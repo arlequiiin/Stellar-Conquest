@@ -5,10 +5,11 @@ public abstract class Entity : MonoBehaviour {
     [SerializeField] private GameObject _selectionCircle;
     private float _currentHealth;
 
-    public int OwnerPlayerId { get; protected set; }
+    [SerializeField] public int OwnerPlayerId { get; protected set; }
 
     protected virtual void Awake() {
         _currentHealth = _maxHealth;
+        OwnerPlayerId = 1;
     }
 
     protected virtual void Start() {
@@ -58,8 +59,6 @@ public abstract class Entity : MonoBehaviour {
         Destroy(gameObject, 5f); // удалим через 5 сек
     }
     protected virtual void OnDestroy() {
-        if (_selectionCircle != null) {
-            Destroy(_selectionCircle);
-        }
+    
     }
 }

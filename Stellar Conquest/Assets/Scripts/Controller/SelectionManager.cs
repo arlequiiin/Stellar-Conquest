@@ -17,6 +17,8 @@ public class SelectionManager : MonoBehaviour {
     [SerializeField] private RectTransform _selectionBoxRect; 
     private Vector2 _startDragPos;
 
+    [SerializeField] private FactoryUIPanel _factoryUIPanel;
+
     void Awake() {
         if (_instance != null && _instance != this) { Destroy(gameObject); return; }
         _instance = this;
@@ -56,24 +58,37 @@ public class SelectionManager : MonoBehaviour {
         }
     }
 
-    // --- Event Handlers ---
-
     private void HandleLeftClick(Vector3 clickPosition) {
-        ClearSelection(); // Сначала очищаем предыдущее выделение
-        // Если клик был не в пустоту
+        bool clickedFriendlySelectable = false;
+        Entity clickedEntity = null;
+
         if (clickPosition != Vector3.negativeInfinity) {
-            // Пытаемся найти объект под курсором
-            if (_inputManager.GetObjectUnderCursor<Entity>(out Entity clickedEntity, _selectableLayerMask)) {
-                Debug.Log("Нажатие ЛКМ по объекту");
-                // Выделяем только если это юнит/здание локального игрока
+
+            if (_inputManager.GetObjectUnderCursor<Entity>(out clickedEntity, _selectableLayerMask)) {
+
                 if (clickedEntity.OwnerPlayerId == GameManager.Instance?.LocalPlayerId) {
+                    ClearSelection(); 
                     SelectEntity(clickedEntity);
+                    clickedFriendlySelectable = true;
+                    Debug.Log($"Выбран свой объект: {clickedEntity.name}");
                 }
-                // нужно выделять и вражеские объекты?
-                // else { SelectEntity(clickedEntity, allowCommands: false); }
+                else {
+                    Debug.Log($"Клик по чужому/нейтральному объекту: {clickedEntity.name}");
+                }
+            }
+            else {
+                Debug.Log("Клик по земле или другому невыделяемому объекту");
             }
         }
-        // UpdateSelectionUI(); // Обновить UI в любом случае (показать инфо или очистить)
+        else {
+            Debug.Log("Клик в пустоту");
+        }
+
+
+        if (!clickedFriendlySelectable) {
+            ClearSelection(); 
+        }
+        UpdateSelectionUI(); 
     }
 
     private void HandleShiftLeftClick(Vector3 clickPosition) {
@@ -95,33 +110,41 @@ public class SelectionManager : MonoBehaviour {
     }
 
     private void HandleRightClick(Vector3 clickPosition) {
-        if (_selectedEntities.Count == 0) return; // Нет выделенных юнитов
+        if (_selectedEntities.Count == 0) 
+            return;
 
-        // 1. Проверяем, кликнули ли по врагу
-        if (_inputManager.GetObjectUnderCursor<Entity>(out Entity targetEntity, _enemyLayerMask)) // Используем _enemyLayerMask
+        Entity targetEntity = null;
+        Vector3 groundPoint = Vector3.zero;
+        bool hitEnemy = false;
+        bool hitGround = false;
+        LayerMask enemyMask = _enemyLayerMask; 
+
+        if (_inputManager.GetObjectUnderCursor<Entity>(out targetEntity, enemyMask)) // Используем _enemyLayerMask
         {
-            // Проверяем, что цель действительно враг
-            if (targetEntity.OwnerPlayerId != GameManager.Instance?.LocalPlayerId && targetEntity.OwnerPlayerId != 0) // 0 - нейтральный ID?
+            if (targetEntity.OwnerPlayerId != GameManager.Instance?.LocalPlayerId && targetEntity.OwnerPlayerId != 0) 
             {
-                Debug.Log($"Ordering selected units to attack {targetEntity.name}");
+                Debug.Log($"Приказ атаковать: {targetEntity.name}");
                 IssueAttackCommand(targetEntity);
-                return; // Приоритет на атаку
+                hitEnemy = true;
             }
         }
 
-        // 2. Если не по врагу, проверяем, кликнули ли по земле
-        if (_inputManager.GetGroundPointUnderCursor(out Vector3 groundPoint)) {
-            Debug.Log($"Ordering selected units to move to {groundPoint}");
-            IssueMoveCommand(groundPoint);
-            return;
+        if (_inputManager.GetGroundPointUnderCursor(out groundPoint)) {
+            Debug.Log($"Приказ двигаться в точку: {groundPoint}");
+            IssueMoveCommand(groundPoint); // Этот метод вызывает unit.MoveTo()
+            hitGround = true;
         }
 
-        // 3. TODO: Клик по другим объектам (ресурсы, дружественные здания для ремонта и т.д.)?
+        if (!hitEnemy && !hitGround) {
+            Debug.Log("ПКМ: Недопустимая цель для команды.");
+        }
+
+        //клик по другим объектам ?
     }
 
     private void HandleCancelKey() {
         if (_selectedEntities.Count > 0) {
-            Debug.Log("Issuing Stop command to selected units.");
+            Debug.Log("Команда стоп для юнитов");
             foreach (var entity in _selectedEntities) {
                 if (entity is Units unit) // Отменяем только для юнитов
                 {
@@ -129,6 +152,8 @@ public class SelectionManager : MonoBehaviour {
                 }
             }
         }
+        ClearSelection();
+        UpdateSelectionUI();
     }
 
     // --- Drag Selection Logic ---
@@ -154,15 +179,19 @@ public class SelectionManager : MonoBehaviour {
 
         // Находим все выбираемые объекты в сцене
         // TODO: Оптимизировать! Не искать все объекты каждый раз. Использовать Quadtree или Physics.OverlapBox?
-        Entity[] allSelectables = FindObjectsOfType<Entity>();
+        Vector3 worldStart = Camera.main.ScreenToWorldPoint(_startDragPos);
+        Vector3 worldEnd = Camera.main.ScreenToWorldPoint(endScreenPos);
+        Vector2 point1 = new Vector2(Mathf.Min(worldStart.x, worldEnd.x), Mathf.Min(worldStart.y, worldEnd.y));
+        Vector2 point2 = new Vector2(Mathf.Max(worldStart.x, worldEnd.x), Mathf.Max(worldStart.y, worldEnd.y));
 
-        foreach (var entity in allSelectables) {
-            // Проверяем, принадлежит ли локальному игроку и находится ли в рамке
+        Collider2D[] hitColliders = Physics2D.OverlapAreaAll(point1, point2, _selectableLayerMask); 
+
+        foreach (var hitCollider in hitColliders) {
+            Entity entity = hitCollider.GetComponent<Entity>();
             if (entity.OwnerPlayerId == GameManager.Instance?.LocalPlayerId) {
                 Vector3 screenPoint = Camera.main.WorldToScreenPoint(entity.transform.position);
-                // Проверяем, что объект перед камерой и внутри прямоугольника
-                if (screenPoint.z > 0 && selectionRect.Contains(screenPoint)) {
-                    SelectEntity(entity, false); // Добавляем без очистки
+                if (entity != null && entity.OwnerPlayerId == GameManager.Instance?.LocalPlayerId && entity.IsAlive) {
+                    SelectEntity(entity, false);
                 }
             }
         }
@@ -173,7 +202,7 @@ public class SelectionManager : MonoBehaviour {
     // --- Helper Methods ---
 
     private void SelectEntity(Entity entity, bool clearPrevious = true) {
-        if (entity == null) return;
+        if (entity == null || !entity.IsAlive) return; 
 
         if (clearPrevious) {
             ClearSelection();
@@ -181,8 +210,8 @@ public class SelectionManager : MonoBehaviour {
 
         if (!_selectedEntities.Contains(entity)) {
             _selectedEntities.Add(entity);
-            entity.Select(); // Вызываем метод выделения у самого объекта
-                             // Debug.Log($"Selected: {entity.gameObject.name}");
+            entity.Select(); 
+            Debug.Log($"Selected: {entity.gameObject.name}");
         }
     }
 
@@ -192,46 +221,65 @@ public class SelectionManager : MonoBehaviour {
         if (_selectedEntities.Contains(entity)) {
             entity.Deselect(); // Снимаем выделение у объекта
             _selectedEntities.Remove(entity);
-            // Debug.Log($"Deselected: {entity.gameObject.name}");
+            Debug.Log($"Deselected: {entity.gameObject.name}");
         }
     }
 
     private void ClearSelection() {
-        // Снимаем выделение со всех ранее выделенных
-        foreach (var entity in _selectedEntities) {
+        List<Entity> entitiesToDeselect = new List<Entity>(_selectedEntities);
+
+        foreach (var entity in entitiesToDeselect) {
             if (entity != null) // Проверка на случай, если объект был уничтожен пока был выделен
             {
                 entity.Deselect();
             }
         }
         _selectedEntities.Clear();
-        // Debug.Log("Selection Cleared.");
+        Debug.Log("Выделение очищено");
     }
 
     private void IssueMoveCommand(Vector3 destination) {
-        // TODO: Формации движения? Пока просто отправляем всех в одну точку
+        // пока просто отправляем всех в одну точку
         foreach (var entity in _selectedEntities) {
-            if (entity is Units unit) {
+            if (entity is Units unit && unit.IsAlive) {
                 unit.MoveTo(destination);
             }
         }
     }
 
     private void IssueAttackCommand(Entity target) {
+        if (target == null || !target.IsAlive) 
+            return; 
+
         foreach (var entity in _selectedEntities) {
-            if (entity is Units unit) {
+            if (entity is Units unit && unit.IsAlive) {
                 unit.OrderAttackTarget(target);
             }
         }
+        // маркер атаки?
     }
 
-    // Обновление UI, связанного с выделением (панель информации и т.д.)
     private void UpdateSelectionUI() {
-        Debug.Log($"Selection updated. Count: {_selectedEntities.Count}");
-        // TODO: Здесь код для обновления UI:
-        // - Если выделен 1 объект: показать его панель информации (иконка, здоровье, кнопки действий)
-        // - Если выделено несколько: показать сетку иконок, общее кол-во, возможно, панель только для общих действий
-        // - Если выделение снято: скрыть панель информации
+        if (_selectedEntities.Count == 1) {
+            Entity selectedEntity = _selectedEntities[0];
+
+            if (selectedEntity is Factory selectedFactory) 
+            {
+                if (_factoryUIPanel != null) {
+                    _factoryUIPanel.Show(selectedFactory); 
+                }
+                // TODO: Скрыть другие UI панели (например, для юнитов)
+            }
+            else {
+                if (_factoryUIPanel != null) _factoryUIPanel.Hide();
+                // TODO: Показать UI для юнита или другого типа здания
+            }
+        }
+        else
+        {
+            if (_factoryUIPanel != null) _factoryUIPanel.Hide(); 
+            // TODO: Показать UI для мульти-выделения или скрыть все UI панели
+        }
     }
 
     // --- UI Drag Box ---

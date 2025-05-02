@@ -136,7 +136,7 @@ public class Units : Entity {
     }
 
     private void FindTargetAndAttackIfNeeded() {
-        Collider[] hitColliders = Physics.OverlapSphere(transform.position, _range);
+        Collider2D[] hitColliders = Physics2D.OverlapCircleAll(transform.position, _range); 
         Entity potentialTarget = null;
         float minDistance = float.MaxValue;
 
@@ -153,7 +153,6 @@ public class Units : Entity {
         }
 
         if (potentialTarget != null) {
-            Debug.Log($"{gameObject.name} найдена цель {potentialTarget.name}. Атака");
             OrderAttackTarget(potentialTarget);
         }
     }
@@ -172,7 +171,7 @@ public class Units : Entity {
             return;
         }
 
-        transform.LookAt(_currentTarget.transform);
+        transform.LookAt(_currentTarget.transform); // ?
 
         if (Time.time >= _lastAttackTime + _attackCooldown) {
             Debug.Log($"{gameObject.name} атакует {_currentTarget.name} нанеся {_attackDamage} урона");
