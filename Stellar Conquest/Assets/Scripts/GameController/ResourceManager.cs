@@ -179,4 +179,14 @@ public class ResourceManager : MonoBehaviour {
             OnPowerStatusChanged?.Invoke(playerId, newPowerStatus);
         }
     }
+
+    internal bool CanAfford(int cost)
+    {
+        throw new NotImplementedException();
+    }
+
+    internal bool TrySpendResources(int cost)
+    {
+        throw new NotImplementedException();
+    }
 }
