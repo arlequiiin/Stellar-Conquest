@@ -23,7 +23,7 @@ public class Factory : Buildings {
         public Units UnitPrefab;         
         public float ProductionTime = 5f;
         public float ResourceCost = 100f;
-        public ResourceType ResourceType = ResourceType.Nanites; 
+        public ResourceType ResourceType = ResourceType.Uranium; 
         public float PowerCost = 0f;     // cтоимость в энергии (мгновенная при заказе?)
         public Sprite UnitIcon;
     }
@@ -39,23 +39,13 @@ public class Factory : Buildings {
         base.Start();
         if (_spawnPoint == null) _spawnPoint = transform; 
         if (_rallyPoint == null) _rallyPoint = _spawnPoint; 
-        Debug.Log($"{gameObject.name} построен. Можно производить юнитов. Тратит {_powerConsumption} энергии");
+        Debug.Log($"{gameObject.name} построен. Можно производить юнитов");
     }
 
     void Update() {
-        if (IsPowered) {
-            ProcessProductionQueue();
-            if (_currentProduction != null) {
-                OnProductionProgressUpdated?.Invoke(_currentProductionTimer / _currentProduction.ProductionTime);
-            }
-        }
-        else {
-            // питание пропало во время производства, ставим на паузу?
-            if (_currentProduction != null) {
-                Debug.Log($"{gameObject.name} питания нет, пауза производства: {_currentProduction.UnitName}");
-            }
-
-            OnProductionProgressUpdated?.Invoke(0f); // Или другой индикатор паузы
+        ProcessProductionQueue();
+        if (_currentProduction != null) {
+            OnProductionProgressUpdated?.Invoke(_currentProductionTimer / _currentProduction.ProductionTime);
         }
     }
 
@@ -98,12 +88,6 @@ public class Factory : Buildings {
         if (unitInfo == null || unitInfo.UnitPrefab == null) {
             Debug.LogError("Невозможно создать юнита");
             OnProductionMessage?.Invoke("Невозможно создать юнита: информация неполная.");
-            return false;
-        }
-
-        if (!IsPowered) {
-            Debug.LogWarning($"{gameObject.name} невозможно добавить в очередь: нет энергии");
-            OnProductionMessage?.Invoke("Невозможно добавить в очередь: нет энергии.");
             return false;
         }
 
@@ -201,16 +185,5 @@ public class Factory : Buildings {
         newUnit.MoveTo(_rallyPoint.position);
 
         // TODO: Добавить событие OnUnitProduced, если нужно
-    }
-
-    protected override void OnPowerChanged(bool isPowered) {
-        if (isPowered) {
-            Debug.Log($"{gameObject.name} power restored, resuming production if possible.");
-            // Можно включить анимации/эффекты работы
-        }
-        else {
-            Debug.Log($"{gameObject.name} lost power, production paused.");
-            // Можно выключить анимации/эффекты работы
-        }
     }
 }

@@ -30,7 +30,7 @@ Transform:
   m_GameObject: {fileID: 3381349816559678969}
   serializedVersion: 2
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: -1.5009, y: 2.4257, z: -0.042778105}
+  m_LocalPosition: {x: 0, y: 0, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children:
@@ -194,8 +194,10 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 2e8f763a7ae8dbd4d90294bdabfdaf26, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  _maxHealth: 100
-  _selectionCircle: {fileID: 6962358814173311666}
+  maxHealth: 100
+  selectionCircle: {fileID: 6962358814173311666}
+  entityData: {fileID: 11400000, guid: 8be658115a4ce1146b41bc796b0db1df, type: 2}
+  currentStatus: 
   _walkSpeed: 5
   _range: 10
   _attackDamage: 10

@@ -1,30 +1,11 @@
 using UnityEngine;
 using UnityEngine.Events;
 using UnityEngine.UIElements;
-using Buildings;
-using static UnityEngine.RuleTile.TilingRuleOutput;
-using System;
+
+
+
 public class Engineer : Units
 {
-    public void StartConstruction(GameObject buildingPrefab)
-    {
-        if (buildingPrefab == null) return;
-
-        // Проверка места для строительства
-        if (CanPlaceBuilding(out Vector3 position))
-        {
-            Instantiate(buildingPrefab, position, Quaternion.identity);
-            PlayConstructionAnimation();
-        }
-    }
-
-    private bool CanPlaceBuilding(out Vector3 position)
-    {
-        // Логика проверки доступного места
-        position = transform.position + transform.forward * 5f;
-        return true;
-    }
-
     [Header("Buildings Settings")]
     public GameObject buildingPreview;
     public AudioClip constructionStartSound;
@@ -44,14 +25,60 @@ public class Engineer : Units
     private bool isProcessing = false; // Защита от многократных кликов
     private AudioSource audioSource;
 
+    private void Update() {
+        if (!isBuilding || isProcessing) return;
+
+        // Отмена строительства по правой кнопке
+        if (Input.GetMouseButtonDown(1)) {
+            CancelConstruction();
+            return;
+        }
+
+        // Основная логика строительства
+        if (Input.GetMouseButtonDown(0)) {
+            isProcessing = true;
+
+            RaycastHit hit;
+            Ray ray = Camera.main.ScreenPointToRay(Input.mousePosition);
+
+            //if (Physics.Raycast(ray, out hit)) {
+            //    if (selectedBuilding.CanPlace(hit.point)) {
+            //        CompleteConstruction(hit.point);
+            //    }
+            //    else {
+            //        onMessage?.Invoke("Нельзя построить здесь!");
+
+            //    }
+            //}
+
+            isProcessing = false;
+        }
+    }
+
+    public void StartConstruction(GameObject buildingPrefab)
+    {
+        if (buildingPrefab == null) return;
+
+        if (CanPlaceBuilding(out Vector3 position))
+        {
+            Instantiate(buildingPrefab, position, Quaternion.identity);
+            // PlayConstructionAnimation();
+        }
+    }
+
+    private bool CanPlaceBuilding(out Vector3 position)
+    {
+        position = transform.position + transform.forward * 5f;
+        return true;
+    }
 
     public void StartConstruction(Buildings building)
     {
-        if (!HasEnoughResources(building.cost))
-        {
-            onMessage?.Invoke("Недостаточно ресурсов!");
-            return;
-        }
+        //if (!HasEnoughResources(building.cost))
+        //{
+        //    onMessage?.Invoke("Недостаточно ресурсов!");
+        //    return;
+        //}
 
         selectedBuilding = building;
         buildingPreview.SetActive(true);
@@ -60,45 +87,10 @@ public class Engineer : Units
         
     }
 
-    private void Update()
-    {
-        if (!isBuilding || isProcessing) return;
-
-        // Отмена строительства по правой кнопке
-        if (Input.GetMouseButtonDown(1))
-        {
-            CancelConstruction();
-            return;
-        }
-
-        // Основная логика строительства
-        if (Input.GetMouseButtonDown(0))
-        {
-            isProcessing = true;
-
-            RaycastHit hit;
-            Ray ray = Camera.main.ScreenPointToRay(Input.mousePosition);
-
-            if (Physics.Raycast(ray, out hit))
-            {
-                if (selectedBuilding.CanPlace(hit.point))
-                {
-                    CompleteConstruction(hit.point);
-                }
-                else
-                {
-                    onMessage?.Invoke("Нельзя построить здесь!");
-                    
-                }
-            }
-
-            isProcessing = false;
-        }
-    }
 
     private void CompleteConstruction(Vector3 position)
     {
-        ResourceCost(selectedBuilding.cost);
+        // ResourceCost(selectedBuilding.cost);
         Instantiate(selectedBuilding, position, Quaternion.identity);
         buildingPreview.SetActive(false);
         isBuilding = false;
@@ -112,7 +104,5 @@ public class Engineer : Units
         onConstructionCancel?.Invoke();
         
     }
-
-   
-        }
+}
 

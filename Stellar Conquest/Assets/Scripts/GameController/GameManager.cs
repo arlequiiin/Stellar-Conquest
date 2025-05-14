@@ -1,6 +1,6 @@
 using UnityEngine;
 using System.Collections.Generic;
-using System.Linq; // Для Linq методов типа Count()
+using System.Linq;
 
 public class GameManager : MonoBehaviour {
     private static GameManager _instance;
@@ -10,113 +10,52 @@ public class GameManager : MonoBehaviour {
             return _instance;
         }
     }
+    public int playerId = 1;
+    public CommandCenter playerCommandCenter;
+    public bool isDefeated = false;
 
-    public enum GameState { Pregame, Playing, Paused, GameOver }
-    public GameState CurrentState { get; private set; } = GameState.Pregame;
+    public enum GameState { Playing, Paused, GameOver }
+    public GameState CurrentState { get; private set; } = GameState.Playing;
 
-    public class PlayerInfo {
-        public int PlayerId;
-        public string PlayerName; 
-        public Color PlayerColor;  
-        public bool IsHuman; 
-        public CommandCenter CommandCenter;
-        public bool IsDefeated = false;
-    }
-
-    public List<PlayerInfo> Players = new List<PlayerInfo>();
-    public int LocalPlayerId = 1;
-
-    void Awake() {
+    private void Awake() {
         if (_instance != null && _instance != this) {
             Destroy(gameObject);
             return;
         }
         _instance = this;
-        DontDestroyOnLoad(gameObject); 
+        DontDestroyOnLoad(gameObject);
     }
 
-    void Start() {
-        // TODO: Инициализация игры
-        // - Найти или создать игроков
-        // - Инициализировать ресурсы для каждого игрока через ResourceManager
-        // - Найти командные центры (или создать их при старте карты)
-        // - Установить начальное состояние игры
-        InitializeGame(); // Пример метода инициализации
+    private void Start() {
+        InitializeGame();
     }
 
-    void InitializeGame() {
-        Debug.Log("Initializing Game...");
-        // Пример: Добавляем двух игроков (один локальный, один ИИ)
-        // В реальной игре это будет зависеть от настроек лобби или карты
-        Players.Add(new PlayerInfo { PlayerId = 1, PlayerName = "Player 1", PlayerColor = Color.blue, IsHuman = true });
-        Players.Add(new PlayerInfo { PlayerId = 2, PlayerName = "AI Opponent", PlayerColor = Color.red, IsHuman = false });
-
-        // Инициализируем ресурсы для всех
-        foreach (var player in Players) {
-            // TODO: Задать стартовые ресурсы в настройках карты/игры
-            ResourceManager.Instance.InitializePlayerResources(player.PlayerId, 250f, 15f);
-
-            // TODO: Найти или создать командный центр для игрока
-            // CommandCenter cc = FindCommandCenterForPlayer(player.PlayerId);
-            // if (cc != null) {
-            //    player.CommandCenter = cc;
-            //    cc.SetOwner(player.PlayerId);
-            // } else {
-            //     Debug.LogError($"Command Center for Player {player.PlayerId} not found!");
-            //     // Возможно, нужно создать его здесь
-            // }
-        }
+    private void InitializeGame() {
+        Debug.Log("Начало игры");
 
         CurrentState = GameState.Playing;
-        Debug.Log("Game Started! State: Playing");
     }
 
-    // Вызывается из CommandCenter.Die()
-    public void PlayerLost(int playerId) {
-        if (CurrentState != GameState.Playing) 
-            return; 
+    public void PlayerLost() {
+        if (CurrentState != GameState.Playing)
+            return;
 
-        PlayerInfo defeatedPlayer = Players.Find(p => p.PlayerId == playerId);
-        if (defeatedPlayer != null && !defeatedPlayer.IsDefeated) {
-            defeatedPlayer.IsDefeated = true;
-            Debug.LogWarning($"Player {defeatedPlayer.PlayerName} (ID: {playerId}) has been defeated!");
-
-            // TODO: Уничтожить все оставшиеся юниты/здания игрока? (Опционально)
-
-            CheckEndGameCondition();
-        }
-    }
-
-    private void CheckEndGameCondition() {
-        int activePlayers = Players.Count(p => !p.IsDefeated);
-
-        if (activePlayers <= 1) {
-            EndGame();
-        }
+        isDefeated = true;
+        EndGame();
     }
 
     private void EndGame() {
         CurrentState = GameState.GameOver;
-        PlayerInfo winner = Players.FirstOrDefault(p => !p.IsDefeated);
-
-        if (winner != null) {
-            Debug.Log($"Game Over! Winner: Player {winner.PlayerName} (ID: {winner.PlayerId})");
-            // TODO: Показать экран победы/поражения
-        }
-        else {
-            Debug.Log("Game Over! It's a draw?"); // Ситуация возможна, если все проиграли одновременно
-                                                  // TODO: Показать экран ничьи
-        }
-
-        // Можно остановить время или заблокировать управление
+        Debug.Log("Игрок проиграл");
+        // TODO: Показать экран поражения
         // Time.timeScale = 0f;
     }
 
     public void PauseGame() {
         if (CurrentState == GameState.Playing) {
             CurrentState = GameState.Paused;
-            Time.timeScale = 0f; // Останавливаем время
-            Debug.Log("Game Paused");
+            Time.timeScale = 0f;
+            Debug.Log("Игра на паузе");
             // TODO: Показать меню паузы
         }
     }
@@ -124,13 +63,13 @@ public class GameManager : MonoBehaviour {
     public void ResumeGame() {
         if (CurrentState == GameState.Paused) {
             CurrentState = GameState.Playing;
-            Time.timeScale = 1f; // Возобновляем время
-            Debug.Log("Game Resumed");
+            Time.timeScale = 1f;
+            Debug.Log("Игра продолжается");
             // TODO: Скрыть меню паузы
         }
     }
 
-    public PlayerInfo GetPlayerInfo(int playerId) {
-        return Players.Find(p => p.PlayerId == playerId);
+    public int GetPlayerId() {
+        return playerId;
     }
 }

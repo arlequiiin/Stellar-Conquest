@@ -5,9 +5,6 @@ public class Units : Entity {
 
     [SerializeField] private float _walkSpeed;
     [SerializeField] public float _range;
-
-    // [SerializeField] public float _recoilAmount;
-
     [SerializeField] private float _attackDamage;
     [SerializeField] private float _attackCooldown;
 
@@ -41,7 +38,6 @@ public class Units : Entity {
                 SetAnimator(false, false);
                 FindTargetAndAttackIfNeeded();
                 break;
-
             case UnitState.Moving:
                 SetAnimator(true, false);
                 if (!_navMeshAgent.pathPending && _navMeshAgent.remainingDistance <= _navMeshAgent.stoppingDistance) {
@@ -52,14 +48,11 @@ public class Units : Entity {
                 }
                 // FindTargetAndAttackIfNeeded(); // автоатака в движении
                 break;
-
             case UnitState.Attacking:
                 SetAnimator(false, true);
                 PerformAttack();
                 break;
-
             case UnitState.Death:
-
                 break;
         }
 

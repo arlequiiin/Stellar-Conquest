@@ -1,27 +1,25 @@
 using UnityEngine;
-using UnityEngine.UIElements;
 
 public class Generator : Buildings {
-    [SerializeField] private float _powerGenerated = 50f; 
-
-    public float PowerGenerated => _powerGenerated;
+    [SerializeField] private float powerPerSecond = 10f;
+    private float timer;
 
     protected override void Start() {
         base.Start();
-        _requiresPower = false; 
-        _isCurrentlyPowered = true; 
-        // сообщаем ResourceManager 
-        // TODO: ResourceManager.Instance(OwnerPlayerId).AddPowerSource(this);
-        Debug.Log($"{gameObject.name} построен и генерирует {_powerGenerated} энергии для игрока: {OwnerPlayerId}.");
+        Debug.Log($"{gameObject.name} начал производить энергию");
+    }
+
+    void Update() {
+        timer += Time.deltaTime;
+        if (timer >= 1f) {
+            timer -= 1f;
+            ResourceManager.Instance.AddEnergy(powerPerSecond);
+            Debug.Log($"{gameObject.name} сгенерировал {powerPerSecond} энергии");
+        }
     }
 
     protected override void Die() {
-        Debug.Log($"{gameObject.name} перестал давать энергию");
-        // Сообщаем ResourceManager 
-        // TODO: ResourceManager.Instance(OwnerPlayerId).RemovePowerSource(this);
+        Debug.Log($"{gameObject.name} разрушен и больше не производит энергию");
         base.Die();
     }
-
-    public override void UpdatePowerStatus(bool hasPower) { }
-    protected override void OnPowerChanged(bool isPowered) { }
 }

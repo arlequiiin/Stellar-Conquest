@@ -1,47 +1,49 @@
 using UnityEngine;
 
 public abstract class Entity : MonoBehaviour {
-    [SerializeField] private float _maxHealth;
-    [SerializeField] private GameObject _selectionCircle;
-    private float _currentHealth;
+    [SerializeField] private float maxHealth;
+    [SerializeField] private GameObject selectionCircle;
+    public int OwnerPlayerId { get; protected set; }
+    public EntityData entityData; 
 
-    [SerializeField] public int OwnerPlayerId { get; protected set; }
+    private float currentHealth;
+    public string currentStatus;
+
+    private bool isDie = false;
+    public bool IsAlive => currentHealth > 0;
+    public float CurrentHealth => currentHealth;
+    public float MaxHealth => maxHealth;
 
     protected virtual void Awake() {
-        _currentHealth = _maxHealth;
+        currentHealth = maxHealth;
         OwnerPlayerId = 1;
     }
 
     protected virtual void Start() {
-        _selectionCircle?.SetActive(false);
-        Debug.Log($"{gameObject.name} выключил выделение");
+        selectionCircle?.SetActive(false);
+    }
+
+    protected virtual void OnDestroy() {
+
     }
 
     public virtual void TakeDamage(float amount) {
         if (amount <= 0) return;
 
-        _currentHealth -= amount;
-        Debug.Log($"{gameObject.name} получил {amount} урона. Текущее здоровье: {_currentHealth}/{_maxHealth}");
+        currentHealth -= amount;
+        Debug.Log($"{gameObject.name} получил {amount} урона. Текущее здоровье: {currentHealth}/{maxHealth}");
 
-        if (_currentHealth <= 0) Die();
+        if (currentHealth <= 0) Die();
     }
-
-    public bool IsAlive => _currentHealth > 0;
-    public float CurrentHealth => _currentHealth;
-    public float MaxHealth => _maxHealth;
 
     public virtual void Select() {
-        if (_selectionCircle != null)
-            _selectionCircle.SetActive(true);
-    
-        Debug.Log($"{gameObject.name} выбран");
-    }
+        if (selectionCircle != null)
+            selectionCircle.SetActive(true);
+        }
 
     public virtual void Deselect() {
-        if (_selectionCircle != null)
-            _selectionCircle.SetActive(false);
-
-        Debug.Log($"{gameObject.name} не выбран");
+        if (selectionCircle != null)
+            selectionCircle.SetActive(false);
     }
 
     public virtual void SetOwner(int playerId) {
@@ -50,15 +52,14 @@ public abstract class Entity : MonoBehaviour {
     }
 
     protected virtual void Die() {
+        if (isDie) return;
+            isDie = true;
+
         Debug.Log($"{gameObject.name} был уничтожен");
         //  логика проигрывания анимации смерти, звуков, эффектов
 
-        // Сообщаем внешним системам (например, GameManager) о смерти
         // OnEntityDestroyed?.Invoke(this); 
 
-        Destroy(gameObject, 5f); // удалим через 5 сек
-    }
-    protected virtual void OnDestroy() {
-    
+        Destroy(gameObject, 5f); 
     }
 }

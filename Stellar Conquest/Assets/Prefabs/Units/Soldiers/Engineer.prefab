@@ -199,12 +199,26 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 3ccf55394a663d54ebd119116fc4a488, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  _maxHealth: 100
-  _selectionCircle: {fileID: 5678090406289879750}
+  maxHealth: 100
+  selectionCircle: {fileID: 5678090406289879750}
+  entityData: {fileID: 11400000, guid: cce1ca500a8470c4c9c1dbbd22dc6c55, type: 2}
+  currentStatus: 
   _walkSpeed: 5
   _range: 7
   _attackDamage: 5
   _attackCooldown: 2
+  buildingPreview: {fileID: 0}
+  constructionStartSound: {fileID: 0}
+  constructionCompleteSound: {fileID: 0}
+  errorSound: {fileID: 0}
+  engineerAnimator: {fileID: 0}
+  constructionAnimTrigger: StartBuilding
+  onMessage:
+    m_PersistentCalls:
+      m_Calls: []
+  onConstructionCancel:
+    m_PersistentCalls:
+      m_Calls: []
 --- !u!1 &5678090406289879750
 GameObject:
   m_ObjectHideFlags: 0
@@ -231,7 +245,7 @@ Transform:
   m_GameObject: {fileID: 5678090406289879750}
   serializedVersion: 2
   m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
-  m_LocalPosition: {x: -3.27, y: -0.049999952, z: 0}
+  m_LocalPosition: {x: 0, y: 0, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children: []

@@ -13,7 +13,6 @@ public class SelectionManager : MonoBehaviour {
     [SerializeField] private LayerMask _selectableLayerMask;
     [SerializeField] private LayerMask _groundLayerMask;
     [SerializeField] private LayerMask _enemyLayerMask; 
-
     [SerializeField] private RectTransform _selectionBoxRect; 
     private Vector2 _startDragPos;
 
@@ -66,7 +65,7 @@ public class SelectionManager : MonoBehaviour {
 
             if (_inputManager.GetObjectUnderCursor<Entity>(out clickedEntity, _selectableLayerMask)) {
 
-                if (clickedEntity.OwnerPlayerId == GameManager.Instance?.LocalPlayerId) {
+                if (clickedEntity.OwnerPlayerId == GameManager.Instance.playerId) {
                     ClearSelection(); 
                     SelectEntity(clickedEntity);
                     clickedFriendlySelectable = true;
@@ -96,7 +95,7 @@ public class SelectionManager : MonoBehaviour {
         if (clickPosition != Vector3.negativeInfinity) {
             if (_inputManager.GetObjectUnderCursor<Entity>(out Entity clickedEntity, _selectableLayerMask)) {
                 // Добавляем/удаляем только юнитов/здания локального игрока
-                if (clickedEntity.OwnerPlayerId == GameManager.Instance?.LocalPlayerId) {
+                if (clickedEntity.OwnerPlayerId == GameManager.Instance.playerId) {
                     if (_selectedEntities.Contains(clickedEntity)) {
                         DeselectEntity(clickedEntity); // Убираем из выделения
                     }
@@ -121,7 +120,7 @@ public class SelectionManager : MonoBehaviour {
 
         if (_inputManager.GetObjectUnderCursor<Entity>(out targetEntity, enemyMask)) // Используем _enemyLayerMask
         {
-            if (targetEntity.OwnerPlayerId != GameManager.Instance?.LocalPlayerId && targetEntity.OwnerPlayerId != 0) 
+            if (targetEntity.OwnerPlayerId != GameManager.Instance.playerId && targetEntity.OwnerPlayerId != 0) 
             {
                 Debug.Log($"Приказ атаковать: {targetEntity.name}");
                 IssueAttackCommand(targetEntity);
@@ -188,9 +187,9 @@ public class SelectionManager : MonoBehaviour {
 
         foreach (var hitCollider in hitColliders) {
             Entity entity = hitCollider.GetComponent<Entity>();
-            if (entity.OwnerPlayerId == GameManager.Instance?.LocalPlayerId) {
+            if (entity.OwnerPlayerId == GameManager.Instance.playerId) {
                 Vector3 screenPoint = Camera.main.WorldToScreenPoint(entity.transform.position);
-                if (entity != null && entity.OwnerPlayerId == GameManager.Instance?.LocalPlayerId && entity.IsAlive) {
+                if (entity != null && entity.OwnerPlayerId == GameManager.Instance.playerId && entity.IsAlive) {
                     SelectEntity(entity, false);
                 }
             }

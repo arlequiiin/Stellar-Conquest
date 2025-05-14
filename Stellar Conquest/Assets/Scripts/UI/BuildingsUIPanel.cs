@@ -65,29 +65,29 @@ public class BuildingsUIPanel : MonoBehaviour
 
     private void UpdateButtonsState()
     {
-        for (int i = 0; i < _buttons.Length; i++)
-        {
-            bool canAfford = _resourceManager.CanAfford(_buildings[i].cost);
-            _buttons[i].interactable = canAfford;
-            _costTexts[i].color = canAfford ? Color.white : Color.red;
-        }
+        //for (int i = 0; i < _buttons.Length; i++)
+        //{
+        //    bool canAfford = _resourceManager.CanAfford(_buildings[i].cost);
+        //    _buttons[i].interactable = canAfford;
+        //    _costTexts[i].color = canAfford ? Color.white : Color.red;
+        //}
     }
 
     private void TryBuild(int index)
     {
-        if (_selectedEngineer == null) return;
+        //if (_selectedEngineer == null) return;
 
-        BuildingData building = _buildings[index];
+        //BuildingData building = _buildings[index];
 
-        if (_resourceManager.TrySpendResources(building.cost))
-        {
-            _selectedEngineer.StartConstruction(building.prefab);
-            Hide();
-        }
-        else
-        {
-            ShowMessage("Недостаточно ресурсов!", 2f);
-        }
+        //if (_resourceManager.TrySpendResources(building.cost))
+        //{
+        //    _selectedEngineer.StartConstruction(building.prefab);
+        //    Hide();
+        //}
+        //else
+        //{
+        //    ShowMessage("Недостаточно ресурсов!", 2f);
+        //}
     }
 
     private void ShowMessage(string text, float duration)

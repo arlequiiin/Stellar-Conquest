@@ -259,8 +259,10 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: f6508f9d4bcc69646bd778cc23ae89a3, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  _maxHealth: 200
-  _selectionCircle: {fileID: 1297497322678715344}
+  maxHealth: 200
+  selectionCircle: {fileID: 1297497322678715344}
+  entityData: {fileID: 11400000, guid: 8271532d701a39340842eba019218aec, type: 2}
+  currentStatus: 
   _walkSpeed: 5
   _range: 10
   _attackDamage: 20

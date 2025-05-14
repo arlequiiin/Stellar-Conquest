@@ -1,0 +1,17 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 596f5c28c5c605f42b3bab9f47915686, type: 3}
+  m_Name: Sniper
+  m_EditorClassIdentifier: 
+  icon: {fileID: -636027326, guid: cbe09717ee744b6449172b35b9d432d7, type: 3}
+  entityName: "\u0421\u043D\u0430\u0439\u043F\u0435\u0440"
+  description: 'HP: 80'
