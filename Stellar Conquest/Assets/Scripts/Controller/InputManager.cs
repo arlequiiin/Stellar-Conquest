@@ -40,7 +40,7 @@ public class InputManager : MonoBehaviour {
         _controls = new PlayerControls();
         _controls.Enable();
 
-        _controls.Player.Select.performed += ctx => HandleLeftClick();
+        // _controls.Player.Select.performed += ctx => HandleLeftClick();
         _controls.Player.RightClick.performed += ctx => HandleRightClick();
         _controls.Player.Cancel.performed += ctx => OnCancelKeyPressed?.Invoke();
         _controls.Player.Select.started += ctx => StartDrag(ctx);
@@ -48,9 +48,6 @@ public class InputManager : MonoBehaviour {
     }
 
     void Update() {
-        //if (GameManager.Instance != null && GameManager.Instance.CurrentState != GameManager.GameState.Playing)
-        //    return;
-
         if (_isDragging) {
             Vector2 mousePos = Mouse.current.position.ReadValue();
             if (Vector2.Distance(mousePos, _dragStartPosition) > DragThreshold)
@@ -75,7 +72,7 @@ public class InputManager : MonoBehaviour {
         }
         else {
             if (IsPointerOverUI()) {
-                Debug.Log("Detected a click (no drag) over UI. Blocking world interaction.");
+                Debug.Log("Щелчок по UI");
                 return; 
             }
             if (RaycastMouse(out RaycastHit2D hit, _selectableLayerMask | _groundLayerMask)) {
@@ -90,25 +87,22 @@ public class InputManager : MonoBehaviour {
         }
     }
 
-    private void HandleLeftClick() {
-        if (IsPointerOverUI()) {
-            Debug.Log("Clicked on UI (HandleLeftClick). Blocking world interaction.");
-            return;
-        }
+    //private void HandleLeftClick() {
+    //    if (IsPointerOverUI()) {
+    //        return;
+    //    }
 
-        if (RaycastMouse(out RaycastHit2D hit, _selectableLayerMask)) {
-            OnLeftClick?.Invoke(hit.point);
-            Debug.Log($"Рейкаст попал в объект (в HandleLeftClick): {hit.collider.gameObject.name}, Слой: {LayerMask.LayerToName(hit.collider.gameObject.layer)}, Точка попадания: {hit.point}");
-        }
-        else {
-            OnLeftClick?.Invoke(Vector3.negativeInfinity);
-            Debug.Log("Рейкаст ничего не попал (в HandleLeftClick)");
-        }
-    }
+    //    if (RaycastMouse(out RaycastHit2D hit, _selectableLayerMask)) {
+    //        OnLeftClick?.Invoke(hit.point);
+    //    }
+    //    else {
+    //        OnLeftClick?.Invoke(Vector3.negativeInfinity);
+    //    }
+    //}
 
     private void HandleRightClick() {
         if (IsPointerOverUI()) {
-            Debug.Log("Clicked on UI (HandleRightClick). Blocking world interaction.");
+            Debug.Log("Нажато ПКМ по UI");
             return;
         }
 
@@ -127,21 +121,16 @@ public class InputManager : MonoBehaviour {
 
         if (hit.collider != null) {
             hitInfo = hit;
-            // Debug.Log($"[RaycastMouse 2D] Hit: {hit.collider.name} on layer {LayerMask.LayerToName(hit.collider.gameObject.layer)}");
-            return true; // Попали во что-то
+            return true; 
         }
 
-        // Debug.Log($"[RaycastMouse 2D] Missed with mask: {LayerMask.LayerToName(layerMask)}");
-        return false; // Ничего не попали
+        return false; 
     }
 
     public bool GetObjectUnderCursor<T>(out T component, LayerMask layerMask) where T : Component {
-        Debug.Log($"Выполняем RaycastMouse с маской: {layerMask.value}"); 
         component = null;
         if (RaycastMouse(out RaycastHit2D hit, layerMask)) {
-            Debug.Log($"Raycast попал в объект: {hit.collider.gameObject.name}");
             component = hit.collider.GetComponent<T>();
-            Debug.Log($"Получен компонент {typeof(T)}: {component != null}"); 
             return component != null;
         }
         return false;

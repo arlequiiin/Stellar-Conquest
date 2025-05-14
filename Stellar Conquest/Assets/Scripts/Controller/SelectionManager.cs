@@ -16,7 +16,10 @@ public class SelectionManager : MonoBehaviour {
     [SerializeField] private RectTransform _selectionBoxRect; 
     private Vector2 _startDragPos;
 
-    [SerializeField] private FactoryUIPanel _factoryUIPanel;
+    [SerializeField] private FactoryUIPanel factoryUIPanel;
+    [SerializeField] private SelectionUIPanel selectionUIPanel;
+    [SerializeField] private OrdersUIPanel orderUIPanel;
+    [SerializeField] private BuildingsUIPanel buildingsUIPanel;
 
     void Awake() {
         if (_instance != null && _instance != this) { Destroy(gameObject); return; }
@@ -69,7 +72,6 @@ public class SelectionManager : MonoBehaviour {
                     ClearSelection(); 
                     SelectEntity(clickedEntity);
                     clickedFriendlySelectable = true;
-                    Debug.Log($"Выбран свой объект: {clickedEntity.name}");
                 }
                 else {
                     Debug.Log($"Клик по чужому/нейтральному объекту: {clickedEntity.name}");
@@ -91,13 +93,13 @@ public class SelectionManager : MonoBehaviour {
     }
 
     private void HandleShiftLeftClick(Vector3 clickPosition) {
-        // Не очищаем выделение!
+        Debug.Log("Shift");
         if (clickPosition != Vector3.negativeInfinity) {
             if (_inputManager.GetObjectUnderCursor<Entity>(out Entity clickedEntity, _selectableLayerMask)) {
                 // Добавляем/удаляем только юнитов/здания локального игрока
                 if (clickedEntity.OwnerPlayerId == GameManager.Instance.playerId) {
                     if (_selectedEntities.Contains(clickedEntity)) {
-                        DeselectEntity(clickedEntity); // Убираем из выделения
+                        DeselectEntity(clickedEntity);
                     }
                     else {
                         SelectEntity(clickedEntity, false); // Добавляем к выделению (не очищая старое)
@@ -130,7 +132,7 @@ public class SelectionManager : MonoBehaviour {
 
         if (_inputManager.GetGroundPointUnderCursor(out groundPoint)) {
             Debug.Log($"Приказ двигаться в точку: {groundPoint}");
-            IssueMoveCommand(groundPoint); // Этот метод вызывает unit.MoveTo()
+            IssueMoveCommand(groundPoint);
             hitGround = true;
         }
 
@@ -145,7 +147,7 @@ public class SelectionManager : MonoBehaviour {
         if (_selectedEntities.Count > 0) {
             Debug.Log("Команда стоп для юнитов");
             foreach (var entity in _selectedEntities) {
-                if (entity is Units unit) // Отменяем только для юнитов
+                if (entity is Units unit)
                 {
                     unit.StopActions();
                 }
@@ -155,13 +157,12 @@ public class SelectionManager : MonoBehaviour {
         UpdateSelectionUI();
     }
 
-    // --- Drag Selection Logic ---
 
     private void HandleDragStart(Vector2 screenPos) {
         if (_selectionBoxRect == null) return;
         _startDragPos = screenPos;
         _selectionBoxRect.gameObject.SetActive(true);
-        UpdateSelectionBox(screenPos); // Инициализируем размер/позицию
+        UpdateSelectionBox(screenPos);
     }
 
     private void HandleDragUpdate(Vector2 currentScreenPos, Vector2 startScreenPos) {
@@ -172,12 +173,10 @@ public class SelectionManager : MonoBehaviour {
     private void HandleDragEnd(Vector2 endScreenPos, Vector2 startScreenPos) {
         if (_selectionBoxRect != null) _selectionBoxRect.gameObject.SetActive(false);
 
-        ClearSelection(); // Очищаем перед выделением рамкой
+        ClearSelection();
 
         Rect selectionRect = GetSelectionRect(_startDragPos, endScreenPos);
 
-        // Находим все выбираемые объекты в сцене
-        // TODO: Оптимизировать! Не искать все объекты каждый раз. Использовать Quadtree или Physics.OverlapBox?
         Vector3 worldStart = Camera.main.ScreenToWorldPoint(_startDragPos);
         Vector3 worldEnd = Camera.main.ScreenToWorldPoint(endScreenPos);
         Vector2 point1 = new Vector2(Mathf.Min(worldStart.x, worldEnd.x), Mathf.Min(worldStart.y, worldEnd.y));
@@ -194,11 +193,9 @@ public class SelectionManager : MonoBehaviour {
                 }
             }
         }
-        Debug.Log($"Drag selection finished. Selected {_selectedEntities.Count} entities.");
+        Debug.Log($"Перетаскиванием выделено {_selectedEntities.Count} существ");
         UpdateSelectionUI();
     }
-
-    // --- Helper Methods ---
 
     private void SelectEntity(Entity entity, bool clearPrevious = true) {
         if (entity == null || !entity.IsAlive) return; 
@@ -210,7 +207,6 @@ public class SelectionManager : MonoBehaviour {
         if (!_selectedEntities.Contains(entity)) {
             _selectedEntities.Add(entity);
             entity.Select(); 
-            Debug.Log($"Selected: {entity.gameObject.name}");
         }
     }
 
@@ -218,9 +214,8 @@ public class SelectionManager : MonoBehaviour {
         if (entity == null) return;
 
         if (_selectedEntities.Contains(entity)) {
-            entity.Deselect(); // Снимаем выделение у объекта
+            entity.Deselect();
             _selectedEntities.Remove(entity);
-            Debug.Log($"Deselected: {entity.gameObject.name}");
         }
     }
 
@@ -228,13 +223,13 @@ public class SelectionManager : MonoBehaviour {
         List<Entity> entitiesToDeselect = new List<Entity>(_selectedEntities);
 
         foreach (var entity in entitiesToDeselect) {
-            if (entity != null) // Проверка на случай, если объект был уничтожен пока был выделен
+            if (entity != null) 
             {
                 entity.Deselect();
             }
         }
         _selectedEntities.Clear();
-        Debug.Log("Выделение очищено");
+        selectionUIPanel.Clear();
     }
 
     private void IssueMoveCommand(Vector3 destination) {
@@ -261,27 +256,31 @@ public class SelectionManager : MonoBehaviour {
     private void UpdateSelectionUI() {
         if (_selectedEntities.Count == 1) {
             Entity selectedEntity = _selectedEntities[0];
+            selectionUIPanel.UpdateEntityInfo(selectedEntity);
 
             if (selectedEntity is Factory selectedFactory) 
             {
-                if (_factoryUIPanel != null) {
-                    _factoryUIPanel.Show(selectedFactory); 
+                if (factoryUIPanel != null) { 
+                    factoryUIPanel.Show(selectedFactory); 
                 }
-                // TODO: Скрыть другие UI панели (например, для юнитов)
+                // Скрыть другие UI панели
+            }
+            else if (selectedEntity is Engineer selectedEngineer) {
+                 buildingsUIPanel.Open();
             }
             else {
-                if (_factoryUIPanel != null) _factoryUIPanel.Hide();
-                // TODO: Показать UI для юнита или другого типа здания
+                if (factoryUIPanel != null) factoryUIPanel.Hide();
+                // оказать UI для юнита или другого типа здания
             }
         }
         else
         {
-            if (_factoryUIPanel != null) _factoryUIPanel.Hide(); 
-            // TODO: Показать UI для мульти-выделения или скрыть все UI панели
+            selectionUIPanel.Clear();
+            if (factoryUIPanel != null) factoryUIPanel.Hide(); 
+            // скрыть все UI панели
         }
     }
 
-    // --- UI Drag Box ---
     private void UpdateSelectionBox(Vector2 currentMousePos) {
         if (!_selectionBoxRect.gameObject.activeSelf) return;
 
@@ -293,7 +292,6 @@ public class SelectionManager : MonoBehaviour {
     }
 
     private Rect GetSelectionRect(Vector2 startPos, Vector2 endPos) {
-        // Нормализуем координаты, чтобы xMin/yMin всегда были меньше xMax/yMax
         float xMin = Mathf.Min(startPos.x, endPos.x);
         float xMax = Mathf.Max(startPos.x, endPos.x);
         float yMin = Mathf.Min(startPos.y, endPos.y);

@@ -1,108 +1,71 @@
 using UnityEngine;
-using UnityEngine.Events;
-using UnityEngine.UIElements;
+using UnityEngine.AI;
 
+public class Engineer : Units {
+    private Buildings buildingTarget;
+    private float buildRange = 2f;
 
+    public void StartConstruction(Buildings target) {
+        if (target == null) return;
 
-public class Engineer : Units
-{
-    [Header("Buildings Settings")]
-    public GameObject buildingPreview;
-    public AudioClip constructionStartSound;
-    public AudioClip constructionCompleteSound;
-    public AudioClip errorSound;
+        buildingTarget = target;
+        MoveTo(target.transform.position);
+        _currentState = UnitState.Moving;
+    }
 
-    [Header("Animation")]
-    public Animator engineerAnimator;
-    public string constructionAnimTrigger = "StartBuilding";
+    protected override void Update() {
+        base.Update();
 
-    [Header("Events")]
-    public UnityEvent<string> onMessage; // Для UI-уведомлений
-    public UnityEvent onConstructionCancel;
+        switch (_currentState) {
+            case UnitState.Moving:
+                HandleMoveToBuilding();
+                break;
+            case UnitState.Building:
+                HandleBuilding();
+                break;
+        }
+    }
 
-    private Buildings selectedBuilding;
-    private bool isBuilding = false;
-    private bool isProcessing = false; // Защита от многократных кликов
-    private AudioSource audioSource;
-
-    private void Update() {
-        if (!isBuilding || isProcessing) return;
-
-        // Отмена строительства по правой кнопке
-        if (Input.GetMouseButtonDown(1)) {
-            CancelConstruction();
+    private void HandleMoveToBuilding() {
+        if (buildingTarget == null) {
+            _currentState = UnitState.Idle;
             return;
         }
 
-        // Основная логика строительства
-        if (Input.GetMouseButtonDown(0)) {
-            isProcessing = true;
+        float distance = Vector3.Distance(transform.position, buildingTarget.transform.position);
 
-            RaycastHit hit;
-            Ray ray = Camera.main.ScreenPointToRay(Input.mousePosition);
-
-            //if (Physics.Raycast(ray, out hit)) {
-            //    if (selectedBuilding.CanPlace(hit.point)) {
-            //        CompleteConstruction(hit.point);
-            //    }
-            //    else {
-            //        onMessage?.Invoke("Нельзя построить здесь!");
-
-            //    }
-            //}
-
-            isProcessing = false;
+        if (distance <= buildRange) {
+            StopMoving();
+            _currentState = UnitState.Building;
         }
     }
 
-    public void StartConstruction(GameObject buildingPrefab)
-    {
-        if (buildingPrefab == null) return;
+    private void HandleBuilding() {
+        if (buildingTarget == null || buildingTarget.IsCompleted) {
+            _currentState = UnitState.Idle;
+            return;
+        }
 
-        if (CanPlaceBuilding(out Vector3 position))
-        {
-            Instantiate(buildingPrefab, position, Quaternion.identity);
-            // PlayConstructionAnimation();
+        buildingTarget.Build(Time.deltaTime);
+
+        if (buildingTarget.IsCompleted) {
+            buildingTarget = null;
+            _currentState = UnitState.Idle;
         }
     }
 
-    private bool CanPlaceBuilding(out Vector3 position)
-    {
-        position = transform.position + transform.forward * 5f;
-        return true;
+    protected override void Die() {
+        base.Die();
+
+        if (buildingTarget != null && !buildingTarget.IsCompleted) {
+            buildingTarget.CancelConstruction();
+        }
     }
 
-    public void StartConstruction(Buildings building)
-    {
-        //if (!HasEnoughResources(building.cost))
-        //{
-        //    onMessage?.Invoke("Недостаточно ресурсов!");
-        //    return;
-        //}
-
-        selectedBuilding = building;
-        buildingPreview.SetActive(true);
-        isBuilding = true;
-        engineerAnimator.SetTrigger(constructionAnimTrigger);
-        
-    }
-
-
-    private void CompleteConstruction(Vector3 position)
-    {
-        // ResourceCost(selectedBuilding.cost);
-        Instantiate(selectedBuilding, position, Quaternion.identity);
-        buildingPreview.SetActive(false);
-        isBuilding = false;
-        
-    }
-
-    private void CancelConstruction()
-    {
-        buildingPreview.SetActive(false);
-        isBuilding = false;
-        onConstructionCancel?.Invoke();
-        
+    private void StopMoving() {
+        if (_navMeshAgent != null && _navMeshAgent.enabled) {
+            _navMeshAgent.isStopped = true;
+            _navMeshAgent.ResetPath();
+        }
     }
 }
-

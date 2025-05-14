@@ -12,9 +12,7 @@ public class CommandCenter : Buildings {
     protected override void Die() {
         Debug.Log($"Коммандный центр игрока {OwnerPlayerId} УНИЧТОЖЕН");
         if (_isEssential) {
-            // сообщим GameManager о поражении игрока
-            // GameManager.Instance.PlayerLost(OwnerPlayerId);
-            Debug.LogError($"Игрок {OwnerPlayerId} проиграл");
+            //GameManager.Instance.PlayerLost(OwnerPlayerId);
         }
         base.Die();
     }

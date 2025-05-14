@@ -15,7 +15,7 @@ public class Extractor : Buildings {
 
         isOnResourceNode = CheckPlacement();
         if (!isOnResourceNode) {
-            Debug.LogError($"{gameObject.name} не размещено над месторождением и не будет работать");
+            Debug.Log($"{gameObject.name} не размещено над месторождением и не будет работать");
         }
     }
 

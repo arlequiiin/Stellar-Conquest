@@ -15,3 +15,7 @@ MonoBehaviour:
   icon: {fileID: 1397570944, guid: 638a5b59884f398448089114a0b01968, type: 3}
   entityName: "\u0413\u043B\u0430\u0432\u043D\u044B\u0439 \u0438\u043D\u0436\u0435\u043D\u0435\u0440"
   description: 'HP: 500'
+  maxHealth: 250
+  uraniumCost: 0
+  energyCost: 0
+  prefab: {fileID: 4524947680229497039, guid: 0321ef210c56c944dae9bed555c07207, type: 3}

@@ -5,66 +5,34 @@ using System.Collections.Generic;
 using System.Linq; 
 
 public class FactoryUIPanel : MonoBehaviour {
-    [Header("UI Elements")]
-    [SerializeField] private GameObject _uiPanelGameObject;
+    [Header("Элементы UI")]
+    [SerializeField] private GameObject _uiPanel;
     [SerializeField] private TextMeshProUGUI _buildingNameText;
     [SerializeField] private TextMeshProUGUI _hpText;
 
-    [Header("Unit Buttons")]
-    [SerializeField] private Button[] _unitButtons; // Массив ваших 4 кнопок
-    [SerializeField] private TextMeshProUGUI[] _unitButtonTexts; // Массив текстов для кнопок (имя/стоимость)
-    // Возможно, вам понадобятся ссылки на Image, если они не на самой кнопке, а внутри
+    [Header("Кнопки юнитов")]
+    [SerializeField] private Button[] _unitButtons;
+    [SerializeField] private TextMeshProUGUI[] _unitButtonTexts; 
 
-    [Header("Production Queue")]
-    [SerializeField] private Transform _queueContainer; // Контейнер для иконок в очереди
-    [SerializeField] private GameObject _queueItemPrefab; // Префаб для одной иконки юнита в очереди
+    [Header("Очередь производства")]
+    [SerializeField] private Transform _queueContainer;
+    [SerializeField] private GameObject _queueItemPrefab; 
 
-    [Header("Current Production")]
-    [SerializeField] private Image _currentProductionIcon; // Иконка текущего юнита
-    [SerializeField] private TextMeshProUGUI _productionProgressText; // Текст для прогресса (например, % или время) - ОПЦИОНАЛЬНО
-    [SerializeField] private GameObject _currentProductionDisplay; // Объект, который показывает текущее производство (иконка + бар) - можно скрыть, если ничего не строится
+    [Header("Текущее производство")]
+    [SerializeField] private Image _currentProductionIcon;
+    [SerializeField] private TextMeshProUGUI _productionProgressText;
+    [SerializeField] private GameObject _currentProductionDisplay;
 
-    [Header("Messages")]
-    [SerializeField] private TextMeshProUGUI _messageText; // Для отображения сообщений (нет ресурсов, очередь полна)
-    [SerializeField] private float _messageDisplayTime = 3f; // Время показа сообщения
+    [Header("Сообщения")]
+    [SerializeField] private TextMeshProUGUI _messageText; 
+    [SerializeField] private float _messageDisplayTime = 3f; 
 
-    private Factory _currentFactory; // Ссылка на фабрику, UI которой сейчас отображается
-    private List<Image> _queueItemIcons = new List<Image>(); // Список созданных иконок в очереди
-    private Coroutine _messageCoroutine; // Для управления временем показа сообщения
+    private Factory _currentFactory; 
+    private List<Image> _queueItemIcons = new List<Image>();
+    private Coroutine _messageCoroutine;
 
     private void Awake() {
-        _uiPanelGameObject.SetActive(false);
-
-        // Можно здесь добавить слушателей на кнопки, если не делаете это через инспектор
-        // for (int i = 0; i < _unitButtons.Length; i++)
-        // {
-        //     int unitIndex = i; // Сохраняем индекс для замыкания
-        //     _unitButtons[i].onClick.AddListener(() => OnUnitButtonClicked(unitIndex));
-        // }
-    }
-
-    void Start() {
-        // Подписываемся на события выделения/снятия выделения зданий (нужен менеджер выделения или аналогичный класс)
-        // Этот шаг требует централизованного менеджера выделения или других зданий, которые оповещают о своем выделении.
-        // Простой вариант: Найти все фабрики и подписаться. Неэффективно для большого кол-ва зданий.
-        // Лучший вариант: Единый SelectionManager, который обрабатывает клики и вызывает Select/Deselect на объектах.
-        // Допустим, у нас есть SelectionManager.Instance
-        // SelectionManager.Instance.OnEntitySelected += OnEntitySelected;
-        // SelectionManager.Instance.OnEntityDeselected += OnEntityDeselected;
-
-        // Пока для примера, подпишемся на все фабрики в сцене (для тестирования)
-        // Это **НЕ** рекомендуемый подход для финальной игры
-        // FindObjectsOfType<Factory>().ToList().ForEach(factory =>
-        // {
-        //    factory.OnFactorySelected += Show;
-        //    factory.OnFactoryDeselected += Hide;
-        // });
-
-        // Лучше всего, когда Factory сам вызывает не глобальный Show/Hide,
-        // а оповещает SelectionManager, а SelectionManager решает, какой UI показать.
-
-        // **Самый простой вариант для начала:** Сделать Show/Hide публичными и вызывать их из метода Select/Deselect в Factory,
-        // передавая ссылку на себя. Для этого UI Panel должен быть легко доступен (например, найден по тегу или ссылке из SelectionManager).
+        _uiPanel.SetActive(false);
     }
 
     // Вызывается, когда любую сущность выбрали (для SelectionManager)
@@ -89,45 +57,32 @@ public class FactoryUIPanel : MonoBehaviour {
     //     }
     // }
 
-
-    // !!! Публичный метод для показа панели !!!
     public void Show(Factory factory) {
         if (_currentFactory != null) {
-            // Если уже показываем UI другой фабрики, сначала скрываем его
-            // Это может случиться, если SelectionManager переключает выделение быстро
             Hide();
         }
 
         _currentFactory = factory;
-        _uiPanelGameObject.SetActive(true);
+        _uiPanel.SetActive(true);
 
-        // Обновляем основную информацию о здании
         _buildingNameText.text = factory.gameObject.name;
-        // Обновляем HP. Пока просто число. Можно добавить MaxHP если нужно
         _hpText.text = $"HP: {factory.CurrentHealthInt}";
 
-        // Обновляем кнопки юнитов
-        SetupUnitButtons(factory.ProducibleUnits);
+        // SetupUnitButtons(factory.ProducibleUnits);
 
-        // Подписываемся на события конкретной выбранной фабрики
         factory.OnQueueChanged += UpdateQueueUI;
         factory.OnProductionProgressUpdated += UpdateProductionProgressUI;
         factory.OnProductionMessage += DisplayMessage;
-        // Если нужно обновлять HP в реальном времени при получении урона,
-        // понадобится событие OnHealthChanged в Entity или Building
-        // factory.OnHealthChanged += UpdateBuildingStats; // Предполагаем такой метод и событие
+        // factory.OnHealthChanged += UpdateBuildingStats; 
 
-        // Первичное обновление UI очереди и прогресса
         UpdateQueueUI(_currentFactory.ProductionQueue.ToList(), _currentFactory.CurrentProduction);
         UpdateProductionProgressUI(_currentFactory.CurrentProductionTimer / (_currentFactory.CurrentProduction?.ProductionTime ?? 1f)); // Обработка деления на ноль
 
         Debug.Log($"UI для фабрики {factory.name} показан.");
     }
 
-    // !!! Публичный метод для скрытия панели !!!
     public void Hide() {
         if (_currentFactory != null) {
-            // Отписываемся от событий текущей фабрики перед скрытием
             _currentFactory.OnQueueChanged -= UpdateQueueUI;
             _currentFactory.OnProductionProgressUpdated -= UpdateProductionProgressUI;
             _currentFactory.OnProductionMessage -= DisplayMessage;
@@ -136,16 +91,14 @@ public class FactoryUIPanel : MonoBehaviour {
             _currentFactory = null;
         }
 
-        _uiPanelGameObject.SetActive(false);
+        _uiPanel.SetActive(false);
         // Очищаем UI (очередь, прогресс)
         ClearQueueUI();
-        _currentProductionIcon.sprite = null; // Сбросить иконку
-        _currentProductionIcon.enabled = false; // Скрыть иконку
+        _currentProductionIcon.sprite = null; 
+        _currentProductionIcon.enabled = false; 
         _productionProgressText.text = "";
-        _currentProductionDisplay.SetActive(false); // Скрыть блок текущего производства
-        _messageText.text = ""; // Очистить сообщения
-
-        Debug.Log("UI фабрики скрыт.");
+        _currentProductionDisplay.SetActive(false);
+        _messageText.text = "";
     }
 
     // Метод для обновления отображения HP и других статов здания
@@ -161,11 +114,8 @@ public class FactoryUIPanel : MonoBehaviour {
 
     // Настраиваем кнопки юнитов на основе данных из фабрики
     private void SetupUnitButtons(List<Factory.UnitProductionInfo> producibleUnits) {
-        // Предполагаем, что у вас есть ровно 4 кнопки и ровно 4 производимых юнита
-        // или юниты в списке _producibleUnits соответствуют порядку кнопок
         if (_unitButtons.Length != producibleUnits.Count) {
             Debug.LogError("Количество кнопок юнитов не совпадает с количеством производимых юнитов в фабрике!");
-            // Здесь можно как-то обработать или отключить UI
         }
 
         for (int i = 0; i < _unitButtons.Length; i++) {
@@ -184,7 +134,7 @@ public class FactoryUIPanel : MonoBehaviour {
 
                 if (_unitButtonTexts.Length > i && _unitButtonTexts[i] != null) {
                     // Отображаем название и стоимость
-                    _unitButtonTexts[i].text = $"{unitInfo.UnitName}\nCost: {unitInfo.ResourceCost}";
+                    _unitButtonTexts[i].text = $"{unitInfo.UnitName}\nCost: {unitInfo.UranuimCost}";
                     // TODO: Использовать иконки ресурсов вместо текста "Cost:"
                 }
 
@@ -204,20 +154,16 @@ public class FactoryUIPanel : MonoBehaviour {
         }
     }
 
-    // Метод, вызываемый при клике на любую из кнопок юнитов
     public void OnUnitButtonClicked(int unitIndex) {
         if (_currentFactory != null) {
-            // Пытаемся поставить юнита в очередь через фабрику
             bool success = _currentFactory.TryQueueUnitByIndex(unitIndex);
-            // Фабрика сама вызовет OnQueueChanged и OnProductionMessage
         }
     }
 
-    // Метод для обновления визуального отображения очереди
+    // обновление визуального отображения очереди
     private void UpdateQueueUI(List<Factory.UnitProductionInfo> queueList, Factory.UnitProductionInfo currentProduction) {
-        ClearQueueUI(); // Очищаем текущие иконки
+        ClearQueueUI(); 
 
-        // Добавляем иконку текущего производимого юнита, если он есть
         if (currentProduction != null) {
             if (_currentProductionIcon != null && currentProduction.UnitIcon != null) {
                 _currentProductionIcon.sprite = currentProduction.UnitIcon;
@@ -231,7 +177,6 @@ public class FactoryUIPanel : MonoBehaviour {
             // Прогресс бар и текст будут обновляться через UpdateProductionProgressUI
         }
         else {
-            // Ничего не строится
             if (_currentProductionIcon != null) _currentProductionIcon.enabled = false;
             _productionProgressText.text = "";
             _currentProductionDisplay.SetActive(false); // Скрыть блок текущего производства

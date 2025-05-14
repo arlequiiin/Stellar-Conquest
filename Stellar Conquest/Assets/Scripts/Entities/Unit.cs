@@ -1,5 +1,6 @@
 using UnityEngine;
 using UnityEngine.AI;
+using static UnityEngine.GraphicsBuffer;
 
 public class Units : Entity {
 
@@ -8,16 +9,16 @@ public class Units : Entity {
     [SerializeField] private float _attackDamage;
     [SerializeField] private float _attackCooldown;
 
+    protected NavMeshAgent _navMeshAgent;
 
-    private NavMeshAgent _navMeshAgent;
-
-    private enum UnitState { Idle, Moving, Attacking, Death }
-    private UnitState _currentState = UnitState.Idle;
+    protected enum UnitState { Idle, Moving, Attacking, Death, Building }
+    protected UnitState _currentState = UnitState.Idle;
     private Entity _currentTarget;
     private float _lastAttackTime;
     private Animator _animator;
     private bool _isMoving;
     private bool _isFiring;
+    private bool _isBuilding;
     private bool _updateRotation = false;
     private bool _updateUpAxis = false;
 
@@ -35,13 +36,13 @@ public class Units : Entity {
     protected virtual void Update() {
         switch (_currentState) {
             case UnitState.Idle:
-                SetAnimator(false, false);
+                SetAnimator(false, false, false);
                 FindTargetAndAttackIfNeeded();
                 break;
             case UnitState.Moving:
-                SetAnimator(true, false);
+                SetAnimator(true, false, false);
                 if (!_navMeshAgent.pathPending && _navMeshAgent.remainingDistance <= _navMeshAgent.stoppingDistance) {
-                    if (!_navMeshAgent.hasPath || _navMeshAgent.velocity.sqrMagnitude == 0f) {
+                    if (!_navMeshAgent.hasPath || _navMeshAgent.velocity.sqrMagnitude <= 2f) {
                         Debug.Log($"{gameObject.name} достиг пункта назначения");
                         _currentState = UnitState.Idle; 
                     }
@@ -49,19 +50,21 @@ public class Units : Entity {
                 // FindTargetAndAttackIfNeeded(); // автоатака в движении
                 break;
             case UnitState.Attacking:
-                SetAnimator(false, true);
+                SetAnimator(false, true, false);
                 PerformAttack();
                 break;
             case UnitState.Death:
                 break;
+            case UnitState.Building:
+                SetAnimator(false, false, true);
+                // логика строительства 
+                break;
         }
 
-        // #if UNITY_EDITOR
         // Debug.Log($"Юнит: {gameObject.name}, Состояние: {_currentState}");
-        // #endif    
     }
 
-    private void SetAnimator(bool isMoving, bool isFiring) {
+    private void SetAnimator(bool isMoving, bool isFiring, bool isBuilding) {
         if (_isMoving != isMoving) {
             _animator.SetBool("IsMoving", isMoving);
             _isMoving = isMoving;
@@ -71,10 +74,16 @@ public class Units : Entity {
             _animator.SetBool("IsFiring", isFiring);
             _isFiring = isFiring;
         }
+
+        if (_isBuilding != isBuilding) {
+            _animator.SetBool("isBuilding", isBuilding);
+            _isBuilding = isBuilding;
+        }
     }
 
 
     public void MoveTo(Vector3 destination) {
+        FlipSprite(destination);
         if (_navMeshAgent.SetDestination(destination)) {
             _currentState = UnitState.Moving;
             _currentTarget = null; 
@@ -86,6 +95,7 @@ public class Units : Entity {
     }
 
     public void OrderAttackTarget(Entity target) {
+        FlipSprite(target.transform.position);
         if (target == null || target == this || target.OwnerPlayerId == this.OwnerPlayerId)
         {
             Debug.LogWarning($"{gameObject.name} не может атаковать {target?.name}");
@@ -151,10 +161,11 @@ public class Units : Entity {
     }
 
     private void PerformAttack() {
-        if (_currentTarget == null || _currentTarget.CurrentHealth <= 0) {
+        if (_currentTarget == null || _currentTarget.GetCurrentHealth <= 0) {
             StopActions();
             return;
         }
+        FlipSprite(_currentTarget.transform.position);
 
         float distanceToTarget = Vector3.Distance(transform.position, _currentTarget.transform.position);
         if (distanceToTarget > _range) {
@@ -174,6 +185,16 @@ public class Units : Entity {
 
             _lastAttackTime = Time.time; 
         }
+    }
+    private void FlipSprite(Vector3 targetPosition) {
+        Vector3 scale = transform.localScale;
+        if (targetPosition.x < transform.position.x && scale.x > 0) {
+            scale.x *= -1;
+        }
+        else if (targetPosition.x > transform.position.x && scale.x < 0) {
+            scale.x *= -1;
+        }
+        transform.localScale = scale;
     }
 
     protected override void Die() {

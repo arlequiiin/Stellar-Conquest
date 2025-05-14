@@ -6,7 +6,6 @@ public class Generator : Buildings {
 
     protected override void Start() {
         base.Start();
-        Debug.Log($"{gameObject.name} начал производить энергию");
     }
 
     void Update() {
@@ -19,7 +18,6 @@ public class Generator : Buildings {
     }
 
     protected override void Die() {
-        Debug.Log($"{gameObject.name} разрушен и больше не производит энергию");
         base.Die();
     }
 }

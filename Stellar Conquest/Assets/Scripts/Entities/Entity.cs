@@ -11,8 +11,14 @@ public abstract class Entity : MonoBehaviour {
 
     private bool isDie = false;
     public bool IsAlive => currentHealth > 0;
-    public float CurrentHealth => currentHealth;
-    public float MaxHealth => maxHealth;
+    public float GetCurrentHealth => currentHealth;
+    public float GetMaxHealth => maxHealth;
+    public string GetEntityName => entityData.entityName;
+    public string GetDescription => entityData.description;
+    public Sprite GetIcon => entityData.icon;
+    public float UraniumCost => entityData.uraniumCost;
+    public float EnergyCost => entityData.energyCost;
+    public float BuildTime => entityData.buildTime;
 
     protected virtual void Awake() {
         currentHealth = maxHealth;
