@@ -29,7 +29,7 @@ public class Units : Entity {
         _navMeshAgent.speed = _walkSpeed;
         _navMeshAgent.updateRotation = _updateRotation;
         _navMeshAgent.updateUpAxis = _updateUpAxis;
-
+        //_navMeshAgent.SetAreaCost(0, 1);
         _animator = GetComponent<Animator>();
     }
 
@@ -127,7 +127,8 @@ public class Units : Entity {
             Debug.Log($"{gameObject.name} цель {target.name} в радиусе обзора. Атака");
             _currentState = UnitState.Attacking;
             _navMeshAgent.ResetPath();
-            FlipSprite(target.transform.position);
+
+            FlipSprite(_currentTarget.transform.position);
         }
     }
 
@@ -175,8 +176,6 @@ public class Units : Entity {
             return;
         }
 
-        // transform.LookAt(_currentTarget.transform); // ?
-
         if (Time.time >= _lastAttackTime + _attackCooldown) {
             Debug.Log($"{gameObject.name} атакует {_currentTarget.name} нанеся {_attackDamage} урона");
             _currentTarget.TakeDamage(_attackDamage);
@@ -186,18 +185,25 @@ public class Units : Entity {
             _lastAttackTime = Time.time; 
         }
     }
+	
     protected void FlipSprite(Vector3 targetPosition) {
         Vector3 scale = transform.localScale;
-        if (targetPosition.x < transform.position.x && scale.x > 0) {
-            scale.x *= -1;
+
+        if (targetPosition.x < transform.position.x && scale.x > 0)
+        {
+            scale.x *=-1 ;
         }
-        else if (targetPosition.x > transform.position.x && scale.x < 0) {
-            scale.x *= -1;
+        else if (targetPosition.x > transform.position.x && scale.x < 0)
+        {
+            scale.x  *= -1;
         }
+
         transform.localScale = scale;
     }
 
-    protected override void Die() {
+
+    protected override void Die()
+    {
         _animator.SetBool("IsMoving", false);
         _animator.SetBool("IsFiring", false);
         _animator.SetBool("IsBuilding", false);
@@ -207,5 +213,6 @@ public class Units : Entity {
         _navMeshAgent.enabled = false;
 
         base.Die();
-    }
+    
+     }
 }
