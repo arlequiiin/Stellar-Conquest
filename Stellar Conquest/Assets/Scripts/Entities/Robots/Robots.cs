@@ -22,12 +22,12 @@ public class Robots : Entity
 
     protected override void Awake()
     {
-        base.Awake();
+        
         _navMeshAgent = GetComponent<NavMeshAgent>();
         _navMeshAgent.speed = _walkSpeed;
         _navMeshAgent.updateRotation = _updateRotation;
         _navMeshAgent.updateUpAxis = _updateUpAxis;
-
+        _navMeshAgent.SetAreaCost(0, 1);
         _animator = GetComponent<Animator>();
     }
 
@@ -113,7 +113,6 @@ public class Robots : Entity
 
     private void OrderAttackTarget(Entity target)
     {
-        FlipSprite(target.transform.position);
         if (target == null || target == this) return;
 
         _currentTarget = target;
@@ -139,7 +138,7 @@ public class Robots : Entity
         {
             _currentState = UnitState.Attacking;
             _navMeshAgent.ResetPath();
-            transform.LookAt(_currentTarget.transform);
+            FlipSprite(_currentTarget.transform.position);
         }
     }
 
@@ -150,8 +149,10 @@ public class Robots : Entity
             StopActions();
             return;
         }
-
         float distanceToTarget = Vector3.Distance(transform.position, _currentTarget.transform.position);
+
+
+        FlipSprite(_currentTarget.transform.position);
         if (distanceToTarget > _range)
         {
             OrderAttackTarget(_currentTarget);
@@ -167,15 +168,18 @@ public class Robots : Entity
 
     private void FlipSprite(Vector3 targetPosition)
     {
+        // Для 2D спрайтов лучше использовать изменение scale
         Vector3 scale = transform.localScale;
+
         if (targetPosition.x < transform.position.x && scale.x > 0)
         {
-            scale.x *= -1;
+            scale.x = -Mathf.Abs(scale.x);
         }
         else if (targetPosition.x > transform.position.x && scale.x < 0)
         {
-            scale.x *= -1;
+            scale.x = Mathf.Abs(scale.x);
         }
+
         transform.localScale = scale;
     }
 
