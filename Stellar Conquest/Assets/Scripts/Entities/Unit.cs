@@ -29,7 +29,7 @@ public class Units : Entity {
         _navMeshAgent.speed = _walkSpeed;
         _navMeshAgent.updateRotation = _updateRotation;
         _navMeshAgent.updateUpAxis = _updateUpAxis;
-
+        _navMeshAgent.SetAreaCost(0, 1);
         _animator = GetComponent<Animator>();
     }
 
@@ -126,8 +126,8 @@ public class Units : Entity {
         {
             Debug.Log($"{gameObject.name} цель {target.name} в радиусе обзора. Атака");
             _currentState = UnitState.Attacking;
-            _navMeshAgent.ResetPath(); 
-            transform.LookAt(_currentTarget.transform); 
+            _navMeshAgent.ResetPath();
+            FlipSprite(_currentTarget.transform.position);
         }
     }
 
@@ -186,14 +186,20 @@ public class Units : Entity {
             _lastAttackTime = Time.time; 
         }
     }
-    private void FlipSprite(Vector3 targetPosition) {
+    private void FlipSprite(Vector3 targetPosition)
+    {
+        // Для 2D спрайтов лучше использовать изменение scale
         Vector3 scale = transform.localScale;
-        if (targetPosition.x < transform.position.x && scale.x > 0) {
-            scale.x *= -1;
+
+        if (targetPosition.x < transform.position.x && scale.x > 0)
+        {
+            scale.x = -Mathf.Abs(scale.x);
         }
-        else if (targetPosition.x > transform.position.x && scale.x < 0) {
-            scale.x *= -1;
+        else if (targetPosition.x > transform.position.x && scale.x < 0)
+        {
+            scale.x = Mathf.Abs(scale.x);
         }
+
         transform.localScale = scale;
     }
 
