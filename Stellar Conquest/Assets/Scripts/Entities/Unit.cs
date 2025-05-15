@@ -29,7 +29,7 @@ public class Units : Entity {
         _navMeshAgent.speed = _walkSpeed;
         _navMeshAgent.updateRotation = _updateRotation;
         _navMeshAgent.updateUpAxis = _updateUpAxis;
-        _navMeshAgent.SetAreaCost(0, 1);
+        //_navMeshAgent.SetAreaCost(0, 1);
         _animator = GetComponent<Animator>();
     }
 
@@ -193,24 +193,27 @@ public class Units : Entity {
 
         if (targetPosition.x < transform.position.x && scale.x > 0)
         {
-            scale.x = -Mathf.Abs(scale.x);
+            scale.x *=-1 ;
         }
         else if (targetPosition.x > transform.position.x && scale.x < 0)
         {
-            scale.x = Mathf.Abs(scale.x);
+            scale.x  *= -1;
         }
 
         transform.localScale = scale;
     }
 
-    protected override void Die() {
-        Debug.Log($"Юнит {gameObject.name} уничтожен");
-        _currentState = UnitState.Death;
-        _navMeshAgent.enabled = false;
+    protected override void Die()
+    {
         _animator.SetBool("IsMoving", false);
         _animator.SetBool("IsFiring", false);
-        _animator.SetTrigger("IsDead");
+        _animator.SetBool("IsBuilding", false);
+
+        _animator.SetTrigger("Die");
+        _currentState = UnitState.Death;
+        _navMeshAgent.enabled = false;
 
         base.Die();
-    }
+    
+     }
 }
