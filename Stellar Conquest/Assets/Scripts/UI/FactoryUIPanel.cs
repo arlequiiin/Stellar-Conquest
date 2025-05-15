@@ -35,28 +35,6 @@ public class FactoryUIPanel : MonoBehaviour {
         _uiPanel.SetActive(false);
     }
 
-    // Вызывается, когда любую сущность выбрали (для SelectionManager)
-    // private void OnEntitySelected(Entity entity)
-    // {
-    //     if (entity is Factory factory) // Если выбранная сущность - фабрика
-    //     {
-    //         Show(factory);
-    //     }
-    //     else
-    //     {
-    //         Hide(); // Скрыть UI фабрики, если выбрано что-то другое
-    //     }
-    // }
-
-    // Вызывается, когда любую сущность сняли с выделения
-    // private void OnEntityDeselected(Entity entity)
-    // {
-    //     if (entity == _currentFactory) // Если сняли с выделения текущую фабрику
-    //     {
-    //         Hide();
-    //     }
-    // }
-
     public void Show(Factory factory) {
         if (_currentFactory != null) {
             Hide();
@@ -78,7 +56,7 @@ public class FactoryUIPanel : MonoBehaviour {
         UpdateQueueUI(_currentFactory.ProductionQueue.ToList(), _currentFactory.CurrentProduction);
         UpdateProductionProgressUI(_currentFactory.CurrentProductionTimer / (_currentFactory.CurrentProduction?.ProductionTime ?? 1f)); // Обработка деления на ноль
 
-        Debug.Log($"UI для фабрики {factory.name} показан.");
+        Debug.Log($"UI для фабрики {factory.name} показан");
     }
 
     public void Hide() {
@@ -92,7 +70,7 @@ public class FactoryUIPanel : MonoBehaviour {
         }
 
         _uiPanel.SetActive(false);
-        // Очищаем UI (очередь, прогресс)
+
         ClearQueueUI();
         _currentProductionIcon.sprite = null; 
         _currentProductionIcon.enabled = false; 
@@ -101,58 +79,14 @@ public class FactoryUIPanel : MonoBehaviour {
         _messageText.text = "";
     }
 
-    // Метод для обновления отображения HP и других статов здания
+    // обновления отображения HP
     // private void UpdateBuildingStats()
     // {
     //      if (_currentFactory != null)
     //      {
     //           _hpText.text = $"HP: {_currentFactory.CurrentHealthInt}";
-    //           // Обновить другие статы, если есть
     //      }
     // }
-
-
-    // Настраиваем кнопки юнитов на основе данных из фабрики
-    private void SetupUnitButtons(List<Factory.UnitProductionInfo> producibleUnits) {
-        if (_unitButtons.Length != producibleUnits.Count) {
-            Debug.LogError("Количество кнопок юнитов не совпадает с количеством производимых юнитов в фабрике!");
-        }
-
-        for (int i = 0; i < _unitButtons.Length; i++) {
-            if (i < producibleUnits.Count) {
-                Factory.UnitProductionInfo unitInfo = producibleUnits[i];
-
-                // Настраиваем визуал кнопки
-                if (_unitButtons[i].image != null && unitInfo.UnitIcon != null) {
-                    _unitButtons[i].image.sprite = unitInfo.UnitIcon;
-                    _unitButtons[i].image.enabled = true;
-                }
-                else if (_unitButtons[i].image != null) {
-                    _unitButtons[i].image.enabled = false; // Скрыть Image если нет иконки
-                }
-
-
-                if (_unitButtonTexts.Length > i && _unitButtonTexts[i] != null) {
-                    // Отображаем название и стоимость
-                    _unitButtonTexts[i].text = $"{unitInfo.UnitName}\nCost: {unitInfo.UranuimCost}";
-                    // TODO: Использовать иконки ресурсов вместо текста "Cost:"
-                }
-
-                // Привязываем клик кнопки к методу производства в текущей фабрике
-                // Сначала очищаем все предыдущие слушатели, чтобы избежать двойных вызовов
-                _unitButtons[i].onClick.RemoveAllListeners();
-                int unitIndex = i; // Сохраняем индекс для передачи в замыкание
-                _unitButtons[i].onClick.AddListener(() => OnUnitButtonClicked(unitIndex));
-
-                _unitButtons[i].interactable = true; // Изначально кнопки активны (проверка ресурсов будет позже)
-
-            }
-            else {
-                // Если кнопок больше, чем юнитов, скрываем или отключаем лишние кнопки
-                _unitButtons[i].gameObject.SetActive(false);
-            }
-        }
-    }
 
     public void OnUnitButtonClicked(int unitIndex) {
         if (_currentFactory != null) {
@@ -160,7 +94,6 @@ public class FactoryUIPanel : MonoBehaviour {
         }
     }
 
-    // обновление визуального отображения очереди
     private void UpdateQueueUI(List<Factory.UnitProductionInfo> queueList, Factory.UnitProductionInfo currentProduction) {
         ClearQueueUI(); 
 
@@ -203,7 +136,6 @@ public class FactoryUIPanel : MonoBehaviour {
         }
     }
 
-    // Очищает визуальное отображение очереди
     private void ClearQueueUI() {
         foreach (var icon in _queueItemIcons) {
             if (icon != null && icon.gameObject != null) {
@@ -213,7 +145,6 @@ public class FactoryUIPanel : MonoBehaviour {
         _queueItemIcons.Clear();
     }
 
-    // Метод для обновления прогресс бара
     private void UpdateProductionProgressUI(float progress) // progress от 0 до 1
     {
         if (_productionProgressText != null) {
@@ -253,7 +184,6 @@ public class FactoryUIPanel : MonoBehaviour {
         _messageCoroutine = null;
     }
 
-    // TODO: Метод для обработки клика по иконке в очереди для отмены (потребует изменения Prefab очереди)
     // TODO: Метод для кнопки отмены текущего производства (вызывает _currentFactory.CancelProduction(0))
     // TODO: Метод для кнопки установки точки сбора (_currentFactory._rallyPoint = ...)
 

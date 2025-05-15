@@ -107,6 +107,8 @@ MonoBehaviour:
   selectionCircle: {fileID: 8732206402695998459}
   entityData: {fileID: 11400000, guid: c84add71b024271499301547a01dad50, type: 2}
   currentStatus: 
+  isExtractor: 0
+  preview: {fileID: 9185986565880025287, guid: 0d0c4fbb8002da04191a6db3c00bdcd2, type: 3}
   powerPerSecond: 10
 --- !u!61 &541977144000934282
 BoxCollider2D:

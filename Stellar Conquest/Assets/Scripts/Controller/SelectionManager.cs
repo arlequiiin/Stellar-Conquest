@@ -9,17 +9,16 @@ public class SelectionManager : MonoBehaviour {
     [SerializeField] private List<Entity> _selectedEntities = new List<Entity>();
     public IReadOnlyList<Entity> SelectedEntities => _selectedEntities; 
 
-    private InputManager _inputManager;
     [SerializeField] private LayerMask _selectableLayerMask;
     [SerializeField] private LayerMask _groundLayerMask;
     [SerializeField] private LayerMask _enemyLayerMask; 
     [SerializeField] private RectTransform _selectionBoxRect; 
-    private Vector2 _startDragPos;
-
     [SerializeField] private FactoryUIPanel factoryUIPanel;
     [SerializeField] private SelectionUIPanel selectionUIPanel;
     [SerializeField] private OrdersUIPanel orderUIPanel;
-    [SerializeField] private BuildingsUIPanel buildingsUIPanel;
+
+    private InputManager _inputManager;
+    private Vector2 _startDragPos;
 
     void Awake() {
         if (_instance != null && _instance != this) { Destroy(gameObject); return; }
@@ -96,13 +95,12 @@ public class SelectionManager : MonoBehaviour {
         Debug.Log("Shift");
         if (clickPosition != Vector3.negativeInfinity) {
             if (_inputManager.GetObjectUnderCursor<Entity>(out Entity clickedEntity, _selectableLayerMask)) {
-                // Добавляем/удаляем только юнитов/здания локального игрока
                 if (clickedEntity.OwnerPlayerId == GameManager.Instance.playerId) {
                     if (_selectedEntities.Contains(clickedEntity)) {
                         DeselectEntity(clickedEntity);
                     }
                     else {
-                        SelectEntity(clickedEntity, false); // Добавляем к выделению (не очищая старое)
+                        SelectEntity(clickedEntity, false); 
                     }
                     UpdateSelectionUI();
                 }
@@ -140,7 +138,7 @@ public class SelectionManager : MonoBehaviour {
             Debug.Log("ПКМ: Недопустимая цель для команды.");
         }
 
-        //клик по другим объектам ?
+        // клик по другим объектам ?
     }
 
     private void HandleCancelKey() {
@@ -265,18 +263,15 @@ public class SelectionManager : MonoBehaviour {
                 }
                 // Скрыть другие UI панели
             }
-            else if (selectedEntity is Engineer selectedEngineer) {
-                 buildingsUIPanel.Open();
-            }
             else {
-                if (factoryUIPanel != null) factoryUIPanel.Hide();
-                // оказать UI для юнита или другого типа здания
+                if (factoryUIPanel != null) factoryUIPanel.Hide();           
+                // показать UI для юнита или другого типа здания
             }
         }
         else
         {
             selectionUIPanel.Clear();
-            if (factoryUIPanel != null) factoryUIPanel.Hide(); 
+            if (factoryUIPanel != null) factoryUIPanel.Hide();
             // скрыть все UI панели
         }
     }
@@ -284,12 +279,20 @@ public class SelectionManager : MonoBehaviour {
     private void UpdateSelectionBox(Vector2 currentMousePos) {
         if (!_selectionBoxRect.gameObject.activeSelf) return;
 
-        float width = currentMousePos.x - _startDragPos.x;
-        float height = currentMousePos.y - _startDragPos.y;
+        Canvas canvas = _selectionBoxRect.GetComponentInParent<Canvas>();
 
-        _selectionBoxRect.sizeDelta = new Vector2(Mathf.Abs(width), Mathf.Abs(height));
-        _selectionBoxRect.anchoredPosition = _startDragPos + new Vector2(width / 2, height / 2);
+        RectTransform canvasRectTransform = _selectionBoxRect.GetComponentInParent<Canvas>().GetComponent<RectTransform>();
+
+        RectTransformUtility.ScreenPointToLocalPointInRectangle(canvasRectTransform, _startDragPos, canvas.worldCamera, out Vector2 localStart);
+        RectTransformUtility.ScreenPointToLocalPointInRectangle(canvasRectTransform, currentMousePos, canvas.worldCamera, out Vector2 localEnd);
+
+        Vector2 size = new Vector2(Mathf.Abs(localEnd.x - localStart.x), Mathf.Abs(localEnd.y - localStart.y));
+        Vector2 center = (localStart + localEnd) / 2f;
+
+        _selectionBoxRect.sizeDelta = size;
+        _selectionBoxRect.anchoredPosition = center;
     }
+
 
     private Rect GetSelectionRect(Vector2 startPos, Vector2 endPos) {
         float xMin = Mathf.Min(startPos.x, endPos.x);

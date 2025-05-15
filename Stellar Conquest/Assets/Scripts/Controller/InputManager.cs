@@ -23,10 +23,11 @@ public class InputManager : MonoBehaviour {
 
     private PlayerControls _controls;
 
-    private bool _isDragging = false;
-    private Vector2 _dragStartPosition;
+    private bool isDragging = false;
+    private Vector2 dragStartPosition;
     private const float DragThreshold = 5f;
     private const float MaxRayDistance = 1000f;
+    private bool nextLeftButtonClick = false;
 
     void Awake() {
         if (Instance != null && Instance != this) {
@@ -40,41 +41,43 @@ public class InputManager : MonoBehaviour {
         _controls = new PlayerControls();
         _controls.Enable();
 
-        // _controls.Player.Select.performed += ctx => HandleLeftClick();
+        _controls.Player.Select.performed += ctx => HandleLeftClick();
         _controls.Player.RightClick.performed += ctx => HandleRightClick();
         _controls.Player.Cancel.performed += ctx => OnCancelKeyPressed?.Invoke();
+
         _controls.Player.Select.started += ctx => StartDrag(ctx);
         _controls.Player.Select.canceled += ctx => EndDrag(ctx);
     }
 
     void Update() {
-        if (_isDragging) {
+        if (isDragging) {
             Vector2 mousePos = Mouse.current.position.ReadValue();
-            if (Vector2.Distance(mousePos, _dragStartPosition) > DragThreshold)
-                OnDragSelectUpdate?.Invoke(mousePos, _dragStartPosition);
+            if (Vector2.Distance(mousePos, dragStartPosition) > DragThreshold)
+                OnDragSelectUpdate?.Invoke(mousePos, dragStartPosition);
         }
     }
 
+
     private void StartDrag(InputAction.CallbackContext ctx) {
-        _dragStartPosition = Mouse.current.position.ReadValue();
-        _isDragging = true;
-        OnDragSelectStart?.Invoke(_dragStartPosition);
+        dragStartPosition = Mouse.current.position.ReadValue();
+        isDragging = true;
+        OnDragSelectStart?.Invoke(dragStartPosition);
     }
 
     private void EndDrag(InputAction.CallbackContext ctx) {
-        if (!_isDragging) return;
+        if (!isDragging) return;
 
-        _isDragging = false;
+        isDragging = false;
         Vector2 mousePos = Mouse.current.position.ReadValue();
 
-        if (Vector2.Distance(mousePos, _dragStartPosition) > DragThreshold) {
-            OnDragSelectEnd?.Invoke(mousePos, _dragStartPosition);
+        if (Vector2.Distance(mousePos, dragStartPosition) > DragThreshold) {
+            OnDragSelectEnd?.Invoke(mousePos, dragStartPosition);
+            nextLeftButtonClick = true;
         }
         else {
-            if (IsPointerOverUI()) {
-                Debug.Log("Щелчок по UI");
-                return; 
-            }
+            nextLeftButtonClick = true;
+            if (IsPointerOverUI()) return;
+            
             if (RaycastMouse(out RaycastHit2D hit, _selectableLayerMask | _groundLayerMask)) {
                 if (_controls.Player.MultiSelect.ReadValue<float>() > 0)
                     OnShiftLeftClick?.Invoke(hit.point);
@@ -87,18 +90,22 @@ public class InputManager : MonoBehaviour {
         }
     }
 
-    //private void HandleLeftClick() {
-    //    if (IsPointerOverUI()) {
-    //        return;
-    //    }
+    private void HandleLeftClick() {
+        if (nextLeftButtonClick) { 
+            nextLeftButtonClick = false;
+            return;
+        }
+        if (IsPointerOverUI()) {
+            return;
+        }
 
-    //    if (RaycastMouse(out RaycastHit2D hit, _selectableLayerMask)) {
-    //        OnLeftClick?.Invoke(hit.point);
-    //    }
-    //    else {
-    //        OnLeftClick?.Invoke(Vector3.negativeInfinity);
-    //    }
-    //}
+        if (RaycastMouse(out RaycastHit2D hit, _selectableLayerMask)) {
+            OnLeftClick?.Invoke(hit.point);
+        }
+        else {
+            OnLeftClick?.Invoke(Vector3.negativeInfinity);
+        }
+    }
 
     private void HandleRightClick() {
         if (IsPointerOverUI()) {

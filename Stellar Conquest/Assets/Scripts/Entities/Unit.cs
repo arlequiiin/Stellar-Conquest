@@ -13,14 +13,14 @@ public class Units : Entity {
 
     protected enum UnitState { Idle, Moving, Attacking, Death, Building }
     protected UnitState _currentState = UnitState.Idle;
-    private Entity _currentTarget;
-    private float _lastAttackTime;
-    private Animator _animator;
-    private bool _isMoving;
-    private bool _isFiring;
-    private bool _isBuilding;
-    private bool _updateRotation = false;
-    private bool _updateUpAxis = false;
+    protected Entity _currentTarget;
+    protected float _lastAttackTime;
+    protected Animator _animator;
+    protected bool _isMoving;
+    protected bool _isFiring;
+    protected bool _isBuilding;
+    protected bool _updateRotation = false;
+    protected bool _updateUpAxis = false;
 
     protected override void Awake() 
     {
@@ -64,7 +64,7 @@ public class Units : Entity {
         // Debug.Log($"Юнит: {gameObject.name}, Состояние: {_currentState}");
     }
 
-    private void SetAnimator(bool isMoving, bool isFiring, bool isBuilding) {
+    protected void SetAnimator(bool isMoving, bool isFiring, bool isBuilding) {
         if (_isMoving != isMoving) {
             _animator.SetBool("IsMoving", isMoving);
             _isMoving = isMoving;
@@ -126,8 +126,8 @@ public class Units : Entity {
         {
             Debug.Log($"{gameObject.name} цель {target.name} в радиусе обзора. Атака");
             _currentState = UnitState.Attacking;
-            _navMeshAgent.ResetPath(); 
-            transform.LookAt(_currentTarget.transform); 
+            _navMeshAgent.ResetPath();
+            FlipSprite(target.transform.position);
         }
     }
 
@@ -138,7 +138,7 @@ public class Units : Entity {
         Debug.Log($"{gameObject.name} сброшен приказ");
     }
 
-    private void FindTargetAndAttackIfNeeded() {
+    protected void FindTargetAndAttackIfNeeded() {
         Collider2D[] hitColliders = Physics2D.OverlapCircleAll(transform.position, _range); 
         Entity potentialTarget = null;
         float minDistance = float.MaxValue;
@@ -160,7 +160,7 @@ public class Units : Entity {
         }
     }
 
-    private void PerformAttack() {
+    protected void PerformAttack() {
         if (_currentTarget == null || _currentTarget.GetCurrentHealth <= 0) {
             StopActions();
             return;
@@ -175,7 +175,7 @@ public class Units : Entity {
             return;
         }
 
-        transform.LookAt(_currentTarget.transform); // ?
+        // transform.LookAt(_currentTarget.transform); // ?
 
         if (Time.time >= _lastAttackTime + _attackCooldown) {
             Debug.Log($"{gameObject.name} атакует {_currentTarget.name} нанеся {_attackDamage} урона");
@@ -186,7 +186,7 @@ public class Units : Entity {
             _lastAttackTime = Time.time; 
         }
     }
-    private void FlipSprite(Vector3 targetPosition) {
+    protected void FlipSprite(Vector3 targetPosition) {
         Vector3 scale = transform.localScale;
         if (targetPosition.x < transform.position.x && scale.x > 0) {
             scale.x *= -1;
@@ -198,12 +198,13 @@ public class Units : Entity {
     }
 
     protected override void Die() {
-        Debug.Log($"Юнит {gameObject.name} уничтожен");
-        _currentState = UnitState.Death;
-        _navMeshAgent.enabled = false;
         _animator.SetBool("IsMoving", false);
         _animator.SetBool("IsFiring", false);
-        _animator.SetTrigger("IsDead");
+        _animator.SetBool("IsBuilding", false);
+
+        _animator.SetTrigger("Die");
+        _currentState = UnitState.Death;
+        _navMeshAgent.enabled = false;
 
         base.Die();
     }
