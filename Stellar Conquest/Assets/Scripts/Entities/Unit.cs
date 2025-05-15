@@ -175,7 +175,7 @@ public class Units : Entity {
             return;
         }
 
-        transform.LookAt(_currentTarget.transform); // ?
+        //transform.LookAt(_currentTarget.transform); // ?
 
         if (Time.time >= _lastAttackTime + _attackCooldown) {
             Debug.Log($"{gameObject.name} атакует {_currentTarget.name} нанеся {_attackDamage} урона");
