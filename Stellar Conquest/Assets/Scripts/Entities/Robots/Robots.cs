@@ -55,21 +55,23 @@ public class Robots : Entity
                 break;
             case UnitState.Death:
                 break;
+
         }
     }
 
     private void SetAnimator(bool isMoving, bool isFiring)
     {
+        Debug.Log($"Setting Animator: Moving={isMoving}, Firing={isFiring}");
         if (_isMoving != isMoving)
         {
-            _animator.SetBool("IsMoving", isMoving);
-            _isMoving = isMoving;
+            _isMoving = isMoving; 
+            _animator.SetBool("IsMoving", _isMoving);
         }
 
         if (_isFiring != isFiring)
         {
-            _animator.SetBool("IsFiring", isFiring);
             _isFiring = isFiring;
+            _animator.SetBool("IsFiring", _isFiring);
         }
     }
 
@@ -168,7 +170,6 @@ public class Robots : Entity
 
     private void FlipSprite(Vector3 targetPosition)
     {
-        // Для 2D спрайтов лучше использовать изменение scale
         Vector3 scale = transform.localScale;
 
         if (targetPosition.x < transform.position.x && scale.x > 0)
@@ -192,11 +193,12 @@ public class Robots : Entity
 
     protected override void Die()
     {
-        _currentState = UnitState.Death;
-        _navMeshAgent.enabled = false;
         _animator.SetBool("IsMoving", false);
         _animator.SetBool("IsFiring", false);
-        _animator.SetTrigger("IsDead");
+
+        _animator.SetTrigger("Die");
+        _currentState = UnitState.Death;
+        _navMeshAgent.enabled = false;
 
         base.Die();
     }

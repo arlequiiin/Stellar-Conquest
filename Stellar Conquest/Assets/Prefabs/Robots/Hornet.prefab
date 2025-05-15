@@ -13,6 +13,7 @@ GameObject:
   - component: {fileID: 5928147772368609360}
   - component: {fileID: 3622817052962704949}
   - component: {fileID: 7002318949775567953}
+  - component: {fileID: 8929892384110764123}
   m_Layer: 0
   m_Name: Hornet
   m_TagString: Untagged
@@ -29,7 +30,7 @@ Transform:
   m_GameObject: {fileID: 7362398725293651158}
   serializedVersion: 2
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: -0.58, y: -0.53, z: 0}
+  m_LocalPosition: {x: -0.52, y: -1.38, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children: []
@@ -180,3 +181,23 @@ NavMeshAgent:
   m_BaseOffset: 0.575
   m_WalkableMask: 4294967295
   m_ObstacleAvoidanceType: 4
+--- !u!114 &8929892384110764123
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 7362398725293651158}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: d59ae81ecbb15e640949730f684b4e46, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  maxHealth: 10
+  selectionCircle: {fileID: 0}
+  entityData: {fileID: 0}
+  currentStatus: 
+  _walkSpeed: 5
+  _range: 10
+  _attackDamage: 6
+  _attackCooldown: 1
