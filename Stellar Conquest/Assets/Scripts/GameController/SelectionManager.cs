@@ -15,7 +15,7 @@ public class SelectionManager : MonoBehaviour {
     [SerializeField] private RectTransform _selectionBoxRect; 
     [SerializeField] private FactoryUIPanel factoryUIPanel;
     [SerializeField] private SelectionUIPanel selectionUIPanel;
-    [SerializeField] private OrdersUIPanel orderUIPanel;
+    [SerializeField] private OrdersUIPanel ordersUIPanel;
 
     private InputManager _inputManager;
     private Vector2 _startDragPos;
@@ -227,7 +227,7 @@ public class SelectionManager : MonoBehaviour {
             }
         }
         _selectedEntities.Clear();
-        selectionUIPanel.Clear();
+        selectionUIPanel.Hide();
     }
 
     private void IssueMoveCommand(Vector3 destination) {
@@ -255,6 +255,7 @@ public class SelectionManager : MonoBehaviour {
         if (_selectedEntities.Count == 1) {
             Entity selectedEntity = _selectedEntities[0];
             selectionUIPanel.UpdateEntityInfo(selectedEntity);
+            ordersUIPanel.Show(_selectedEntities[0]);
 
             if (selectedEntity is Factory selectedFactory) 
             {
@@ -268,10 +269,17 @@ public class SelectionManager : MonoBehaviour {
                 // показать UI для юнита или другого типа здания
             }
         }
+        else if (_selectedEntities.Count > 1) {
+            if (selectionUIPanel != null) selectionUIPanel.Hide();
+            if (factoryUIPanel != null) factoryUIPanel.Hide();
+
+            ordersUIPanel.Show();
+        }
         else
         {
-            selectionUIPanel.Clear();
             if (factoryUIPanel != null) factoryUIPanel.Hide();
+            if (selectionUIPanel != null) selectionUIPanel.Hide();
+            if (ordersUIPanel != null) ordersUIPanel.Hide();
             // скрыть все UI панели
         }
     }

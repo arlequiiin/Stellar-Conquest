@@ -1,64 +1,40 @@
 using UnityEngine;
 
 public class Extractor : Buildings {
-    [SerializeField] private ResourceType _resourceType = ResourceType.Uranium;
-    [SerializeField] private float extractionRate = 5f;
-    [SerializeField] private float extractionInterval = 1f;
-    [SerializeField] private float checkRadius = 1.5f;
+    [Header("Ресурсы")]
+    [SerializeField] private ResourceType resourceType = ResourceType.Uranium;
+    [SerializeField] private float uranuimPerSecond = 10f;
 
     private float timer;
-    private bool isOnResourceNode;
-    private Uranuim claimedNode;
 
     protected override void Start() {
         base.Start();
-
-        isOnResourceNode = CheckPlacement();
-        if (!isOnResourceNode) {
-            Debug.Log($"{gameObject.name} не размещено над месторождением и не будет работать");
+        if (IsCompleted) {
+            ResourceManager.Instance.AddProduction(resourceType, uranuimPerSecond);
         }
     }
 
     private void Update() {
-        if (isOnResourceNode) {
-            timer += Time.deltaTime;
-            if (timer >= extractionInterval) {
-                timer -= extractionInterval;
-                float amount = extractionRate * extractionInterval;
+        if (!IsCompleted) return;
 
-                ResourceManager.Instance.AddUranium(amount);
-                Debug.Log($"{gameObject.name} добыл {amount} {_resourceType}");
-            }
-        }
-        else {
-            timer = 0;
+        timer += Time.deltaTime;
+        if (timer >= 1f) {
+            timer -= 1f;
+            ResourceManager.Instance.AddUranium(uranuimPerSecond);
         }
     }
 
-    private bool CheckPlacement() {
-        Collider[] hits = Physics.OverlapSphere(transform.position, checkRadius);
-        foreach (var hit in hits) {
-            if (hit.TryGetComponent<Uranuim>(out var node)) {
-                if (node.ResourceType == _resourceType && node.TryClaim()) {
-                    claimedNode = node;
-                    return true;
-                }
-            }
+    protected override void FinishConstruction() {
+        if (!underConstruction) {
+            ResourceManager.Instance.AddProduction(resourceType, uranuimPerSecond);
         }
-        return false;
+        base.FinishConstruction();
     }
 
     protected override void Die() {
-        if (claimedNode != null) {
-            claimedNode.Release();
+        if (!underConstruction) {
+            ResourceManager.Instance.RemoveProduction(resourceType, uranuimPerSecond);
         }
         base.Die();
-    }
-
-    protected override void OnDestroy() {
-        if (claimedNode != null) {
-            claimedNode.Release();
-        }
-        base.OnDestroy();
     }
 }

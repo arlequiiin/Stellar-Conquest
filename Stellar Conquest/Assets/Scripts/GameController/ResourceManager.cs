@@ -6,24 +6,18 @@ public enum ResourceType { Energy, Uranium }
 
 public class ResourceManager : MonoBehaviour {
     private static ResourceManager _instance;
-    public static ResourceManager Instance {
-        get {
-            if (_instance == null) {
-                _instance = FindFirstObjectByType<ResourceManager>();
-                if (_instance == null) {
-                    GameObject singletonObject = new GameObject("ResourceManager");
-                    _instance = singletonObject.AddComponent<ResourceManager>();
-                }
-            }
-            return _instance;
-        }
-    }
-
+    public static ResourceManager Instance =>  _instance;
+   
     [SerializeField] private float startingUranium = 100f;
     [SerializeField] private float startingEnergy = 100f;
 
     private float currentUranium;
     private float currentEnergy;
+    private float totalUraniumProduction;
+    private float totalEnergyProduction;
+
+    public float UraniumProductionRate => totalUraniumProduction;
+    public float EnergyProductionRate => totalEnergyProduction;
 
     public event Action<ResourceType, float> OnResourceChanged;
 
@@ -37,7 +31,9 @@ public class ResourceManager : MonoBehaviour {
 
         currentUranium = startingUranium;
         currentEnergy = startingEnergy;
+    }
 
+    public void UpdateAll() {
         OnResourceChanged?.Invoke(ResourceType.Uranium, currentUranium);
         OnResourceChanged?.Invoke(ResourceType.Energy, currentEnergy);
     }
@@ -93,4 +89,31 @@ public class ResourceManager : MonoBehaviour {
                 break;
         }
     }
+
+    public void AddProduction(ResourceType type, float amount) {
+        if (amount <= 0) return;
+
+        switch (type) {
+            case ResourceType.Uranium:
+                totalUraniumProduction += amount;
+                break;
+            case ResourceType.Energy:
+                totalEnergyProduction += amount;
+                break;
+        }
+    }
+
+    public void RemoveProduction(ResourceType type, float amount) {
+        if (amount <= 0) return;
+
+        switch (type) {
+            case ResourceType.Uranium:
+                totalUraniumProduction -= amount;
+                break;
+            case ResourceType.Energy:
+                totalEnergyProduction -= amount;
+                break;
+        }
+    }
+
 }

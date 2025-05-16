@@ -11,7 +11,7 @@ public class SelectionUIPanel: MonoBehaviour {
 
     public void UpdateEntityInfo(Entity entity) {
         if (entity == null) {
-            Clear();
+            Hide();
             return;
         }
 
@@ -26,7 +26,7 @@ public class SelectionUIPanel: MonoBehaviour {
         healthText.text = $"HP: {entity.GetCurrentHealth} / {entity.GetMaxHealth}";
     }
 
-    public void Clear() {
+    public void Hide() {
         gameObject.SetActive(false);
         nameText.text = "";
         descriptionText.text = "";

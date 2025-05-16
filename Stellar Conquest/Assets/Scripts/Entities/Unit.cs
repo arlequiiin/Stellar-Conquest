@@ -1,6 +1,5 @@
 using UnityEngine;
 using UnityEngine.AI;
-using static UnityEngine.GraphicsBuffer;
 
 public class Units : Entity {
 
@@ -21,7 +20,7 @@ public class Units : Entity {
     protected bool _isBuilding;
     protected bool _updateRotation = false;
     protected bool _updateUpAxis = false;
-
+    // добавить константы для анимаций!
     protected override void Awake() 
     {
         base.Awake(); 
@@ -29,7 +28,6 @@ public class Units : Entity {
         _navMeshAgent.speed = _walkSpeed;
         _navMeshAgent.updateRotation = _updateRotation;
         _navMeshAgent.updateUpAxis = _updateUpAxis;
-        //_navMeshAgent.SetAreaCost(0, 1);
         _animator = GetComponent<Animator>();
     }
 
@@ -163,6 +161,10 @@ public class Units : Entity {
 
     protected void PerformAttack() {
         if (_currentTarget == null || _currentTarget.GetCurrentHealth <= 0) {
+            if (_currentTarget==null)
+                Debug.Log("1");
+            if (_currentTarget.GetCurrentHealth <= 0)
+                Debug.Log("1");
             StopActions();
             return;
         }
@@ -206,7 +208,7 @@ public class Units : Entity {
     {
         _animator.SetBool("IsMoving", false);
         _animator.SetBool("IsFiring", false);
-        _animator.SetBool("IsBuilding", false);
+        _animator.SetBool("IsBuilding", false); // отслеживать инженер ли это?
 
         _animator.SetTrigger("Die");
         _currentState = UnitState.Death;

@@ -174,11 +174,11 @@ public class Robots : Entity
 
         if (targetPosition.x < transform.position.x && scale.x > 0)
         {
-            scale.x = -Mathf.Abs(scale.x);
+            scale.x = -1;
         }
         else if (targetPosition.x > transform.position.x && scale.x < 0)
         {
-            scale.x = Mathf.Abs(scale.x);
+            scale.x = -1;
         }
 
         transform.localScale = scale;
