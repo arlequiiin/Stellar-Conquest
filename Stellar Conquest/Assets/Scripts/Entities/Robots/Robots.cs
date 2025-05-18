@@ -22,7 +22,6 @@ public class Robots : Entity
 
     protected override void Awake()
     {
-        
         _navMeshAgent = GetComponent<NavMeshAgent>();
         _navMeshAgent.speed = _walkSpeed;
         _navMeshAgent.updateRotation = _updateRotation;
@@ -61,7 +60,6 @@ public class Robots : Entity
 
     private void SetAnimator(bool isMoving, bool isFiring)
     {
-        Debug.Log($"Setting Animator: Moving={isMoving}, Firing={isFiring}");
         if (_isMoving != isMoving)
         {
             _isMoving = isMoving; 
@@ -95,7 +93,6 @@ public class Robots : Entity
         {
             Entity entity = hitCollider.GetComponent<Entity>();
 
-            // »щем только игровые юниты (предполагаем, что у игрока OwnerPlayerId = 1)
             if (entity != null && entity != this && entity.OwnerPlayerId == 1)
             {
                 float distance = Vector3.Distance(transform.position, entity.transform.position);

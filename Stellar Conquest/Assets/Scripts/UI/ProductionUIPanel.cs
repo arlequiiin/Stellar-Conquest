@@ -41,7 +41,7 @@ public class ResourcesUI : MonoBehaviour {
     }
 
     private void UpdateProductionRates() {
-        uraniumProductionText.text = $"+{ResourceManager.Instance.UraniumProductionRate:F1}/ñ";
-        energyProductionText.text = $"+{ResourceManager.Instance.EnergyProductionRate:F1}/ñ";
+        uraniumProductionText.text = $"+{ResourceManager.Instance.UraniumProductionRate:F0}/ñ";
+        energyProductionText.text = $"+{ResourceManager.Instance.EnergyProductionRate:F0}/ñ";
     }
 }

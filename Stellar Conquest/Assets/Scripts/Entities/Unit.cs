@@ -58,8 +58,6 @@ public class Units : Entity {
                 // логика строительства 
                 break;
         }
-
-        // Debug.Log($"Юнит: {gameObject.name}, Состояние: {_currentState}");
     }
 
     protected void SetAnimator(bool isMoving, bool isFiring, bool isBuilding) {
@@ -145,7 +143,7 @@ public class Units : Entity {
         foreach (var hitCollider in hitColliders) {
             Entity entity = hitCollider.GetComponent<Entity>();
 
-            if (entity != null && entity != this && entity.OwnerPlayerId != this.OwnerPlayerId) {
+            if (entity != null && entity != this && entity.OwnerPlayerId != 1) {
                 float distance = Vector3.Distance(transform.position, entity.transform.position);
                 if (distance < minDistance) {
                     minDistance = distance;
@@ -160,11 +158,11 @@ public class Units : Entity {
     }
 
     protected void PerformAttack() {
-        if (_currentTarget == null || _currentTarget.GetCurrentHealth <= 0) {
+        if (_currentTarget == null ) { // || _currentTarget.GetCurrentHealth <= 0
             if (_currentTarget==null)
-                Debug.Log("1");
+                Debug.Log($"{gameObject.name} не нашёл цель");
             if (_currentTarget.GetCurrentHealth <= 0)
-                Debug.Log("1");
+                Debug.Log($"{gameObject.name} - у цели нет хп");
             StopActions();
             return;
         }

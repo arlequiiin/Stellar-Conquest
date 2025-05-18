@@ -3,7 +3,9 @@ using UnityEngine;
 public abstract class Entity : MonoBehaviour {
     [SerializeField] private float maxHealth;
     [SerializeField] private GameObject selectionCircle;
-    public int OwnerPlayerId { get; protected set; }
+    public int OwnerPlayerId;
+
+    // public int OwnerPlayerId { get; protected set; }
     public EntityData entityData; 
 
     private float currentHealth;
@@ -22,7 +24,6 @@ public abstract class Entity : MonoBehaviour {
 
     protected virtual void Awake() {
         currentHealth = maxHealth;
-        OwnerPlayerId = 1;
     }
 
     protected virtual void Start() {
@@ -66,6 +67,6 @@ public abstract class Entity : MonoBehaviour {
 
         // OnEntityDestroyed?.Invoke(this); 
 
-        Destroy(gameObject, 5f); 
+        Destroy(gameObject); 
     }
 }

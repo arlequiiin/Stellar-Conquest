@@ -103,11 +103,14 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 9fac0a957fd635b43b94e622ea6097cd, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  maxHealth: 2000
+  maxHealth: 100
   selectionCircle: {fileID: 6492185546047949226}
+  OwnerPlayerId: 1
   entityData: {fileID: 11400000, guid: b825276f10ce2234b8d12edc7359fd1d, type: 2}
   currentStatus: 
+  underConstruction: 1
   _isEssential: 1
+  _isBot: 0
 --- !u!61 &270824054101699943
 BoxCollider2D:
   m_ObjectHideFlags: 0

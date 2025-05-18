@@ -141,7 +141,5 @@ public class Factory : Buildings {
         newUnit.SetOwner(this.OwnerPlayerId);
         Debug.Log($"{gameObject.name} произведён {newUnit.name}");
         newUnit.MoveTo(_rallyPoint.position);
-
-        // TODO: Добавить событие OnUnitProduced, если нужно
     }
 }

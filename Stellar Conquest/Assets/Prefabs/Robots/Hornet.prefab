@@ -281,11 +281,12 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: d59ae81ecbb15e640949730f684b4e46, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  maxHealth: 10
-  selectionCircle: {fileID: 0}
+  maxHealth: 100
+  selectionCircle: {fileID: 5880892678765074622}
+  OwnerPlayerId: 2
   entityData: {fileID: 0}
   currentStatus: 
   _walkSpeed: 5
-  _range: 10
-  _attackDamage: 60
+  _range: 7
+  _attackDamage: 15
   _attackCooldown: 1

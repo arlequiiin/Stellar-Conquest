@@ -12,7 +12,7 @@ public class GameManager : MonoBehaviour {
     public CommandCenter playerCommandCenter;
     public bool isDefeated = false;
 
-    public enum GameState { Playing, Paused, GameOver }
+    public enum GameState { Playing, Paused, GameOver, GameWin }
     public GameState CurrentState { get; private set; } = GameState.Playing;
 
     private void Awake() {
@@ -39,14 +39,28 @@ public class GameManager : MonoBehaviour {
             return;
 
         isDefeated = true;
-        EndGame();
+        EndGame(isDefeated);
     }
 
-    private void EndGame() {
-        CurrentState = GameState.GameOver;
-        Debug.Log("Игрок проиграл");
-        // TODO: Показать экран поражения
-        // Time.timeScale = 0f;
+    public void PlayerWin() {
+        if (CurrentState != GameState.Playing)
+            return;
+        isDefeated = false;
+        EndGame(isDefeated);
+    }
+
+    private void EndGame(bool isDefeated) {
+        if (isDefeated) {
+            Debug.Log("Игрок проиграл");
+            CurrentState = GameState.GameOver;
+        }
+        else if (!isDefeated) {
+            Debug.Log("Игрок победил");
+            CurrentState = GameState.GameWin;
+        }
+
+        // TODO: Показать экран конца игры
+        Time.timeScale = 0f;
     }
 
     public void PauseGame() {
