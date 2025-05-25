@@ -138,34 +138,34 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   maxHealth: 1000
   selectionCircle: {fileID: 4264477061618580694}
+  OwnerPlayerId: 1
   entityData: {fileID: 11400000, guid: 604f1937b7d0e8f48b97ff2e30b47d35, type: 2}
   currentStatus: 
-  isExtractor: 0
-  preview: {fileID: 2668040484455699140, guid: 92e8f02bb76968d4aa14c4e0eebc5e8f, type: 3}
+  underConstruction: 0
   _producibleUnits:
   - UnitName: "\u0418\u043D\u0436\u0435\u043D\u0435\u0440"
-    UnitPrefab: {fileID: 0}
+    UnitPrefab: {fileID: 6776092548585656108, guid: 25c3779276909d14298d86cd50a92d4c, type: 3}
     ProductionTime: 5
-    UranuimCost: 5
-    EnergyCost: 10
+    UranuimCost: 25
+    EnergyCost: 100
     UnitIcon: {fileID: 845838445, guid: 74c57fd2450c66b43a7f461971db2478, type: 3}
   - UnitName: "\u0420\u0430\u0437\u0432\u0435\u0434\u0447\u0438\u043A"
-    UnitPrefab: {fileID: 0}
+    UnitPrefab: {fileID: 5005043062724946788, guid: b7d53a740ba4d1844bce0cb0bc9e787a, type: 3}
     ProductionTime: 5
-    UranuimCost: 5
-    EnergyCost: 10
+    UranuimCost: 40
+    EnergyCost: 120
     UnitIcon: {fileID: 1915592573, guid: eea38f694b39af84893a03688f428338, type: 3}
   - UnitName: "\u0421\u043D\u0430\u0439\u043F\u0435\u0440"
-    UnitPrefab: {fileID: 0}
+    UnitPrefab: {fileID: 1510721836259028843, guid: 1e52a394ce421004abd855ace16abfb4, type: 3}
     ProductionTime: 10
-    UranuimCost: 5
-    EnergyCost: 10
+    UranuimCost: 100
+    EnergyCost: 350
     UnitIcon: {fileID: 149215641, guid: cbe09717ee744b6449172b35b9d432d7, type: 3}
   - UnitName: "\u0421\u043E\u043B\u0434\u0430\u0442"
-    UnitPrefab: {fileID: 0}
+    UnitPrefab: {fileID: 2040909255167950312, guid: edec443c70b7d274ea2cb55162a6b7ff, type: 3}
     ProductionTime: 7
-    UranuimCost: 5
-    EnergyCost: 10
+    UranuimCost: 60
+    EnergyCost: 150
     UnitIcon: {fileID: 1421664858, guid: 7ee4f9adfafa4d34898da17905ce7530, type: 3}
   _spawnPoint: {fileID: 5677098950876814152}
   _rallyPoint: {fileID: 7136309519428702080}

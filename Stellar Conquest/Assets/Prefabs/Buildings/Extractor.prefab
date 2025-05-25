@@ -105,14 +105,12 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   maxHealth: 500
   selectionCircle: {fileID: 7839726929813732454}
+  OwnerPlayerId: 1
   entityData: {fileID: 11400000, guid: f4a5c8204145858469bdc4a9a45341b0, type: 2}
   currentStatus: 
-  isExtractor: 1
-  preview: {fileID: 4351604557988575908, guid: c79ef85e91755e545855d12010d96018, type: 3}
-  _resourceType: 1
-  extractionRate: 5
-  extractionInterval: 1
-  checkRadius: 1.5
+  underConstruction: 0
+  resourceType: 1
+  uranuimPerSecond: 1
 --- !u!61 &1842901232497004628
 BoxCollider2D:
   m_ObjectHideFlags: 0
