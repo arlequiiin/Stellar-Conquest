@@ -1,5 +1,36 @@
 %YAML 1.1
 %TAG !u! tag:unity3d.com,2011:
+--- !u!1 &933309722147115155
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 8814534127426210808}
+  m_Layer: 0
+  m_Name: FirePoint
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!4 &8814534127426210808
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 933309722147115155}
+  serializedVersion: 2
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: 0.5, y: -0.13, z: 0}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_ConstrainProportionsScale: 0
+  m_Children: []
+  m_Father: {fileID: 2045357084591713939}
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1 &5880892678765074622
 GameObject:
   m_ObjectHideFlags: 0
@@ -100,8 +131,8 @@ GameObject:
   - component: {fileID: 5928147772368609360}
   - component: {fileID: 3622817052962704949}
   - component: {fileID: 7002318949775567953}
-  - component: {fileID: 8929892384110764123}
-  m_Layer: 0
+  - component: {fileID: 8019772178976457958}
+  m_Layer: 11
   m_Name: Hornet
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -122,6 +153,7 @@ Transform:
   m_ConstrainProportionsScale: 0
   m_Children:
   - {fileID: 1272264547864268919}
+  - {fileID: 8814534127426210808}
   m_Father: {fileID: 0}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!61 &303510713809506614
@@ -269,7 +301,7 @@ NavMeshAgent:
   m_BaseOffset: 0.575
   m_WalkableMask: 4294967295
   m_ObstacleAvoidanceType: 4
---- !u!114 &8929892384110764123
+--- !u!114 &8019772178976457958
 MonoBehaviour:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
@@ -278,7 +310,7 @@ MonoBehaviour:
   m_GameObject: {fileID: 7362398725293651158}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: d59ae81ecbb15e640949730f684b4e46, type: 3}
+  m_Script: {fileID: 11500000, guid: 5c885aeaf02519547868077f7adaef88, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
   maxHealth: 100
@@ -286,7 +318,17 @@ MonoBehaviour:
   OwnerPlayerId: 2
   entityData: {fileID: 0}
   currentStatus: 
-  _walkSpeed: 5
-  _range: 7
-  _attackDamage: 15
-  _attackCooldown: 1
+  CurrentRole: 0
+  manager: {fileID: 0}
+  visionRange: 6
+  playerUnitsLayer:
+    serializedVersion: 2
+    m_Bits: 8
+  playerBuildingsLayer:
+    serializedVersion: 2
+    m_Bits: 8
+  firePoint: {fileID: 8814534127426210808}
+  bulletPrefab: {fileID: 4129262722367275213, guid: 3f091a03277276647928f434f75889fe, type: 3}
+  attackDamage: 5
+  attackCooldown: 1.5
+  attackRange: 5

@@ -236,7 +236,7 @@ TextureImporter:
     serializedVersion: 2
     sprites:
     - serializedVersion: 2
-      name: all animations sprite sheet_0
+      name: Extractor_0
       rect:
         serializedVersion: 2
         x: 28
@@ -249,21 +249,21 @@ TextureImporter:
       customData: 
       outline: []
       physicsShape: []
-      tessellationDetail: -1
+      tessellationDetail: 0
       bones: []
-      spriteID: 64d80bf3fdabf2330800000000000000
-      internalID: 3688372087848734022
+      spriteID: be310cfa0c308bc4aa883d72c0492a11
+      internalID: -1295063367
       vertices: []
       indices: 
       edges: []
       weights: []
     - serializedVersion: 2
-      name: all animations sprite sheet_1
+      name: Extractor_1
       rect:
         serializedVersion: 2
-        x: 120
+        x: 119
         y: 4
-        width: 36
+        width: 38
         height: 80
       alignment: 0
       pivot: {x: 0, y: 0}
@@ -271,21 +271,21 @@ TextureImporter:
       customData: 
       outline: []
       physicsShape: []
-      tessellationDetail: -1
+      tessellationDetail: 0
       bones: []
-      spriteID: 20492267841889440800000000000000
-      internalID: 4942842739258725378
+      spriteID: b4a537bae6c5daa4080ff8e8826c1190
+      internalID: 219741025
       vertices: []
       indices: 
       edges: []
       weights: []
     - serializedVersion: 2
-      name: all animations sprite sheet_2
+      name: Extractor_2
       rect:
         serializedVersion: 2
-        x: 212
+        x: 211
         y: 4
-        width: 36
+        width: 38
         height: 79
       alignment: 0
       pivot: {x: 0, y: 0}
@@ -293,16 +293,16 @@ TextureImporter:
       customData: 
       outline: []
       physicsShape: []
-      tessellationDetail: -1
+      tessellationDetail: 0
       bones: []
-      spriteID: 2a3cdb1869d2cd380800000000000000
-      internalID: -8945224635419606110
+      spriteID: 69b6ae5d294c7994088d92fe3a866d33
+      internalID: -1365991217
       vertices: []
       indices: 
       edges: []
       weights: []
     - serializedVersion: 2
-      name: all animations sprite sheet_3
+      name: Extractor_3
       rect:
         serializedVersion: 2
         x: 304
@@ -315,65 +315,65 @@ TextureImporter:
       customData: 
       outline: []
       physicsShape: []
-      tessellationDetail: -1
+      tessellationDetail: 0
       bones: []
-      spriteID: bb0160e7332f497a0800000000000000
-      internalID: -6371201269850828613
+      spriteID: 57134fa99677de4499c22d5f0dca7400
+      internalID: -1167501443
       vertices: []
       indices: 
       edges: []
       weights: []
     - serializedVersion: 2
-      name: all animations sprite sheet_4
+      name: Extractor_4
       rect:
         serializedVersion: 2
         x: 396
         y: 4
         width: 36
-        height: 78
+        height: 79
       alignment: 0
       pivot: {x: 0, y: 0}
       border: {x: 0, y: 0, z: 0, w: 0}
       customData: 
       outline: []
       physicsShape: []
-      tessellationDetail: -1
+      tessellationDetail: 0
       bones: []
-      spriteID: b4f16abd20560bae0800000000000000
-      internalID: -1535616409983901877
+      spriteID: df3e51565125f614ca3508297319ccf9
+      internalID: 1847465863
       vertices: []
       indices: 
       edges: []
       weights: []
     - serializedVersion: 2
-      name: all animations sprite sheet_5
+      name: Extractor_5
       rect:
         serializedVersion: 2
-        x: 488
+        x: 487
         y: 4
-        width: 36
-        height: 78
+        width: 38
+        height: 79
       alignment: 0
       pivot: {x: 0, y: 0}
       border: {x: 0, y: 0, z: 0, w: 0}
       customData: 
       outline: []
       physicsShape: []
-      tessellationDetail: -1
+      tessellationDetail: 0
       bones: []
-      spriteID: 431c193f69eca6810800000000000000
-      internalID: 1759445752168431924
+      spriteID: 4c5fe67dd5d1b8b45a174ce487707220
+      internalID: 613294472
       vertices: []
       indices: 
       edges: []
       weights: []
     - serializedVersion: 2
-      name: all animations sprite sheet_6
+      name: Extractor_6
       rect:
         serializedVersion: 2
-        x: 580
+        x: 579
         y: 4
-        width: 36
+        width: 38
         height: 77
       alignment: 0
       pivot: {x: 0, y: 0}
@@ -381,21 +381,21 @@ TextureImporter:
       customData: 
       outline: []
       physicsShape: []
-      tessellationDetail: -1
+      tessellationDetail: 0
       bones: []
-      spriteID: 67068c2884a27e0b0800000000000000
-      internalID: -5699540312493891466
+      spriteID: 86410e896e2ea8e4e9c43e1af8274743
+      internalID: -71896793
       vertices: []
       indices: 
       edges: []
       weights: []
     - serializedVersion: 2
-      name: all animations sprite sheet_7
+      name: Extractor_7
       rect:
         serializedVersion: 2
         x: 672
         y: 4
-        width: 36
+        width: 37
         height: 77
       alignment: 0
       pivot: {x: 0, y: 0}
@@ -403,104 +403,104 @@ TextureImporter:
       customData: 
       outline: []
       physicsShape: []
-      tessellationDetail: -1
+      tessellationDetail: 0
       bones: []
-      spriteID: 71e71fe1dded6d990800000000000000
-      internalID: -7361451499602215401
+      spriteID: 1c3b9d9ebfbc0d34b9951578f8f394e3
+      internalID: 1065378414
       vertices: []
       indices: 
       edges: []
       weights: []
     - serializedVersion: 2
-      name: all animations sprite sheet_8
+      name: Extractor_8
       rect:
         serializedVersion: 2
         x: 764
         y: 4
         width: 36
-        height: 78
+        height: 79
       alignment: 0
       pivot: {x: 0, y: 0}
       border: {x: 0, y: 0, z: 0, w: 0}
       customData: 
       outline: []
       physicsShape: []
-      tessellationDetail: -1
+      tessellationDetail: 0
       bones: []
-      spriteID: af747454944526830800000000000000
-      internalID: 4062902487513253882
+      spriteID: aba25d49f49d55940b1724bf82ea198a
+      internalID: 1029256637
       vertices: []
       indices: 
       edges: []
       weights: []
     - serializedVersion: 2
-      name: all animations sprite sheet_9
+      name: Extractor_9
       rect:
         serializedVersion: 2
-        x: 856
+        x: 855
         y: 4
-        width: 36
-        height: 76
+        width: 37
+        height: 77
       alignment: 0
       pivot: {x: 0, y: 0}
       border: {x: 0, y: 0, z: 0, w: 0}
       customData: 
       outline: []
       physicsShape: []
-      tessellationDetail: -1
+      tessellationDetail: 0
       bones: []
-      spriteID: bbd767b2f03697be0800000000000000
-      internalID: -1479042085809652293
+      spriteID: b4d094495f988714b8d0dce99bfeb80f
+      internalID: -1470433124
       vertices: []
       indices: 
       edges: []
       weights: []
     - serializedVersion: 2
-      name: all animations sprite sheet_10
+      name: Extractor_10
       rect:
         serializedVersion: 2
-        x: 948
+        x: 947
         y: 4
-        width: 36
-        height: 70
+        width: 38
+        height: 71
       alignment: 0
       pivot: {x: 0, y: 0}
       border: {x: 0, y: 0, z: 0, w: 0}
       customData: 
       outline: []
       physicsShape: []
-      tessellationDetail: -1
+      tessellationDetail: 0
       bones: []
-      spriteID: 649848901fe0549d0800000000000000
-      internalID: -2790807965676566202
+      spriteID: 13a9b52801ced8148a828e05f2415606
+      internalID: 341930754
       vertices: []
       indices: 
       edges: []
       weights: []
     - serializedVersion: 2
-      name: all animations sprite sheet_11
+      name: Extractor_11
       rect:
         serializedVersion: 2
         x: 1040
         y: 4
-        width: 36
-        height: 68
+        width: 37
+        height: 69
       alignment: 0
       pivot: {x: 0, y: 0}
       border: {x: 0, y: 0, z: 0, w: 0}
       customData: 
       outline: []
       physicsShape: []
-      tessellationDetail: -1
+      tessellationDetail: 0
       bones: []
-      spriteID: 2f13a2d4e6dc485e0800000000000000
-      internalID: -1908174468473540110
+      spriteID: df2d09158ba0eec419eb9e5b4a078332
+      internalID: 1810019048
       vertices: []
       indices: 
       edges: []
       weights: []
     - serializedVersion: 2
-      name: all animations sprite sheet_12
+      name: Extractor_12
       rect:
         serializedVersion: 2
         x: 1132
@@ -513,43 +513,43 @@ TextureImporter:
       customData: 
       outline: []
       physicsShape: []
-      tessellationDetail: -1
+      tessellationDetail: 0
       bones: []
-      spriteID: e9f667b1d10244660800000000000000
-      internalID: 7369050199671861150
+      spriteID: 7484c18fda0729c4bbd2d5a384624644
+      internalID: -1063171831
       vertices: []
       indices: 
       edges: []
       weights: []
     - serializedVersion: 2
-      name: all animations sprite sheet_13
+      name: Extractor_13
       rect:
         serializedVersion: 2
-        x: 1224
+        x: 1223
         y: 4
-        width: 36
-        height: 66
+        width: 37
+        height: 67
       alignment: 0
       pivot: {x: 0, y: 0}
       border: {x: 0, y: 0, z: 0, w: 0}
       customData: 
       outline: []
       physicsShape: []
-      tessellationDetail: -1
+      tessellationDetail: 0
       bones: []
-      spriteID: 9e9193a969400d9d0800000000000000
-      internalID: -2751694327444334103
+      spriteID: 7f42e97d14e3bf746b7b160462c0f0b8
+      internalID: 2080768962
       vertices: []
       indices: 
       edges: []
       weights: []
     - serializedVersion: 2
-      name: all animations sprite sheet_14
+      name: Extractor_14
       rect:
         serializedVersion: 2
-        x: 1316
+        x: 1315
         y: 4
-        width: 36
+        width: 38
         height: 65
       alignment: 0
       pivot: {x: 0, y: 0}
@@ -557,109 +557,109 @@ TextureImporter:
       customData: 
       outline: []
       physicsShape: []
-      tessellationDetail: -1
+      tessellationDetail: 0
       bones: []
-      spriteID: 369d0ea783af155a0800000000000000
-      internalID: -6534166463851210397
+      spriteID: a3dc76416ca7f5645b63a7ef87497f45
+      internalID: 1033253925
       vertices: []
       indices: 
       edges: []
       weights: []
     - serializedVersion: 2
-      name: all animations sprite sheet_15
+      name: Extractor_15
       rect:
         serializedVersion: 2
-        x: 1408
+        x: 1407
         y: 4
-        width: 36
-        height: 63
+        width: 38
+        height: 64
       alignment: 0
       pivot: {x: 0, y: 0}
       border: {x: 0, y: 0, z: 0, w: 0}
       customData: 
       outline: []
       physicsShape: []
-      tessellationDetail: -1
+      tessellationDetail: 0
       bones: []
-      spriteID: 16efd091905995f70800000000000000
-      internalID: 9176529582051688033
+      spriteID: 49a74f61516432f4aaf6028e3e72dd07
+      internalID: -636058264
       vertices: []
       indices: 
       edges: []
       weights: []
     - serializedVersion: 2
-      name: all animations sprite sheet_16
+      name: Extractor_16
       rect:
         serializedVersion: 2
         x: 1500
         y: 4
         width: 36
-        height: 63
+        height: 64
       alignment: 0
       pivot: {x: 0, y: 0}
       border: {x: 0, y: 0, z: 0, w: 0}
       customData: 
       outline: []
       physicsShape: []
-      tessellationDetail: -1
+      tessellationDetail: 0
       bones: []
-      spriteID: fa8eb35d3058f2820800000000000000
-      internalID: 2895679336931387567
+      spriteID: 6e97c59482fff894ea061bd8c5cb2546
+      internalID: -370286148
       vertices: []
       indices: 
       edges: []
       weights: []
     - serializedVersion: 2
-      name: all animations sprite sheet_17
+      name: Extractor_17
       rect:
         serializedVersion: 2
         x: 1592
         y: 4
         width: 36
-        height: 63
+        height: 64
       alignment: 0
       pivot: {x: 0, y: 0}
       border: {x: 0, y: 0, z: 0, w: 0}
       customData: 
       outline: []
       physicsShape: []
-      tessellationDetail: -1
+      tessellationDetail: 0
       bones: []
-      spriteID: 2f58b0cfa276c2aa0800000000000000
-      internalID: -6184454753971632654
+      spriteID: 6617e6335b190134183d3c15c525cdcf
+      internalID: 1831769882
       vertices: []
       indices: 
       edges: []
       weights: []
     - serializedVersion: 2
-      name: all animations sprite sheet_18
+      name: Extractor_18
       rect:
         serializedVersion: 2
-        x: 1684
+        x: 1683
         y: 4
-        width: 36
-        height: 63
+        width: 38
+        height: 64
       alignment: 0
       pivot: {x: 0, y: 0}
       border: {x: 0, y: 0, z: 0, w: 0}
       customData: 
       outline: []
       physicsShape: []
-      tessellationDetail: -1
+      tessellationDetail: 0
       bones: []
-      spriteID: 2414d2baa6e56b5c0800000000000000
-      internalID: -4200065790244994750
+      spriteID: 2ca1837e140818f4a8188247a6b54d0d
+      internalID: -157913541
       vertices: []
       indices: 
       edges: []
       weights: []
     - serializedVersion: 2
-      name: all animations sprite sheet_19
+      name: Extractor_19
       rect:
         serializedVersion: 2
-        x: 1776
+        x: 1775
         y: 4
-        width: 36
+        width: 38
         height: 65
       alignment: 0
       pivot: {x: 0, y: 0}
@@ -667,16 +667,16 @@ TextureImporter:
       customData: 
       outline: []
       physicsShape: []
-      tessellationDetail: -1
+      tessellationDetail: 0
       bones: []
-      spriteID: c5c5ec9004dbf6600800000000000000
-      internalID: 463797369382526044
+      spriteID: b27dc09db75245147b5dbde1df8c052e
+      internalID: -1687086166
       vertices: []
       indices: 
       edges: []
       weights: []
     - serializedVersion: 2
-      name: all animations sprite sheet_20
+      name: Extractor_20
       rect:
         serializedVersion: 2
         x: 1868
@@ -689,104 +689,104 @@ TextureImporter:
       customData: 
       outline: []
       physicsShape: []
-      tessellationDetail: -1
+      tessellationDetail: 0
       bones: []
-      spriteID: 762a217b192c4ecf0800000000000000
-      internalID: -223840150364183961
+      spriteID: 6bedf9428d1a0bd4e9270610483a8f34
+      internalID: -1988226316
       vertices: []
       indices: 
       edges: []
       weights: []
     - serializedVersion: 2
-      name: all animations sprite sheet_21
+      name: Extractor_21
       rect:
         serializedVersion: 2
         x: 1960
         y: 4
         width: 36
-        height: 68
+        height: 69
       alignment: 0
       pivot: {x: 0, y: 0}
       border: {x: 0, y: 0, z: 0, w: 0}
       customData: 
       outline: []
       physicsShape: []
-      tessellationDetail: -1
+      tessellationDetail: 0
       bones: []
-      spriteID: 3f5e3e2ce502ba550800000000000000
-      internalID: 6173063305610126835
+      spriteID: 4ab05642983314c4ebd9b86eec919fb8
+      internalID: 1476783637
       vertices: []
       indices: 
       edges: []
       weights: []
     - serializedVersion: 2
-      name: all animations sprite sheet_22
+      name: Extractor_22
       rect:
         serializedVersion: 2
-        x: 2052
+        x: 2051
         y: 4
-        width: 36
-        height: 70
+        width: 38
+        height: 71
       alignment: 0
       pivot: {x: 0, y: 0}
       border: {x: 0, y: 0, z: 0, w: 0}
       customData: 
       outline: []
       physicsShape: []
-      tessellationDetail: -1
+      tessellationDetail: 0
       bones: []
-      spriteID: 531d058fabb672f20800000000000000
-      internalID: 3397802894648463669
+      spriteID: d6eb9eae21e9ce74a937f6d26f37ff34
+      internalID: 477032439
       vertices: []
       indices: 
       edges: []
       weights: []
     - serializedVersion: 2
-      name: all animations sprite sheet_23
+      name: Extractor_23
       rect:
         serializedVersion: 2
-        x: 2144
+        x: 2143
         y: 4
-        width: 36
-        height: 76
+        width: 38
+        height: 77
       alignment: 0
       pivot: {x: 0, y: 0}
       border: {x: 0, y: 0, z: 0, w: 0}
       customData: 
       outline: []
       physicsShape: []
-      tessellationDetail: -1
+      tessellationDetail: 0
       bones: []
-      spriteID: 9f788231640462ab0800000000000000
-      internalID: -5033264863826638855
+      spriteID: f2dfa8f455057004498d56498b1c34ef
+      internalID: -787903718
       vertices: []
       indices: 
       edges: []
       weights: []
     - serializedVersion: 2
-      name: all animations sprite sheet_24
+      name: Extractor_24
       rect:
         serializedVersion: 2
         x: 2236
         y: 4
         width: 36
-        height: 78
+        height: 79
       alignment: 0
       pivot: {x: 0, y: 0}
       border: {x: 0, y: 0, z: 0, w: 0}
       customData: 
       outline: []
       physicsShape: []
-      tessellationDetail: -1
+      tessellationDetail: 0
       bones: []
-      spriteID: 7502d43cc520dc5a0800000000000000
-      internalID: -6499536089788899241
+      spriteID: 01421dee8808ee644bf307b686af0374
+      internalID: 361644340
       vertices: []
       indices: 
       edges: []
       weights: []
     - serializedVersion: 2
-      name: all animations sprite sheet_25
+      name: Extractor_25
       rect:
         serializedVersion: 2
         x: 2328
@@ -799,21 +799,21 @@ TextureImporter:
       customData: 
       outline: []
       physicsShape: []
-      tessellationDetail: -1
+      tessellationDetail: 0
       bones: []
-      spriteID: 0d1cad6b101a50030800000000000000
-      internalID: 3460348917438923216
+      spriteID: a5e751ceb19cf864389d830b2242ea00
+      internalID: 444779100
       vertices: []
       indices: 
       edges: []
       weights: []
     - serializedVersion: 2
-      name: all animations sprite sheet_26
+      name: Extractor_26
       rect:
         serializedVersion: 2
-        x: 2420
+        x: 2419
         y: 4
-        width: 36
+        width: 38
         height: 80
       alignment: 0
       pivot: {x: 0, y: 0}
@@ -821,21 +821,21 @@ TextureImporter:
       customData: 
       outline: []
       physicsShape: []
-      tessellationDetail: -1
+      tessellationDetail: 0
       bones: []
-      spriteID: 250c4db803bb193e0800000000000000
-      internalID: -2048650538298064814
+      spriteID: 5be80b07a79f4d046bff383a68c652bc
+      internalID: 164888867
       vertices: []
       indices: 
       edges: []
       weights: []
     - serializedVersion: 2
-      name: all animations sprite sheet_27
+      name: Extractor_27
       rect:
         serializedVersion: 2
-        x: 2512
+        x: 2511
         y: 4
-        width: 36
+        width: 38
         height: 82
       alignment: 0
       pivot: {x: 0, y: 0}
@@ -843,21 +843,21 @@ TextureImporter:
       customData: 
       outline: []
       physicsShape: []
-      tessellationDetail: -1
+      tessellationDetail: 0
       bones: []
-      spriteID: 14b068f1e60460160800000000000000
-      internalID: 6991346313258732353
+      spriteID: 84e8f539400b73b4fb1d59a0ff7ace0b
+      internalID: 1864524120
       vertices: []
       indices: 
       edges: []
       weights: []
     - serializedVersion: 2
-      name: all animations sprite sheet_28
+      name: Extractor_28
       rect:
         serializedVersion: 2
         x: 2604
         y: 4
-        width: 36
+        width: 37
         height: 82
       alignment: 0
       pivot: {x: 0, y: 0}
@@ -865,16 +865,16 @@ TextureImporter:
       customData: 
       outline: []
       physicsShape: []
-      tessellationDetail: -1
+      tessellationDetail: 0
       bones: []
-      spriteID: 7f328a2a0543e44a0800000000000000
-      internalID: -6607286082374982665
+      spriteID: f108a5f67f4bd9d4bb62cbf5abd28fa3
+      internalID: -1891503527
       vertices: []
       indices: 
       edges: []
       weights: []
     - serializedVersion: 2
-      name: all animations sprite sheet_29
+      name: Extractor_29
       rect:
         serializedVersion: 2
         x: 2696
@@ -887,21 +887,21 @@ TextureImporter:
       customData: 
       outline: []
       physicsShape: []
-      tessellationDetail: -1
+      tessellationDetail: 0
       bones: []
-      spriteID: 2323585838e45cd60800000000000000
-      internalID: 7909814647333925426
+      spriteID: d590e5ca2f0a28345807b2893cff425f
+      internalID: 723983873
       vertices: []
       indices: 
       edges: []
       weights: []
     - serializedVersion: 2
-      name: all animations sprite sheet_30
+      name: Extractor_30
       rect:
         serializedVersion: 2
-        x: 2788
+        x: 2787
         y: 4
-        width: 36
+        width: 37
         height: 82
       alignment: 0
       pivot: {x: 0, y: 0}
@@ -909,21 +909,21 @@ TextureImporter:
       customData: 
       outline: []
       physicsShape: []
-      tessellationDetail: -1
+      tessellationDetail: 0
       bones: []
-      spriteID: e53864d76989ada80800000000000000
-      internalID: -8441266779438283938
+      spriteID: e11b43356305fd84d99c6c219faa9850
+      internalID: 2009128432
       vertices: []
       indices: 
       edges: []
       weights: []
     - serializedVersion: 2
-      name: all animations sprite sheet_31
+      name: Extractor_31
       rect:
         serializedVersion: 2
-        x: 2880
+        x: 2879
         y: 4
-        width: 36
+        width: 38
         height: 82
       alignment: 0
       pivot: {x: 0, y: 0}
@@ -931,21 +931,21 @@ TextureImporter:
       customData: 
       outline: []
       physicsShape: []
-      tessellationDetail: -1
+      tessellationDetail: 0
       bones: []
-      spriteID: 15e011e27a145be50800000000000000
-      internalID: 6824432996638068305
+      spriteID: 3ac5a0eacde7cb447960b054ea2659fc
+      internalID: -1064133114
       vertices: []
       indices: 
       edges: []
       weights: []
     - serializedVersion: 2
-      name: all animations sprite sheet_32
+      name: Extractor_32
       rect:
         serializedVersion: 2
         x: 2972
         y: 4
-        width: 36
+        width: 37
         height: 82
       alignment: 0
       pivot: {x: 0, y: 0}
@@ -953,16 +953,16 @@ TextureImporter:
       customData: 
       outline: []
       physicsShape: []
-      tessellationDetail: -1
+      tessellationDetail: 0
       bones: []
-      spriteID: 622c79a3a4b069120800000000000000
-      internalID: 2420134263196729894
+      spriteID: 437512dfab4e81b4694861d1a10684ef
+      internalID: -1937360438
       vertices: []
       indices: 
       edges: []
       weights: []
     - serializedVersion: 2
-      name: all animations sprite sheet_33
+      name: Extractor_33
       rect:
         serializedVersion: 2
         x: 3064
@@ -975,21 +975,21 @@ TextureImporter:
       customData: 
       outline: []
       physicsShape: []
-      tessellationDetail: -1
+      tessellationDetail: 0
       bones: []
-      spriteID: 2bf4d04338570cad0800000000000000
-      internalID: -2684016171538362446
+      spriteID: 36794f267d2047746bd8b684890e2a6e
+      internalID: 614677750
       vertices: []
       indices: 
       edges: []
       weights: []
     - serializedVersion: 2
-      name: all animations sprite sheet_34
+      name: Extractor_34
       rect:
         serializedVersion: 2
-        x: 3156
+        x: 3155
         y: 4
-        width: 36
+        width: 37
         height: 82
       alignment: 0
       pivot: {x: 0, y: 0}
@@ -997,21 +997,21 @@ TextureImporter:
       customData: 
       outline: []
       physicsShape: []
-      tessellationDetail: -1
+      tessellationDetail: 0
       bones: []
-      spriteID: e3bdfd46d74102b80800000000000000
-      internalID: -8421708774386967746
+      spriteID: 509ad3fb0c8b9be4d9721cfbfe301a10
+      internalID: 1071178047
       vertices: []
       indices: 
       edges: []
       weights: []
     - serializedVersion: 2
-      name: all animations sprite sheet_35
+      name: Extractor_35
       rect:
         serializedVersion: 2
-        x: 3248
+        x: 3247
         y: 4
-        width: 36
+        width: 38
         height: 82
       alignment: 0
       pivot: {x: 0, y: 0}
@@ -1019,21 +1019,21 @@ TextureImporter:
       customData: 
       outline: []
       physicsShape: []
-      tessellationDetail: -1
+      tessellationDetail: 0
       bones: []
-      spriteID: 703518794958cfb00800000000000000
-      internalID: 863712101791781639
+      spriteID: e3ef4d136548d904e92ab973337c5854
+      internalID: -903254171
       vertices: []
       indices: 
       edges: []
       weights: []
     - serializedVersion: 2
-      name: all animations sprite sheet_36
+      name: Extractor_36
       rect:
         serializedVersion: 2
-        x: 3340
+        x: 3339
         y: 4
-        width: 36
+        width: 38
         height: 82
       alignment: 0
       pivot: {x: 0, y: 0}
@@ -1041,16 +1041,16 @@ TextureImporter:
       customData: 
       outline: []
       physicsShape: []
-      tessellationDetail: -1
+      tessellationDetail: 0
       bones: []
-      spriteID: 471a46f9990340c10800000000000000
-      internalID: 2018791969331126644
+      spriteID: 9915fea3dcd8e0845814f7bc4c2e90aa
+      internalID: 1581402061
       vertices: []
       indices: 
       edges: []
       weights: []
     - serializedVersion: 2
-      name: all animations sprite sheet_37
+      name: Extractor_37
       rect:
         serializedVersion: 2
         x: 3432
@@ -1063,16 +1063,16 @@ TextureImporter:
       customData: 
       outline: []
       physicsShape: []
-      tessellationDetail: -1
+      tessellationDetail: 0
       bones: []
-      spriteID: 768378640305cf550800000000000000
-      internalID: 6195915355626879079
+      spriteID: 86a1d803f091ff1458509403c072935d
+      internalID: 1532354826
       vertices: []
       indices: 
       edges: []
       weights: []
     - serializedVersion: 2
-      name: all animations sprite sheet_38
+      name: Extractor_38
       rect:
         serializedVersion: 2
         x: 3524
@@ -1085,21 +1085,21 @@ TextureImporter:
       customData: 
       outline: []
       physicsShape: []
-      tessellationDetail: -1
+      tessellationDetail: 0
       bones: []
-      spriteID: 500feef47b299e650800000000000000
-      internalID: 6262698072853114885
+      spriteID: 075b7d769c5a9894fa4ce6d582f9e867
+      internalID: -458315094
       vertices: []
       indices: 
       edges: []
       weights: []
     - serializedVersion: 2
-      name: all animations sprite sheet_39
+      name: Extractor_39
       rect:
         serializedVersion: 2
-        x: 3616
+        x: 3615
         y: 4
-        width: 36
+        width: 38
         height: 82
       alignment: 0
       pivot: {x: 0, y: 0}
@@ -1107,21 +1107,21 @@ TextureImporter:
       customData: 
       outline: []
       physicsShape: []
-      tessellationDetail: -1
+      tessellationDetail: 0
       bones: []
-      spriteID: 89bc4027be958bd90800000000000000
-      internalID: -7081811546275001448
+      spriteID: 96f714d017342cb41ae47130268d480a
+      internalID: 1857437075
       vertices: []
       indices: 
       edges: []
       weights: []
     - serializedVersion: 2
-      name: all animations sprite sheet_40
+      name: Extractor_40
       rect:
         serializedVersion: 2
-        x: 3708
+        x: 3707
         y: 4
-        width: 36
+        width: 38
         height: 82
       alignment: 0
       pivot: {x: 0, y: 0}
@@ -1129,16 +1129,16 @@ TextureImporter:
       customData: 
       outline: []
       physicsShape: []
-      tessellationDetail: -1
+      tessellationDetail: 0
       bones: []
-      spriteID: bd5bae857be2e00e0800000000000000
-      internalID: -2301850994534074917
+      spriteID: 52ccffcdf036bab42ab910461f462acc
+      internalID: 1141801813
       vertices: []
       indices: 
       edges: []
       weights: []
     - serializedVersion: 2
-      name: all animations sprite sheet_41
+      name: Extractor_41
       rect:
         serializedVersion: 2
         x: 3800
@@ -1151,10 +1151,10 @@ TextureImporter:
       customData: 
       outline: []
       physicsShape: []
-      tessellationDetail: -1
+      tessellationDetail: 0
       bones: []
-      spriteID: 614ab84f3c41853b0800000000000000
-      internalID: -5523642111115942890
+      spriteID: 2089812f27ebeea46aa417579248fe7b
+      internalID: -279904961
       vertices: []
       indices: 
       edges: []
@@ -1163,7 +1163,7 @@ TextureImporter:
     customData: 
     physicsShape: []
     bones: []
-    spriteID: 
+    spriteID: aaf75f1a67930e04c8e30f2bb73eb9c9
     internalID: 0
     vertices: []
     indices: 
@@ -1173,48 +1173,48 @@ TextureImporter:
     spriteCustomMetadata:
       entries: []
     nameFileIdTable:
-      all animations sprite sheet_0: 3688372087848734022
-      all animations sprite sheet_1: 4942842739258725378
-      all animations sprite sheet_10: -2790807965676566202
-      all animations sprite sheet_11: -1908174468473540110
-      all animations sprite sheet_12: 7369050199671861150
-      all animations sprite sheet_13: -2751694327444334103
-      all animations sprite sheet_14: -6534166463851210397
-      all animations sprite sheet_15: 9176529582051688033
-      all animations sprite sheet_16: 2895679336931387567
-      all animations sprite sheet_17: -6184454753971632654
-      all animations sprite sheet_18: -4200065790244994750
-      all animations sprite sheet_19: 463797369382526044
-      all animations sprite sheet_2: -8945224635419606110
-      all animations sprite sheet_20: -223840150364183961
-      all animations sprite sheet_21: 6173063305610126835
-      all animations sprite sheet_22: 3397802894648463669
-      all animations sprite sheet_23: -5033264863826638855
-      all animations sprite sheet_24: -6499536089788899241
-      all animations sprite sheet_25: 3460348917438923216
-      all animations sprite sheet_26: -2048650538298064814
-      all animations sprite sheet_27: 6991346313258732353
-      all animations sprite sheet_28: -6607286082374982665
-      all animations sprite sheet_29: 7909814647333925426
-      all animations sprite sheet_3: -6371201269850828613
-      all animations sprite sheet_30: -8441266779438283938
-      all animations sprite sheet_31: 6824432996638068305
-      all animations sprite sheet_32: 2420134263196729894
-      all animations sprite sheet_33: -2684016171538362446
-      all animations sprite sheet_34: -8421708774386967746
-      all animations sprite sheet_35: 863712101791781639
-      all animations sprite sheet_36: 2018791969331126644
-      all animations sprite sheet_37: 6195915355626879079
-      all animations sprite sheet_38: 6262698072853114885
-      all animations sprite sheet_39: -7081811546275001448
-      all animations sprite sheet_4: -1535616409983901877
-      all animations sprite sheet_40: -2301850994534074917
-      all animations sprite sheet_41: -5523642111115942890
-      all animations sprite sheet_5: 1759445752168431924
-      all animations sprite sheet_6: -5699540312493891466
-      all animations sprite sheet_7: -7361451499602215401
-      all animations sprite sheet_8: 4062902487513253882
-      all animations sprite sheet_9: -1479042085809652293
+      Extractor_0: -1295063367
+      Extractor_1: 219741025
+      Extractor_10: 341930754
+      Extractor_11: 1810019048
+      Extractor_12: -1063171831
+      Extractor_13: 2080768962
+      Extractor_14: 1033253925
+      Extractor_15: -636058264
+      Extractor_16: -370286148
+      Extractor_17: 1831769882
+      Extractor_18: -157913541
+      Extractor_19: -1687086166
+      Extractor_2: -1365991217
+      Extractor_20: -1988226316
+      Extractor_21: 1476783637
+      Extractor_22: 477032439
+      Extractor_23: -787903718
+      Extractor_24: 361644340
+      Extractor_25: 444779100
+      Extractor_26: 164888867
+      Extractor_27: 1864524120
+      Extractor_28: -1891503527
+      Extractor_29: 723983873
+      Extractor_3: -1167501443
+      Extractor_30: 2009128432
+      Extractor_31: -1064133114
+      Extractor_32: -1937360438
+      Extractor_33: 614677750
+      Extractor_34: 1071178047
+      Extractor_35: -903254171
+      Extractor_36: 1581402061
+      Extractor_37: 1532354826
+      Extractor_38: -458315094
+      Extractor_39: 1857437075
+      Extractor_4: 1847465863
+      Extractor_40: 1141801813
+      Extractor_41: -279904961
+      Extractor_5: 613294472
+      Extractor_6: -71896793
+      Extractor_7: 1065378414
+      Extractor_8: 1029256637
+      Extractor_9: -1470433124
   mipmapLimitGroupName: 
   pSDRemoveMatte: 0
   userData: 

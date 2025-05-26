@@ -46,15 +46,13 @@ public class FactoryUIPanel : MonoBehaviour {
         _buildingNameText.text = factory.gameObject.name;
         _hpText.text = $"HP: {factory.CurrentHealthInt}";
 
-        // SetupUnitButtons(factory.ProducibleUnits);
-
         factory.OnQueueChanged += UpdateQueueUI;
         factory.OnProductionProgressUpdated += UpdateProductionProgressUI;
         factory.OnProductionMessage += DisplayMessage;
         // factory.OnHealthChanged += UpdateBuildingStats; 
 
         UpdateQueueUI(_currentFactory.ProductionQueue.ToList(), _currentFactory.CurrentProduction);
-        UpdateProductionProgressUI(_currentFactory.CurrentProductionTimer / (_currentFactory.CurrentProduction?.ProductionTime ?? 1f)); // Обработка деления на ноль
+        UpdateProductionProgressUI(_currentFactory.CurrentProductionTimer / (_currentFactory.CurrentProduction?.buildTime ?? 1f));
 
         Debug.Log($"UI для фабрики {factory.name} показан");
     }
@@ -94,44 +92,42 @@ public class FactoryUIPanel : MonoBehaviour {
         }
     }
 
-    private void UpdateQueueUI(List<Factory.UnitProductionInfo> queueList, Factory.UnitProductionInfo currentProduction) {
-        ClearQueueUI(); 
+    public void OnCancelCurrentProduction() {
+        if (_currentFactory != null)
+            _currentFactory.CancelCurrentProduction();
+    }
 
-        if (currentProduction != null) {
-            if (_currentProductionIcon != null && currentProduction.UnitIcon != null) {
-                _currentProductionIcon.sprite = currentProduction.UnitIcon;
+    private void UpdateQueueUI(List<EntityData> queueList, EntityData currentProduction) {
+        ClearQueueUI();
+
+        if (currentProduction != null && _currentProductionIcon != null) {
+            if (currentProduction.icon != null) {
+                _currentProductionIcon.sprite = currentProduction.icon;
                 _currentProductionIcon.enabled = true;
-                _currentProductionDisplay.SetActive(true);
             }
-            else if (_currentProductionIcon != null) {
-                _currentProductionIcon.enabled = false; // Скрыть иконку если нет спрайта
-                _currentProductionDisplay.SetActive(true); // Но бар и текст могут быть видны
+            else {
+                _currentProductionIcon.enabled = false;
             }
-            // Прогресс бар и текст будут обновляться через UpdateProductionProgressUI
+            _currentProductionDisplay.SetActive(true);
         }
         else {
             if (_currentProductionIcon != null) _currentProductionIcon.enabled = false;
             _productionProgressText.text = "";
-            _currentProductionDisplay.SetActive(false); // Скрыть блок текущего производства
+            _currentProductionDisplay.SetActive(false);
         }
 
-        // Добавляем иконки юнитов из очереди
         foreach (var unitInfo in queueList) {
             if (_queueItemPrefab != null && _queueContainer != null) {
                 GameObject queueItemGO = Instantiate(_queueItemPrefab, _queueContainer);
-                Image iconImage = queueItemGO.GetComponent<Image>(); // Префаб должен иметь Image компонент
+                Image iconImage = queueItemGO.GetComponent<Image>();
 
-                if (iconImage != null && unitInfo.UnitIcon != null) {
-                    iconImage.sprite = unitInfo.UnitIcon;
+                if (iconImage != null && unitInfo.icon != null) {
+                    iconImage.sprite = unitInfo.icon;
                 }
                 else if (iconImage != null) {
-                    iconImage.enabled = false; // Скрыть Image если нет спрайта
+                    iconImage.enabled = false;
                 }
-                _queueItemIcons.Add(iconImage); // Сохраняем ссылку на созданную иконку
-
-                // TODO: Возможность отмены по клику на иконку в очереди
-                // Для этого Prefab элемента очереди должен быть кнопкой или иметь скрипт с кнопкой/обработчиком клика
-                // и передавать свой индекс в очереди для отмены.
+                _queueItemIcons.Add(iconImage);
             }
         }
     }
@@ -145,27 +141,23 @@ public class FactoryUIPanel : MonoBehaviour {
         _queueItemIcons.Clear();
     }
 
-    private void UpdateProductionProgressUI(float progress) // progress от 0 до 1
+    private void UpdateProductionProgressUI(float progress)
     {
         if (_productionProgressText != null) {
-            // Можно отобразить процент или оставшееся время
             if (_currentFactory != null && _currentFactory.CurrentProduction != null) {
-                float remainingTime = _currentFactory.CurrentProduction.ProductionTime - _currentFactory.CurrentProductionTimer;
-                _productionProgressText.text = $"{Mathf.CeilToInt(remainingTime)}s"; // Например, округленное оставшееся время
-                                                                                     // _productionProgressText.text = $"{Mathf.RoundToInt(progress * 100)}%"; // Или процент
+                float remainingTime = _currentFactory.CurrentProduction.buildTime - _currentFactory.CurrentProductionTimer;
+                _productionProgressText.text = $"{Mathf.CeilToInt(remainingTime)}s"; 
             }
             else {
-                _productionProgressText.text = ""; // Очистить текст если ничего не строится
+                _productionProgressText.text = ""; 
             }
         }
 
-        // Показываем/скрываем блок текущего производства в зависимости от того, строится ли что-то
         if (_currentProductionDisplay != null) {
             _currentProductionDisplay.SetActive(_currentFactory != null && _currentFactory.CurrentProduction != null);
         }
     }
 
-    // Метод для отображения сообщений (например, "Нет ресурсов")
     private void DisplayMessage(string message) {
         if (_messageText != null) {
             _messageText.text = message;
@@ -184,11 +176,8 @@ public class FactoryUIPanel : MonoBehaviour {
         _messageCoroutine = null;
     }
 
-    // TODO: Метод для кнопки отмены текущего производства (вызывает _currentFactory.CancelProduction(0))
-    // TODO: Метод для кнопки установки точки сбора (_currentFactory._rallyPoint = ...)
 
     void OnDestroy() {
-        // Отписываемся от событий, если скрипт UI уничтожается раньше фабрики
         if (_currentFactory != null) {
             _currentFactory.OnQueueChanged -= UpdateQueueUI;
             _currentFactory.OnProductionProgressUpdated -= UpdateProductionProgressUI;

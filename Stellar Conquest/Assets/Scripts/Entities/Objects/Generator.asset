@@ -16,7 +16,7 @@ MonoBehaviour:
   entityName: "\u0413\u0435\u043D\u0435\u0440\u0430\u0442\u043E\u0440"
   description: "\u0414\u043E\u0431\u044B\u0432\u0430\u0435\u0442 \u044D\u043D\u0435\u0440\u0433\u0438\u044E"
   maxHealth: 600
-  buildTime: 5
-  uraniumCost: 10
-  energyCost: 100
+  buildTime: 10
+  uraniumCost: 100
+  energyCost: 1000
   prefab: {fileID: 2667527302353597238, guid: e5201edd54cc70846a7c584f65ec8b88, type: 3}

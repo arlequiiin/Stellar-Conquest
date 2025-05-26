@@ -1,34 +1,24 @@
-using UnityEngine;
 using TMPro;
+using UnityEngine;
 using UnityEngine.UI;
+using static SelectionManager;
 
 public class OrdersUIPanel : MonoBehaviour {
     [Header("Элементы UI")]
-    public GameObject _uiPanel;
-    public TextMeshProUGUI _entityNameText;
-    public TextMeshProUGUI _messageText;
-    public GameObject _buttonContainer;
-
-    [Header("Кнопки приказов")]
-    public Button moveButton;
-    public Button attackButton;
-    public Button patrolButton;
-    public Button repairButton;
-    public Button attackMoveButton;
-    public Button cancelButton;
+    [SerializeField] private GameObject _uiPanel;
+    [SerializeField] private TextMeshProUGUI _entityNameText;
+    [SerializeField] private TextMeshProUGUI _messageText;
 
     public void Show(Entity entity) {
         _uiPanel.SetActive(true);
         _entityNameText.text = entity.entityData.entityName;
         _messageText.text = "";
-        _buttonContainer.SetActive(true);
     }
 
     public void Show() {
         _uiPanel.SetActive(true);
         _entityNameText.text = "Несколько юнитов";
         _messageText.text = "";
-        _buttonContainer.SetActive(true);
     }
 
     public void Hide() {
@@ -41,5 +31,14 @@ public class OrdersUIPanel : MonoBehaviour {
 
     public void ClearMessage() {
         _messageText.text = "";
+    }
+
+    public void OnMoveOrderPressed() {
+        SelectionManager.Instance.SetOrderMode(OrderMode.Move);
+    }
+
+    public void OnBuildOrderPressed() {
+        SelectionManager.Instance.SetOrderMode(SelectionManager.OrderMode.Build);
+        SetMessage("Кликните по сломанному зданию для приказа инженеру на стройку");
     }
 }

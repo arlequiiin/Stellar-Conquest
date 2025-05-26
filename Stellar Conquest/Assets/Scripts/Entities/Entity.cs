@@ -1,3 +1,4 @@
+using System;
 using UnityEngine;
 
 public abstract class Entity : MonoBehaviour {
@@ -5,8 +6,8 @@ public abstract class Entity : MonoBehaviour {
     [SerializeField] private GameObject selectionCircle;
     public int OwnerPlayerId;
 
-    // public int OwnerPlayerId { get; protected set; }
-    public EntityData entityData; 
+    public EntityData entityData;
+    public event Action<float, float> OnHealthChanged;
 
     private float currentHealth;
     public string currentStatus;
@@ -39,6 +40,7 @@ public abstract class Entity : MonoBehaviour {
 
         currentHealth -= amount;
         Debug.Log($"{gameObject.name} получил {amount} урона. Текущее здоровье: {currentHealth}/{maxHealth}");
+        OnHealthChanged?.Invoke(GetCurrentHealth, GetMaxHealth);
 
         if (currentHealth <= 0) Die();
     }

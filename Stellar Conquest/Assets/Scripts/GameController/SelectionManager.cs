@@ -16,9 +16,16 @@ public class SelectionManager : MonoBehaviour {
     [SerializeField] private FactoryUIPanel factoryUIPanel;
     [SerializeField] private SelectionUIPanel selectionUIPanel;
     [SerializeField] private OrdersUIPanel ordersUIPanel;
-
+    private Entity _currentEntity;
     private InputManager _inputManager;
     private Vector2 _startDragPos;
+    public enum OrderMode {
+        None,
+        Move,
+        Build
+    }
+
+    public OrderMode CurrentOrderMode { get; private set; } = OrderMode.None;
 
     void Awake() {
         if (_instance != null && _instance != this) { Destroy(gameObject); return; }
@@ -112,13 +119,36 @@ public class SelectionManager : MonoBehaviour {
         if (_selectedEntities.Count == 0) 
             return;
 
+        if (CurrentOrderMode == OrderMode.Move) {
+            IssueMoveCommand(clickPosition);
+            ResetOrderMode();
+            return;
+        }
+
         Entity targetEntity = null;
+
+        if (CurrentOrderMode == OrderMode.Build) {
+            if (_inputManager.GetObjectUnderCursor<Entity>(out targetEntity, _selectableLayerMask)) {
+                if (targetEntity is Buildings building && !building.IsCompleted) {
+                    var engineers = _selectedEntities.OfType<Engineer>().ToList();
+                    if (engineers.Count > 0) {
+                        var nearest = engineers.OrderBy(e => Vector3.Distance(e.transform.position, building.transform.position)).First();
+                        nearest.StartBuild(building);
+                        ResetOrderMode();
+                        return;
+                    }
+                }
+            }
+            ResetOrderMode();
+            return;
+        }
+
         Vector3 groundPoint = Vector3.zero;
         bool hitEnemy = false;
         bool hitGround = false;
         LayerMask enemyMask = _enemyLayerMask; 
 
-        if (_inputManager.GetObjectUnderCursor<Entity>(out targetEntity, enemyMask)) // Используем _enemyLayerMask
+        if (_inputManager.GetObjectUnderCursor<Entity>(out targetEntity, enemyMask))
         {
             if (targetEntity.OwnerPlayerId != GameManager.Instance.playerId && targetEntity.OwnerPlayerId != 0) 
             {
@@ -196,16 +226,28 @@ public class SelectionManager : MonoBehaviour {
     }
 
     private void SelectEntity(Entity entity, bool clearPrevious = true) {
-        if (entity == null || !entity.IsAlive) return; 
+        if (entity == null || !entity.IsAlive) return;
 
         if (clearPrevious) {
+            // Важно! При очистке — отписаться от событий предыдущего выделения
+            if (_currentEntity != null)
+                _currentEntity.OnHealthChanged -= OnEntityHealthChanged;
             ClearSelection();
         }
 
         if (!_selectedEntities.Contains(entity)) {
             _selectedEntities.Add(entity);
-            entity.Select(); 
+            entity.Select();
+            _currentEntity = entity;
+
+            // Подписываемся на событие изменения ХП
+            entity.OnHealthChanged += OnEntityHealthChanged;
+
+            selectionUIPanel.UpdateEntityInfo(entity); // или UpdateEntityInfo(entity)
         }
+    }
+    private void OnEntityHealthChanged(float current, float max) {
+        selectionUIPanel.UpdateHealth(current, max);
     }
 
     private void DeselectEntity(Entity entity) {
@@ -231,13 +273,20 @@ public class SelectionManager : MonoBehaviour {
     }
 
     private void IssueMoveCommand(Vector3 destination) {
-        // пока просто отправляем всех в одну точку
-        foreach (var entity in _selectedEntities) {
-            if (entity is Units unit && unit.IsAlive) {
-                unit.MoveTo(destination);
+        int count = _selectedEntities.Count;
+        float radius = 0.5f + count * 0.1f; // подобрать по размеру юнитов
+
+        for (int i = 0; i < count; i++) {
+            if (_selectedEntities[i] is Units unit && unit.IsAlive) {
+                float angle = 2 * Mathf.PI * i / count;
+                Vector3 offset = new Vector3(Mathf.Cos(angle), Mathf.Sin(angle), 0) * radius;
+                Vector3 unitTarget = destination + offset;
+
+                unit.MoveTo(unitTarget);
             }
         }
     }
+
 
     private void IssueAttackCommand(Entity target) {
         if (target == null || !target.IsAlive) 
@@ -284,6 +333,18 @@ public class SelectionManager : MonoBehaviour {
         }
     }
 
+    public void SetOrderMode(OrderMode mode) {
+        CurrentOrderMode = mode;
+        //  показать подсказку в UI?
+        ordersUIPanel.SetMessage(mode == OrderMode.Move ? "Укажите точку для перемещения" : "");
+    }
+    public void ResetOrderMode() {
+        CurrentOrderMode = OrderMode.None;
+        ordersUIPanel.ClearMessage();
+    }
+
+
+    // прямоугольник выделения
     private void UpdateSelectionBox(Vector2 currentMousePos) {
         if (!_selectionBoxRect.gameObject.activeSelf) return;
 

@@ -1,13 +1,10 @@
 fileFormatVersion: 2
-guid: dbecb4fb654b8484a8729d38446dc738
+guid: 3efcebfe0cfc7f14983aa56b71d2729d
 TextureImporter:
   internalIDToNameTable:
   - first:
-      213: -5538297496388433325
-    second: bullets+plasma_0
-  - first:
-      213: 2366671760297177203
-    second: bullets+plasma_1
+      213: -2598447900177598430
+    second: SP402_04_0
   externalObjects: {}
   serializedVersion: 13
   mipmaps:
@@ -40,7 +37,7 @@ TextureImporter:
   maxTextureSize: 2048
   textureSettings:
     serializedVersion: 2
-    filterMode: 0
+    filterMode: 1
     aniso: 1
     mipBias: 0
     wrapU: 1
@@ -54,7 +51,7 @@ TextureImporter:
   spriteMeshType: 1
   alignment: 0
   spritePivot: {x: 0.5, y: 0.5}
-  spritePixelsToUnits: 16
+  spritePixelsToUnits: 32
   spriteBorder: {x: 0, y: 0, z: 0, w: 0}
   spriteGenerateFallbackPhysicsShape: 1
   alphaUsage: 1
@@ -99,73 +96,16 @@ TextureImporter:
     ignorePlatformSupport: 0
     androidETC2FallbackOverride: 0
     forceMaximumCompressionQuality_BC6H_BC7: 0
-  - serializedVersion: 4
-    buildTarget: WebGL
-    maxTextureSize: 2048
-    resizeAlgorithm: 0
-    textureFormat: -1
-    textureCompression: 1
-    compressionQuality: 50
-    crunchedCompression: 0
-    allowsAlphaSplitting: 0
-    overridden: 0
-    ignorePlatformSupport: 0
-    androidETC2FallbackOverride: 0
-    forceMaximumCompressionQuality_BC6H_BC7: 0
   spriteSheet:
     serializedVersion: 2
     sprites:
     - serializedVersion: 2
-      name: bullets+plasma_0
+      name: SP402_04_0
       rect:
         serializedVersion: 2
-        x: 2
-        y: 2
-        width: 4
-        height: 4
-      alignment: 0
-      pivot: {x: 0, y: 0}
-      border: {x: 0, y: 0, z: 0, w: 0}
-      customData: 
-      outline: []
-      physicsShape: []
-      tessellationDetail: -1
-      bones: []
-      spriteID: 35a055b25c30423b0800000000000000
-      internalID: -5538297496388433325
-      vertices: []
-      indices: 
-      edges: []
-      weights: []
-    - serializedVersion: 2
-      name: bullets+plasma_1
-      rect:
-        serializedVersion: 2
-        x: 16
-        y: 0
-        width: 8
-        height: 8
-      alignment: 0
-      pivot: {x: 0.5, y: 0.5}
-      border: {x: 0, y: 0, z: 0, w: 0}
-      customData: 
-      outline: []
-      physicsShape: []
-      tessellationDetail: -1
-      bones: []
-      spriteID: 37036744d6b18d020800000000000000
-      internalID: 2366671760297177203
-      vertices: []
-      indices: 
-      edges: []
-      weights: []
-    - serializedVersion: 2
-      name: bullets+plasma_2
-      rect:
-        serializedVersion: 2
-        x: 9
-        y: 1
-        width: 6
+        x: 5
+        y: 13
+        width: 28
         height: 6
       alignment: 0
       pivot: {x: 0, y: 0}
@@ -173,10 +113,10 @@ TextureImporter:
       customData: 
       outline: []
       physicsShape: []
-      tessellationDetail: 0
+      tessellationDetail: -1
       bones: []
-      spriteID: 369bb369eea8adf4197bb5f99387a869
-      internalID: 1522310733
+      spriteID: 228fd86e66570fbd0800000000000000
+      internalID: -2598447900177598430
       vertices: []
       indices: 
       edges: []
@@ -185,7 +125,7 @@ TextureImporter:
     customData: 
     physicsShape: []
     bones: []
-    spriteID: d0f766cd56ccbcd4982029e0afa54a4b
+    spriteID: 
     internalID: 0
     vertices: []
     indices: 
@@ -195,9 +135,7 @@ TextureImporter:
     spriteCustomMetadata:
       entries: []
     nameFileIdTable:
-      bullets+plasma_0: -5538297496388433325
-      bullets+plasma_1: 2366671760297177203
-      bullets+plasma_2: 1522310733
+      SP402_04_0: -2598447900177598430
   mipmapLimitGroupName: 
   pSDRemoveMatte: 0
   userData: 

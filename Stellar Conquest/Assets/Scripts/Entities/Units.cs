@@ -7,6 +7,8 @@ public class Units : Entity {
     [SerializeField] public float _range;
     [SerializeField] private float _attackDamage;
     [SerializeField] private float _attackCooldown;
+    [SerializeField] private Transform firePoint;
+    [SerializeField] private GameObject bulletPrefab; 
 
     protected NavMeshAgent _navMeshAgent;
 
@@ -77,6 +79,16 @@ public class Units : Entity {
         }
     }
 
+    public virtual string GetCurrentAction() {
+        switch (_currentState) {
+            case UnitState.Idle: return "Ожидает";
+            case UnitState.Moving: return "В движении";
+            case UnitState.Attacking: return "Атакует";
+            case UnitState.Death: return "Уничтожен";
+            case UnitState.Building: return "Строит";
+            default: return "";
+        }
+    }
 
     public void MoveTo(Vector3 destination) {
         FlipSprite(destination);
@@ -158,11 +170,13 @@ public class Units : Entity {
     }
 
     protected void PerformAttack() {
-        if (_currentTarget == null ) { // || _currentTarget.GetCurrentHealth <= 0
-            if (_currentTarget==null)
-                Debug.Log($"{gameObject.name} не нашёл цель");
-            if (_currentTarget.GetCurrentHealth <= 0)
-                Debug.Log($"{gameObject.name} - у цели нет хп");
+        if (_currentTarget == null) {
+            Debug.Log("Нет цели");
+        }
+        if (_currentTarget.GetCurrentHealth <= 0) {
+            Debug.Log("Нет здоровья у цели");
+        }
+        if (_currentTarget == null || _currentTarget.GetCurrentHealth <= 0) {
             StopActions();
             return;
         }
@@ -170,22 +184,31 @@ public class Units : Entity {
 
         float distanceToTarget = Vector3.Distance(transform.position, _currentTarget.transform.position);
         if (distanceToTarget > _range) {
-            Debug.Log($"{gameObject.name} цель {_currentTarget.name} за пределом радиуса обзора");
-            // либо снова вызвать OrderAttackTarget(_currentTarget), либо StopActions()
-            OrderAttackTarget(_currentTarget); // Попробуем догнать
+            OrderAttackTarget(_currentTarget);
             return;
         }
 
         if (Time.time >= _lastAttackTime + _attackCooldown) {
-            Debug.Log($"{gameObject.name} атакует {_currentTarget.name} нанеся {_attackDamage} урона");
-            _currentTarget.TakeDamage(_attackDamage);
-
-            // визуальные эффекты: выстрел, звук, отдача
-
-            _lastAttackTime = Time.time; 
+            ShootBullet(_currentTarget); // вызываем с целью
+            _lastAttackTime = Time.time;
         }
     }
-	
+
+    protected void ShootBullet(Entity target) {
+        if (bulletPrefab == null) { Debug.LogWarning("bulletPrefab пуст!"); return; }
+        if (firePoint == null) { Debug.LogWarning("firePoint пуст!"); return; }
+
+        Debug.Log("Спавн пули"); // <- увидишь ли ты этот лог?
+
+        var bulletObj = Instantiate(bulletPrefab, firePoint.position, Quaternion.identity);
+        var bullet = bulletObj.GetComponent<Bullet>();
+        if (bullet != null) {
+            bullet.Init(target, _attackDamage);
+        }
+    }
+
+
+
     protected void FlipSprite(Vector3 targetPosition) {
         Vector3 scale = transform.localScale;
 

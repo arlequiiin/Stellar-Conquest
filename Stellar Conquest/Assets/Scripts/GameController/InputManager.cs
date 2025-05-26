@@ -122,6 +122,12 @@ public class InputManager : MonoBehaviour {
 
     private bool RaycastMouse(out RaycastHit2D hitInfo, LayerMask layerMask) {
         hitInfo = default;
+
+        if (_mainCamera == null) {
+            Debug.LogWarning("Main camera is null!");
+            return false;
+        }
+
         Ray ray = _mainCamera.ScreenPointToRay(Mouse.current.position.ReadValue());
 
         RaycastHit2D hit = Physics2D.GetRayIntersection(ray, MaxRayDistance, layerMask);

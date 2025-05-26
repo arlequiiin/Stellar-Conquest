@@ -122,89 +122,89 @@ TextureImporter:
     serializedVersion: 2
     sprites:
     - serializedVersion: 2
-      name: building_1 animation_0
+      name: Generator_0
       rect:
         serializedVersion: 2
-        x: 8
+        x: 9
         y: 0
-        width: 70
-        height: 124
+        width: 68
+        height: 123
       alignment: 0
       pivot: {x: 0, y: 0}
       border: {x: 0, y: 0, z: 0, w: 0}
       customData: 
       outline: []
       physicsShape: []
-      tessellationDetail: -1
+      tessellationDetail: 0
       bones: []
-      spriteID: 42928aaa91f6c8dd0800000000000000
-      internalID: -2482487138559973084
+      spriteID: c17a288b1a56132459d6796501cc4fb1
+      internalID: 915355996
       vertices: []
       indices: 
       edges: []
       weights: []
     - serializedVersion: 2
-      name: building_1 animation_1
+      name: Generator_1
       rect:
         serializedVersion: 2
-        x: 100
+        x: 101
         y: 0
-        width: 70
-        height: 124
+        width: 68
+        height: 123
       alignment: 0
       pivot: {x: 0, y: 0}
       border: {x: 0, y: 0, z: 0, w: 0}
       customData: 
       outline: []
       physicsShape: []
-      tessellationDetail: -1
+      tessellationDetail: 0
       bones: []
-      spriteID: 578c732b27649fde0800000000000000
-      internalID: -1298929559089461131
+      spriteID: 8b507a2c2f80321418bc02a7d19fdd34
+      internalID: 327054682
       vertices: []
       indices: 
       edges: []
       weights: []
     - serializedVersion: 2
-      name: building_1 animation_2
+      name: Generator_2
       rect:
         serializedVersion: 2
-        x: 192
+        x: 193
         y: 0
-        width: 70
-        height: 124
+        width: 68
+        height: 123
       alignment: 0
       pivot: {x: 0, y: 0}
       border: {x: 0, y: 0, z: 0, w: 0}
       customData: 
       outline: []
       physicsShape: []
-      tessellationDetail: -1
+      tessellationDetail: 0
       bones: []
-      spriteID: b6ccc44504cea4200800000000000000
-      internalID: 165204097388825707
+      spriteID: 092570667ed8bbf4593df6facadf013b
+      internalID: -459997078
       vertices: []
       indices: 
       edges: []
       weights: []
     - serializedVersion: 2
-      name: building_1 animation_3
+      name: Generator_3
       rect:
         serializedVersion: 2
-        x: 284
+        x: 285
         y: 0
-        width: 70
-        height: 124
+        width: 68
+        height: 123
       alignment: 0
       pivot: {x: 0, y: 0}
       border: {x: 0, y: 0, z: 0, w: 0}
       customData: 
       outline: []
       physicsShape: []
-      tessellationDetail: -1
+      tessellationDetail: 0
       bones: []
-      spriteID: 9af33292240a669f0800000000000000
-      internalID: -475516504622547031
+      spriteID: 505375aae14baab4f9dbf27ca72e64a6
+      internalID: -1776386138
       vertices: []
       indices: 
       edges: []
@@ -213,7 +213,7 @@ TextureImporter:
     customData: 
     physicsShape: []
     bones: []
-    spriteID: 
+    spriteID: 4c7db47e2e154bf4caf9bb063230135e
     internalID: 0
     vertices: []
     indices: 
@@ -223,10 +223,10 @@ TextureImporter:
     spriteCustomMetadata:
       entries: []
     nameFileIdTable:
-      building_1 animation_0: -2482487138559973084
-      building_1 animation_1: -1298929559089461131
-      building_1 animation_2: 165204097388825707
-      building_1 animation_3: -475516504622547031
+      Generator_0: 915355996
+      Generator_1: 327054682
+      Generator_2: -459997078
+      Generator_3: -1776386138
   mipmapLimitGroupName: 
   pSDRemoveMatte: 0
   userData: 

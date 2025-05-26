@@ -3,7 +3,7 @@ using UnityEngine;
 public class Extractor : Buildings {
     [Header("Ресурсы")]
     [SerializeField] private ResourceType resourceType = ResourceType.Uranium;
-    [SerializeField] private float uranuimPerSecond = 10f;
+    [SerializeField] private float uranuimPerSecond = 3f;
 
     private float timer;
 
@@ -25,10 +25,11 @@ public class Extractor : Buildings {
     }
 
     protected override void FinishConstruction() {
+        base.FinishConstruction();
+        Debug.Log("Достроилось!");
         if (!underConstruction) {
             ResourceManager.Instance.AddProduction(resourceType, uranuimPerSecond);
         }
-        base.FinishConstruction();
     }
 
     protected override void Die() {

@@ -108,7 +108,7 @@ MonoBehaviour:
   OwnerPlayerId: 1
   entityData: {fileID: 11400000, guid: b825276f10ce2234b8d12edc7359fd1d, type: 2}
   currentStatus: 
-  underConstruction: 1
+  underConstruction: 0
   _isEssential: 1
   _isBot: 0
 --- !u!61 &270824054101699943

@@ -80,17 +80,17 @@ SpriteRenderer:
   m_SortingLayerID: 0
   m_SortingLayer: 0
   m_SortingOrder: 0
-  m_Sprite: {fileID: 3688372087848734022, guid: f5ada4203e03bfb4683f86d8d1da82cd, type: 3}
+  m_Sprite: {fileID: -1295063367, guid: f5ada4203e03bfb4683f86d8d1da82cd, type: 3}
   m_Color: {r: 1, g: 1, b: 1, a: 1}
   m_FlipX: 0
   m_FlipY: 0
   m_DrawMode: 0
-  m_Size: {x: 0.36, y: 0.8240039}
+  m_Size: {x: 1.125, y: 2.5750122}
   m_AdaptiveModeThreshold: 0.5
   m_SpriteTileMode: 0
   m_WasSpriteAssigned: 1
   m_MaskInteraction: 0
-  m_SpriteSortPoint: 0
+  m_SpriteSortPoint: 1
 --- !u!114 &2454369900279775903
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -103,14 +103,15 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: e931d0a74fced9e4fa84d244871bb33f, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  maxHealth: 500
+  maxHealth: 250
   selectionCircle: {fileID: 7839726929813732454}
   OwnerPlayerId: 1
   entityData: {fileID: 11400000, guid: f4a5c8204145858469bdc4a9a45341b0, type: 2}
   currentStatus: 
   underConstruction: 0
+  isBuildingInProgress: 0
   resourceType: 1
-  uranuimPerSecond: 1
+  uranuimPerSecond: 2
 --- !u!61 &1842901232497004628
 BoxCollider2D:
   m_ObjectHideFlags: 0
@@ -150,7 +151,7 @@ BoxCollider2D:
     border: {x: 0, y: 0, z: 0, w: 0}
     pivot: {x: 0.5, y: 0.5}
     oldSize: {x: 1.125, y: 2.5750122}
-    newSize: {x: 0.36, y: 0.8240039}
+    newSize: {x: 1.125, y: 2.5750122}
     adaptiveTilingThreshold: 0.5
     drawMode: 0
     adaptiveTiling: 0
