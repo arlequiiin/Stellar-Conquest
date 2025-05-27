@@ -293,6 +293,7 @@ MonoBehaviour:
   _attackCooldown: 3
   firePoint: {fileID: 1147792370714634955}
   bulletPrefab: {fileID: 4969774102484036575, guid: f63b71cc9f80dcc4aa5c52b3bf73ed62, type: 3}
+  shootSound: {fileID: 8300000, guid: 329ba8af83899004f982743ede669488, type: 3}
 --- !u!1 &8542419553007962591
 GameObject:
   m_ObjectHideFlags: 0

@@ -233,10 +233,11 @@ MonoBehaviour:
   currentStatus: 
   _walkSpeed: 5
   _range: 10
-  _attackDamage: 5
-  _attackCooldown: 2
+  _attackDamage: 2
+  _attackCooldown: 0.1
   firePoint: {fileID: 600140873069887822}
   bulletPrefab: {fileID: 4969774102484036575, guid: f63b71cc9f80dcc4aa5c52b3bf73ed62, type: 3}
+  shootSound: {fileID: 8300000, guid: 3fc361714fcbf7b409ff7d543e485baa, type: 3}
 --- !u!1 &7999119116358877457
 GameObject:
   m_ObjectHideFlags: 0

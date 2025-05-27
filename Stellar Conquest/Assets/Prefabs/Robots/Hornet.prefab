@@ -320,7 +320,7 @@ MonoBehaviour:
   currentStatus: 
   CurrentRole: 0
   manager: {fileID: 0}
-  visionRange: 6
+  visionRange: 7
   playerUnitsLayer:
     serializedVersion: 2
     m_Bits: 8
@@ -329,6 +329,7 @@ MonoBehaviour:
     m_Bits: 8
   firePoint: {fileID: 8814534127426210808}
   bulletPrefab: {fileID: 4129262722367275213, guid: 3f091a03277276647928f434f75889fe, type: 3}
-  attackDamage: 5
-  attackCooldown: 1.5
-  attackRange: 5
+  attackDamage: 23
+  attackCooldown: 1
+  attackRange: 6
+  shootSound: {fileID: 8300000, guid: af5586b6f6dc0224d82d54074da56281, type: 3}

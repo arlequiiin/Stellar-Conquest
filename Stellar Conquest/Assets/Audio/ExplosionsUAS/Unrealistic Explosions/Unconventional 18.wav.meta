@@ -1,0 +1,29 @@
+fileFormatVersion: 2
+guid: b7b5478f5a74326419b30094f1a141bb
+AudioImporter:
+  externalObjects: {}
+  serializedVersion: 6
+  defaultSettings:
+    loadType: 0
+    sampleRateSetting: 0
+    sampleRateOverride: 44100
+    compressionFormat: 1
+    quality: 1
+    conversionMode: 0
+  platformSettingOverrides: {}
+  forceToMono: 0
+  normalize: 1
+  preloadAudioData: 1
+  loadInBackground: 0
+  ambisonic: 0
+  3D: 1
+  userData: 
+  assetBundleName: 
+  assetBundleVariant: 
+AssetOrigin:
+  serializedVersion: 1
+  productId: 220174
+  packageName: Bombs and Explosions
+  packageVersion: 1.0
+  assetPath: Assets/ExplosionsUAS/Unrealistic Explosions/Unconventional 18.wav
+  uploadId: 494759

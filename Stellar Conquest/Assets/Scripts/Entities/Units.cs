@@ -8,8 +8,10 @@ public class Units : Entity {
     [SerializeField] private float _attackDamage;
     [SerializeField] private float _attackCooldown;
     [SerializeField] private Transform firePoint;
-    [SerializeField] private GameObject bulletPrefab; 
+    [SerializeField] private GameObject bulletPrefab;
+    [SerializeField] private AudioClip shootSound;
 
+    protected AudioSource audioSource;
     protected NavMeshAgent _navMeshAgent;
 
     protected enum UnitState { Idle, Moving, Attacking, Death, Building }
@@ -31,6 +33,9 @@ public class Units : Entity {
         _navMeshAgent.updateRotation = _updateRotation;
         _navMeshAgent.updateUpAxis = _updateUpAxis;
         _animator = GetComponent<Animator>();
+        audioSource = gameObject.AddComponent<AudioSource>();
+        audioSource.playOnAwake = false;
+        audioSource.spatialBlend = 1f;
     }
 
     protected virtual void Update() {
@@ -204,6 +209,10 @@ public class Units : Entity {
         var bullet = bulletObj.GetComponent<Bullet>();
         if (bullet != null) {
             bullet.Init(target, _attackDamage);
+        }
+
+        if (shootSound != null) {
+            audioSource.PlayOneShot(shootSound);
         }
     }
 

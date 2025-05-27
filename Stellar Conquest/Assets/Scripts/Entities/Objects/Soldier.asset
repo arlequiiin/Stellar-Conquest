@@ -17,6 +17,6 @@ MonoBehaviour:
   description: 'HP: 100'
   maxHealth: 100
   buildTime: 5
-  uraniumCost: 5
-  energyCost: 25
+  uraniumCost: 35
+  energyCost: 125
   prefab: {fileID: 3381349816559678969, guid: edec443c70b7d274ea2cb55162a6b7ff, type: 3}

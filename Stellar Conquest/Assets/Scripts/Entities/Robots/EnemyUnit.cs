@@ -21,6 +21,9 @@ public class EnemyUnit : Entity {
     [SerializeField] private float attackDamage = 5f;
     [SerializeField] private float attackCooldown = 1f;
     [SerializeField] private float attackRange = 5f;
+    [SerializeField] private AudioClip shootSound;
+    private AudioSource audioSource;
+
     private float lastAttackTime = 0f;
 
     private Entity currentTargetEntity;
@@ -30,6 +33,9 @@ public class EnemyUnit : Entity {
         agent = GetComponent<NavMeshAgent>();
         agent.updateRotation = false;
         agent.updateUpAxis = false;
+        audioSource = gameObject.AddComponent<AudioSource>();
+        audioSource.playOnAwake = false;
+        audioSource.spatialBlend = 1f;
     }
 
     protected override void Start() { 
@@ -108,12 +114,17 @@ public class EnemyUnit : Entity {
 
     void ShootAtTarget(Entity target) {
         if (bulletPrefab == null || firePoint == null) return;
+
         var bulletObj = Instantiate(bulletPrefab, firePoint.position, Quaternion.identity);
         var bullet = bulletObj.GetComponent<Bullet>();
         if (bullet != null) {
             bullet.Init(target, attackDamage);
         }
+
+        if (shootSound != null)
+            audioSource.PlayOneShot(shootSound);
     }
+
 
     public override void TakeDamage(float amount) {
         base.TakeDamage(amount);
