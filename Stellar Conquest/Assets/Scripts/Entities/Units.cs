@@ -74,7 +74,7 @@ public class Units : Entity {
         }
 
         if (_isBuilding != isBuilding) {
-            _animator.SetBool("isBuilding", isBuilding);
+            _animator.SetBool("IsBuilding", isBuilding);
             _isBuilding = isBuilding;
         }
     }

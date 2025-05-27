@@ -14,6 +14,9 @@ public class GameManager : MonoBehaviour {
 
     public enum GameState { Playing, Paused, GameOver, GameWin }
     public GameState CurrentState { get; private set; } = GameState.Playing;
+    public event System.Action<bool> OnGameEnd;   
+
+    public bool IsPlaying => CurrentState == GameState.Playing;
 
     private void Awake() {
         if (_instance != null && _instance != this) {
@@ -49,18 +52,10 @@ public class GameManager : MonoBehaviour {
         EndGame(isDefeated);
     }
 
-    private void EndGame(bool isDefeated) {
-        if (isDefeated) {
-            Debug.Log("Игрок проиграл");
-            CurrentState = GameState.GameOver;
-        }
-        else if (!isDefeated) {
-            Debug.Log("Игрок победил");
-            CurrentState = GameState.GameWin;
-        }
+    private void EndGame(bool defeated) {
+        CurrentState = defeated ? GameState.GameOver : GameState.GameWin;
 
-        // TODO: Показать экран конца игры
-        Time.timeScale = 0f;
+        OnGameEnd?.Invoke(defeated);
     }
 
     public void PauseGame() {
@@ -68,7 +63,6 @@ public class GameManager : MonoBehaviour {
             CurrentState = GameState.Paused;
             Time.timeScale = 0f;
             Debug.Log("Игра на паузе");
-            // TODO: Показать меню паузы
         }
     }
 
@@ -77,7 +71,6 @@ public class GameManager : MonoBehaviour {
             CurrentState = GameState.Playing;
             Time.timeScale = 1f;
             Debug.Log("Игра продолжается");
-            // TODO: Скрыть меню паузы
         }
     }
 
