@@ -24,7 +24,6 @@ public class GameManager : MonoBehaviour {
             return;
         }
         _instance = this;
-        DontDestroyOnLoad(gameObject);
     }
 
     private void Start() {
@@ -33,6 +32,7 @@ public class GameManager : MonoBehaviour {
 
     private void InitializeGame() {
         Debug.Log("Начало игры");
+        Time.timeScale = 1f;
 
         CurrentState = GameState.Playing;
     }
@@ -56,6 +56,12 @@ public class GameManager : MonoBehaviour {
         CurrentState = defeated ? GameState.GameOver : GameState.GameWin;
 
         OnGameEnd?.Invoke(defeated);
+        StartCoroutine(StopTime(2f));
+    }
+
+    private System.Collections.IEnumerator StopTime(float delay) {
+        yield return new WaitForSeconds(delay);
+        Time.timeScale = 0f;
     }
 
     public void PauseGame() {

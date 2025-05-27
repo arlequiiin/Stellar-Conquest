@@ -33,9 +33,9 @@ public class EnemyUnit : Entity {
         agent = GetComponent<NavMeshAgent>();
         agent.updateRotation = false;
         agent.updateUpAxis = false;
+
         audioSource = gameObject.AddComponent<AudioSource>();
         audioSource.playOnAwake = false;
-        audioSource.spatialBlend = 1f;
     }
 
     protected override void Start() { 

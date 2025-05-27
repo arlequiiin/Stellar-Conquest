@@ -33,9 +33,9 @@ public class Units : Entity {
         _navMeshAgent.updateRotation = _updateRotation;
         _navMeshAgent.updateUpAxis = _updateUpAxis;
         _animator = GetComponent<Animator>();
+
         audioSource = gameObject.AddComponent<AudioSource>();
         audioSource.playOnAwake = false;
-        audioSource.spatialBlend = 1f;
     }
 
     protected virtual void Update() {

@@ -9,6 +9,10 @@ public class OrdersUIPanel : MonoBehaviour {
     [SerializeField] private TextMeshProUGUI _entityNameText;
     [SerializeField] private TextMeshProUGUI _messageText;
 
+    private void Awake() {
+        _uiPanel.SetActive(false);
+    }
+
     public void Show(Entity entity) {
         _uiPanel.SetActive(true);
         _entityNameText.text = entity.entityData.entityName;

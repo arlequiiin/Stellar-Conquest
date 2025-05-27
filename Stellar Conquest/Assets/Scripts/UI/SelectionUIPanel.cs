@@ -2,15 +2,22 @@ using TMPro;
 using Unity.VisualScripting;
 using UnityEngine;
 using UnityEngine.UI;
+using UnityEngine.UIElements;
 
 public class SelectionUIPanel: MonoBehaviour {
+    [Header("Ёлементы UI")]
+    [SerializeField] private GameObject _uiPanel;
     [SerializeField] private TextMeshProUGUI nameText;
     [SerializeField] private TextMeshProUGUI descriptionText;
-    [SerializeField] private Image iconImage;
+    [SerializeField] private UnityEngine.UI.Image iconImage;
     [SerializeField] private TextMeshProUGUI healthText;
     [SerializeField] private TextMeshProUGUI stateText;
     private Entity _currentEntity;
 
+
+    private void Awake() {
+        _uiPanel.SetActive(false);
+    }
 
     void LateUpdate() {
         if (_currentEntity != null) {
@@ -21,6 +28,8 @@ public class SelectionUIPanel: MonoBehaviour {
     }
 
     public void UpdateEntityInfo(Entity entity) {
+        if (gameObject == null) return;
+
         if (entity == null) {
             Hide();
             return;

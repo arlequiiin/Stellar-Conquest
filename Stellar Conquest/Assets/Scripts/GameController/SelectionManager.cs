@@ -1,6 +1,7 @@
-using UnityEngine;
 using System.Collections.Generic;
 using System.Linq;
+using UnityEngine;
+using UnityEngine.SceneManagement;
 
 public class SelectionManager : MonoBehaviour {
     private static SelectionManager _instance;
@@ -30,9 +31,9 @@ public class SelectionManager : MonoBehaviour {
     void Awake() {
         if (_instance != null && _instance != this) { Destroy(gameObject); return; }
         _instance = this;
-        // DontDestroyOnLoad(gameObject); 
+        DontDestroyOnLoad(gameObject);
 
-        if (_selectionBoxRect != null) _selectionBoxRect.gameObject.SetActive(false);
+        SceneManager.sceneLoaded += OnSceneLoaded;
     }
 
     void Start() {
@@ -55,6 +56,9 @@ public class SelectionManager : MonoBehaviour {
 
     void OnDestroy()
     {
+        SceneManager.sceneLoaded -= OnSceneLoaded;
+        
+        if (_instance == this) _instance = null;
         if (_inputManager != null) {
             _inputManager.OnLeftClick -= HandleLeftClick;
             _inputManager.OnShiftLeftClick -= HandleShiftLeftClick;
@@ -64,6 +68,17 @@ public class SelectionManager : MonoBehaviour {
             _inputManager.OnDragSelectUpdate -= HandleDragUpdate;
             _inputManager.OnDragSelectEnd -= HandleDragEnd;
         }
+    }
+
+    private void OnSceneLoaded(Scene scene, LoadSceneMode mode) {
+        EnsureUIPanels();                               // как раньше
+        _selectionBoxRect = GameObject.FindWithTag("SelectionBox")?.GetComponent<RectTransform>();
+        selectionUIPanel = FindObjectOfType<SelectionUIPanel>(true);
+        ordersUIPanel = FindObjectOfType<OrdersUIPanel>(true);
+        factoryUIPanel = FindObjectOfType<FactoryUIPanel>(true);
+        ClearSelection();
+        if (_selectionBoxRect != null)
+            _selectionBoxRect.gameObject.SetActive(false);
     }
 
     private void HandleLeftClick(Vector3 clickPosition) {
@@ -229,7 +244,6 @@ public class SelectionManager : MonoBehaviour {
         if (entity == null || !entity.IsAlive) return;
 
         if (clearPrevious) {
-            // Важно! При очистке — отписаться от событий предыдущего выделения
             if (_currentEntity != null)
                 _currentEntity.OnHealthChanged -= OnEntityHealthChanged;
             ClearSelection();
@@ -247,7 +261,8 @@ public class SelectionManager : MonoBehaviour {
         }
     }
     private void OnEntityHealthChanged(float current, float max) {
-        selectionUIPanel.UpdateHealth(current, max);
+        if (selectionUIPanel != null) 
+            selectionUIPanel.UpdateHealth(current, max);
     }
 
     private void DeselectEntity(Entity entity) {
@@ -269,7 +284,8 @@ public class SelectionManager : MonoBehaviour {
             }
         }
         _selectedEntities.Clear();
-        selectionUIPanel.Hide();
+        if (selectionUIPanel != null)   
+            selectionUIPanel.Hide();
     }
 
     private void IssueMoveCommand(Vector3 destination) {
@@ -301,6 +317,8 @@ public class SelectionManager : MonoBehaviour {
     }
 
     private void UpdateSelectionUI() {
+        if (!EnsureUIPanels()) return;
+
         if (_selectedEntities.Count == 1) {
             Entity selectedEntity = _selectedEntities[0];
             selectionUIPanel.UpdateEntityInfo(selectedEntity);
@@ -322,7 +340,8 @@ public class SelectionManager : MonoBehaviour {
             if (selectionUIPanel != null) selectionUIPanel.Hide();
             if (factoryUIPanel != null) factoryUIPanel.Hide();
 
-            ordersUIPanel.Show();
+            if (ordersUIPanel)  
+                ordersUIPanel.Show();
         }
         else
         {
@@ -332,15 +351,29 @@ public class SelectionManager : MonoBehaviour {
             // скрыть все UI панели
         }
     }
+    private bool EnsureUIPanels() {
+        if (selectionUIPanel == null)
+            selectionUIPanel = Object.FindFirstObjectByType<SelectionUIPanel>(FindObjectsInactive.Include);
+        if (ordersUIPanel == null)
+            ordersUIPanel = Object.FindFirstObjectByType<OrdersUIPanel>(FindObjectsInactive.Include);
+        if (factoryUIPanel == null)
+            factoryUIPanel = Object.FindFirstObjectByType<FactoryUIPanel>(FindObjectsInactive.Include);
+        if (_selectionBoxRect == null)
+            _selectionBoxRect = GameObject.FindWithTag("SelectionBox")?.GetComponent<RectTransform>();
+        return selectionUIPanel != null;
+    }
 
     public void SetOrderMode(OrderMode mode) {
         CurrentOrderMode = mode;
         //  показать подсказку в UI?
-        ordersUIPanel.SetMessage(mode == OrderMode.Move ? "Укажите точку для перемещения" : "");
+        if (ordersUIPanel == null)
+            ordersUIPanel.SetMessage(mode == OrderMode.Move ? "Укажите точку для перемещения" : "");
     }
+
     public void ResetOrderMode() {
         CurrentOrderMode = OrderMode.None;
-        ordersUIPanel.ClearMessage();
+        if (ordersUIPanel == null) 
+            ordersUIPanel.ClearMessage();
     }
 
 

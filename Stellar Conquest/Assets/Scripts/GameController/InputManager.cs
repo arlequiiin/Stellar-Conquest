@@ -3,6 +3,7 @@ using UnityEngine.InputSystem;
 using System;
 using UnityEngine.EventSystems; 
 using System.Collections.Generic;
+using UnityEngine.SceneManagement; 
 
 public class InputManager : MonoBehaviour {
     public static InputManager Instance { get; private set; }
@@ -47,8 +48,14 @@ public class InputManager : MonoBehaviour {
 
         _controls.Player.Select.started += ctx => StartDrag(ctx);
         _controls.Player.Select.canceled += ctx => EndDrag(ctx);
+        SceneManager.sceneLoaded += OnSceneLoaded;
     }
-
+    private void OnSceneLoaded(Scene scene, LoadSceneMode mode) {
+        _mainCamera = Camera.main;
+    }
+    void OnDestroy() {
+        SceneManager.sceneLoaded -= OnSceneLoaded;
+    }
     void Update() {
         if (isDragging) {
             Vector2 mousePos = Mouse.current.position.ReadValue();
