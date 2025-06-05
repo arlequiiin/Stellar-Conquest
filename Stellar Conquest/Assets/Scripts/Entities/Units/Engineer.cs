@@ -62,6 +62,7 @@ public class Engineer : Units {
 
     protected override void Die() {
         CancelBuild();
+        _animator.SetBool("IsBuilding", false); 
         base.Die();
     }
 }

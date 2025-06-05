@@ -29,21 +29,31 @@ public class SelectionManager : MonoBehaviour {
     public OrderMode CurrentOrderMode { get; private set; } = OrderMode.None;
 
     void Awake() {
-        if (_instance != null && _instance != this) { Destroy(gameObject); return; }
+        if (_instance != null && _instance != this) {
+            Destroy(gameObject);
+            return;
+        }
         _instance = this;
-        DontDestroyOnLoad(gameObject);
 
         SceneManager.sceneLoaded += OnSceneLoaded;
     }
 
     void Start() {
+        InitializeInputManager();
+    }
+
+    private void InitializeInputManager() {
         _inputManager = InputManager.Instance;
         if (_inputManager == null) {
             Debug.LogError("SelectionManager'у необходим InputManager");
-            enabled = false; 
+            enabled = false;
             return;
         }
 
+        // Отписываемся от старых событий (если были)
+        UnsubscribeFromInputEvents();
+
+        // Подписываемся на новые события
         _inputManager.OnLeftClick += HandleLeftClick;
         _inputManager.OnShiftLeftClick += HandleShiftLeftClick;
         _inputManager.OnRightClick += HandleRightClick;
@@ -54,11 +64,7 @@ public class SelectionManager : MonoBehaviour {
         _inputManager.OnDragSelectEnd += HandleDragEnd;
     }
 
-    void OnDestroy()
-    {
-        SceneManager.sceneLoaded -= OnSceneLoaded;
-        
-        if (_instance == this) _instance = null;
+    private void UnsubscribeFromInputEvents() {
         if (_inputManager != null) {
             _inputManager.OnLeftClick -= HandleLeftClick;
             _inputManager.OnShiftLeftClick -= HandleShiftLeftClick;
@@ -70,15 +76,29 @@ public class SelectionManager : MonoBehaviour {
         }
     }
 
+    void OnDestroy() {
+        SceneManager.sceneLoaded -= OnSceneLoaded;
+
+        if (_instance == this) _instance = null;
+        UnsubscribeFromInputEvents();
+    }
+
     private void OnSceneLoaded(Scene scene, LoadSceneMode mode) {
-        EnsureUIPanels();                               // как раньше
-        _selectionBoxRect = GameObject.FindWithTag("SelectionBox")?.GetComponent<RectTransform>();
-        selectionUIPanel = FindObjectOfType<SelectionUIPanel>(true);
-        ordersUIPanel = FindObjectOfType<OrdersUIPanel>(true);
-        factoryUIPanel = FindObjectOfType<FactoryUIPanel>(true);
         ClearSelection();
-        if (_selectionBoxRect != null)
+
+        StartCoroutine(ReinitializeAfterFrame());
+    }
+    private System.Collections.IEnumerator ReinitializeAfterFrame() {
+        yield return null;
+
+        EnsureUIPanels();
+        _selectionBoxRect = GameObject.FindWithTag("SelectionBox")?.GetComponent<RectTransform>();
+
+        if (_selectionBoxRect != null) {
             _selectionBoxRect.gameObject.SetActive(false);
+        }
+
+        InitializeInputManager();
     }
 
     private void HandleLeftClick(Vector3 clickPosition) {
@@ -366,13 +386,13 @@ public class SelectionManager : MonoBehaviour {
     public void SetOrderMode(OrderMode mode) {
         CurrentOrderMode = mode;
         //  показать подсказку в UI?
-        if (ordersUIPanel == null)
+        if (ordersUIPanel != null)
             ordersUIPanel.SetMessage(mode == OrderMode.Move ? "Укажите точку для перемещения" : "");
     }
 
     public void ResetOrderMode() {
         CurrentOrderMode = OrderMode.None;
-        if (ordersUIPanel == null) 
+        if (ordersUIPanel != null) 
             ordersUIPanel.ClearMessage();
     }
 

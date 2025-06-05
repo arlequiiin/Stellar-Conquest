@@ -37,6 +37,16 @@ public class InputManager : MonoBehaviour {
         }
         Instance = this;
 
+        InitializeControls();
+        SceneManager.sceneLoaded += OnSceneLoaded;
+    }
+
+    private void InitializeControls() {
+        if (_controls != null) {
+            _controls.Disable();
+            _controls.Dispose();
+        }
+
         if (_mainCamera == null) _mainCamera = Camera.main;
 
         _controls = new PlayerControls();
@@ -48,14 +58,30 @@ public class InputManager : MonoBehaviour {
 
         _controls.Player.Select.started += ctx => StartDrag(ctx);
         _controls.Player.Select.canceled += ctx => EndDrag(ctx);
-        SceneManager.sceneLoaded += OnSceneLoaded;
     }
+
+
     private void OnSceneLoaded(Scene scene, LoadSceneMode mode) {
         _mainCamera = Camera.main;
+        if (_mainCamera == null) {
+            Debug.LogError("Main camera отсутствует после перезагрузки сцены");
+        }
+
+        isDragging = false;
+        nextLeftButtonClick = false;
     }
+
     void OnDestroy() {
         SceneManager.sceneLoaded -= OnSceneLoaded;
+
+        if (_controls != null) {
+            _controls.Disable();
+            _controls.Dispose();
+        }
+
+        if (Instance == this) Instance = null;
     }
+
     void Update() {
         if (isDragging) {
             Vector2 mousePos = Mouse.current.position.ReadValue();

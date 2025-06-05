@@ -18,14 +18,12 @@ public abstract class Buildings : Entity {
 
     protected override void Start() {
         base.Start();
-        // Например, делаем здание полупрозрачным, если не построено
         if (underConstruction)
             SetInactiveVisual();
     }
 
     private void Update() {
         // if (!underConstruction) return;
-        // Здесь можно обновлять визуал постройки (например, альфа-прозрачность)
     }
 
     public void Build(float deltaTime) {
@@ -34,7 +32,6 @@ public abstract class Buildings : Entity {
         buildProgress = Mathf.Clamp01(currentBuildTime / entityData.buildTime);
 
         UpdateBuildingVisual(buildProgress);
-        Debug.Log(buildProgress);
 
         if (buildProgress >= 1f) {
             FinishConstruction();

@@ -25,7 +25,7 @@ Transform:
   m_GameObject: {fileID: 3838308171478475932}
   serializedVersion: 2
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 0.453, y: 0.007, z: 0}
+  m_LocalPosition: {x: 0.085, y: 0.01, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children: []
@@ -233,11 +233,14 @@ MonoBehaviour:
   currentStatus: 
   _walkSpeed: 3
   _range: 7
-  _attackDamage: 5
+  _attackDamage: 20
   _attackCooldown: 2
   firePoint: {fileID: 4391136209513624019}
   bulletPrefab: {fileID: 3768190766290738906, guid: 64c6ff8db3081a34da94653abc1be77f, type: 3}
   shootSound: {fileID: 8300000, guid: 3fc361714fcbf7b409ff7d543e485baa, type: 3}
+  obstacleLayer:
+    serializedVersion: 2
+    m_Bits: 4096
 --- !u!1 &5678090406289879750
 GameObject:
   m_ObjectHideFlags: 0

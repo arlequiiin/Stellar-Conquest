@@ -38,7 +38,9 @@ public class GameManager : MonoBehaviour {
     }
 
     public void PlayerLost() {
-        if (CurrentState != GameState.Playing)
+        if (CurrentState == GameState.Paused)
+            Time.timeScale = 1f;
+        else if (CurrentState != GameState.Playing)
             return;
 
         isDefeated = true;

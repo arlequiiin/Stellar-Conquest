@@ -26,7 +26,6 @@ public class Extractor : Buildings {
 
     protected override void FinishConstruction() {
         base.FinishConstruction();
-        Debug.Log("Достроилось!");
         if (!underConstruction) {
             ResourceManager.Instance.AddProduction(resourceType, uranuimPerSecond);
         }

@@ -171,7 +171,7 @@ NavMeshAgent:
   m_Enabled: 1
   m_AgentTypeID: 0
   m_Radius: 0.25
-  m_Speed: 10
+  m_Speed: 3.5
   m_Acceleration: 8
   avoidancePriority: 50
   m_AngularSpeed: 720
@@ -202,11 +202,14 @@ MonoBehaviour:
   currentStatus: 
   _walkSpeed: 3
   _range: 10
-  _attackDamage: 3
-  _attackCooldown: 0.3
+  _attackDamage: 6
+  _attackCooldown: 0.4
   firePoint: {fileID: 4412988349832122905}
   bulletPrefab: {fileID: 4969774102484036575, guid: f63b71cc9f80dcc4aa5c52b3bf73ed62, type: 3}
   shootSound: {fileID: 8300000, guid: 7934d4db5bb86404eb975beb0b192924, type: 3}
+  obstacleLayer:
+    serializedVersion: 2
+    m_Bits: 4096
 --- !u!1 &6022895732826671564
 GameObject:
   m_ObjectHideFlags: 0
@@ -232,7 +235,7 @@ Transform:
   m_GameObject: {fileID: 6022895732826671564}
   serializedVersion: 2
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 0.589, y: 0.369, z: 0}
+  m_LocalPosition: {x: 0.082, y: 0.381, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children: []

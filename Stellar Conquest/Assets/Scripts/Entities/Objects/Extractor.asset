@@ -12,9 +12,10 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 596f5c28c5c605f42b3bab9f47915686, type: 3}
   m_Name: Extractor
   m_EditorClassIdentifier: 
-  icon: {fileID: 3688372087848734022, guid: f5ada4203e03bfb4683f86d8d1da82cd, type: 3}
+  icon: {fileID: -1295063367, guid: f5ada4203e03bfb4683f86d8d1da82cd, type: 3}
   entityName: "\u042D\u043A\u0441\u0442\u0440\u0430\u043A\u0442\u043E\u0440"
-  description: "\u0414\u043E\u0431\u044B\u0432\u0430\u0435\u0442 \u0443\u0440\u0430\u043D"
+  description: "\u0414\u043E\u0431\u044B\u0432\u0430\u0435\u0442 \u0443\u0440\u0430\u043D\\n\u0421\u0442\u043E\u0438\u043C\u043E\u0441\u0442\u044C:\\n100
+    \u0443\u0440\u0430\u043D\u0430\\n1000 \u042D\u043D\u0435\u0440\u0433\u0438\u0438\u0438"
   maxHealth: 500
   buildTime: 10
   uraniumCost: 100

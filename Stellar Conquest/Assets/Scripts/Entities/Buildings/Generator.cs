@@ -25,10 +25,10 @@ public class Generator : Buildings {
     }
 
     protected override void FinishConstruction() {
+        base.FinishConstruction();
         if (!underConstruction) {
             ResourceManager.Instance.AddProduction(resourceType, powerPerSecond);
         }
-        base.FinishConstruction(); 
     }
 
     protected override void Die() {

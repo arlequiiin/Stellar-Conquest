@@ -25,6 +25,7 @@ public class Units : Entity {
     protected bool _updateRotation = false;
     protected bool _updateUpAxis = false;
     // добавить константы дл€ анимаций!
+    [SerializeField] private LayerMask obstacleLayer;
     protected override void Awake() 
     {
         base.Awake(); 
@@ -64,6 +65,26 @@ public class Units : Entity {
                 SetAnimator(false, false, true);
                 // логика строительства 
                 break;
+        }
+    }
+
+    protected bool CanSeeTarget(Entity target) {
+        if (target == null) return false;
+
+        Vector2 startPoint = firePoint != null ? (Vector2)firePoint.position : (Vector2)transform.position;
+        Vector2 endPoint = (Vector2)target.transform.position;
+
+        Vector2 direction = (endPoint - startPoint).normalized;
+        float distance = Vector2.Distance(startPoint, endPoint);
+
+
+        RaycastHit2D hit = Physics2D.Raycast(startPoint, direction, distance, obstacleLayer);
+
+        if (hit.collider == null) {
+            return true; 
+        }
+        else {
+            return hit.collider.gameObject == target.gameObject;
         }
     }
 
@@ -160,7 +181,7 @@ public class Units : Entity {
         foreach (var hitCollider in hitColliders) {
             Entity entity = hitCollider.GetComponent<Entity>();
 
-            if (entity != null && entity != this && entity.OwnerPlayerId != 1) {
+            if (entity != null && entity != this && entity.OwnerPlayerId != 1 && entity.IsAlive) {
                 float distance = Vector3.Distance(transform.position, entity.transform.position);
                 if (distance < minDistance) {
                     minDistance = distance;
@@ -175,13 +196,7 @@ public class Units : Entity {
     }
 
     protected void PerformAttack() {
-        if (_currentTarget == null) {
-            Debug.Log("Ќет цели");
-        }
-        if (_currentTarget.GetCurrentHealth <= 0) {
-            Debug.Log("Ќет здоровь€ у цели");
-        }
-        if (_currentTarget == null || _currentTarget.GetCurrentHealth <= 0) {
+        if (_currentTarget == null || !_currentTarget.IsAlive) {
             StopActions();
             return;
         }
@@ -190,6 +205,10 @@ public class Units : Entity {
         float distanceToTarget = Vector3.Distance(transform.position, _currentTarget.transform.position);
         if (distanceToTarget > _range) {
             OrderAttackTarget(_currentTarget);
+            return;
+        }
+        if (!CanSeeTarget(_currentTarget)) {
+            SetAnimator(false, false, false);
             return;
         }
 
@@ -238,7 +257,6 @@ public class Units : Entity {
     {
         _animator.SetBool("IsMoving", false);
         _animator.SetBool("IsFiring", false);
-        _animator.SetBool("IsBuilding", false); // отслеживать инженер ли это?
 
         _animator.SetTrigger("Die");
         _currentState = UnitState.Death;

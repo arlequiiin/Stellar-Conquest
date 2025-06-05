@@ -13,7 +13,7 @@ public abstract class Entity : MonoBehaviour {
     public string currentStatus;
 
     private bool isDie = false;
-    public bool IsAlive => currentHealth > 0;
+    public bool IsAlive => currentHealth > 0 && !isDie;
     public float GetCurrentHealth => currentHealth;
     public float GetMaxHealth => maxHealth;
     public string GetEntityName => entityData.entityName;
@@ -62,13 +62,13 @@ public abstract class Entity : MonoBehaviour {
 
     protected virtual void Die() {
         if (isDie) return;
-            isDie = true;
+        isDie = true;
 
         Debug.Log($"{gameObject.name} был уничтожен");
         //  логика проигрывания анимации смерти, звуков, эффектов
 
         // OnEntityDestroyed?.Invoke(this); 
 
-        Destroy(gameObject); 
+        Destroy(gameObject, 5f); 
     }
 }

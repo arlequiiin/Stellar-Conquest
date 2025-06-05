@@ -1,6 +1,7 @@
 using UnityEngine;
 using System.Collections.Generic;
-using System; 
+using System;
+using UnityEngine.SceneManagement;
 
 public enum ResourceType { Energy, Uranium } 
 
@@ -27,12 +28,33 @@ public class ResourceManager : MonoBehaviour {
             return;
         }
         _instance = this;
-        DontDestroyOnLoad(gameObject);
 
-        currentUranium = startingUranium;
-        currentEnergy = startingEnergy;
+
+        SceneManager.sceneLoaded += OnSceneLoaded;
+        ResetResources();
     }
 
+    private void OnSceneLoaded(Scene scene, LoadSceneMode mode) {
+        Debug.Log("ResourceManager: —цена перезагружена, сброс ресурсов...");
+        ResetResources();
+        UpdateAll();
+        Debug.Log($"ResourceManager: –есурсы сброшены - ”ран: {currentUranium}, Ёнерги€: {currentEnergy}");
+    }
+
+    void OnDestroy() {
+        SceneManager.sceneLoaded -= OnSceneLoaded;
+        if (_instance == this) _instance = null;
+    }
+    public void ForceReset() {
+        ResetResources();
+        UpdateAll();
+    }
+    public void ResetResources() {
+        currentUranium = startingUranium;
+        currentEnergy = startingEnergy;
+        totalUraniumProduction = 0f;
+        totalEnergyProduction = 0f;
+    }
     public void UpdateAll() {
         OnResourceChanged?.Invoke(ResourceType.Uranium, currentUranium);
         OnResourceChanged?.Invoke(ResourceType.Energy, currentEnergy);
@@ -92,7 +114,6 @@ public class ResourceManager : MonoBehaviour {
 
     public void AddProduction(ResourceType type, float amount) {
         if (amount <= 0) return;
-
         switch (type) {
             case ResourceType.Uranium:
                 totalUraniumProduction += amount;
