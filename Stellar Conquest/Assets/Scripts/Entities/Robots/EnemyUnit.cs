@@ -1,5 +1,6 @@
 using UnityEngine;
 using UnityEngine.AI;
+using static UnityEngine.GraphicsBuffer;
 
 public class EnemyUnit : Entity {
     public enum Role { Defender, Attacker }
@@ -97,15 +98,20 @@ public class EnemyUnit : Entity {
     }
 
     Collider2D FindTargetInVision() {
-        Collider2D target = Physics2D.OverlapCircle(transform.position, visionRange, playerUnitsLayer);
-        if (target != null)
-            return target;
+        Collider2D[] targets = Physics2D.OverlapCircleAll(transform.position, visionRange, playerUnitsLayer);
 
-        Collider2D[] candidates = Physics2D.OverlapCircleAll(transform.position, visionRange, playerBuildingsLayer);
-        foreach (var col in candidates) {
-            var building = col.GetComponent<Buildings>();
-            if (building != null && building.IsCompleted)
-                return col;
+        foreach (var target in targets) {
+            Units unit = target.GetComponent<Units>();
+            if (unit != null && unit.IsAlive) {
+                return target;
+            }
+        }
+
+        foreach (var target in targets) {
+            Buildings building = target.GetComponent<Buildings>();
+            if (building != null && building.IsCompleted) {
+                return target;
+            }
         }
 
         return null;
